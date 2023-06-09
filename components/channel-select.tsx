@@ -43,7 +43,7 @@ export function ChannelSelect<T extends FieldValues>({
     guildId: selectedGuild?.id!,
   })
 
-  const channels = data?.data.data
+  const channels = data?.data
 
   const onlyTextChannels =
     channels?.filter(
