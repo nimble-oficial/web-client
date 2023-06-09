@@ -10,7 +10,6 @@ import { SelectedNode } from "@/stores"
 import {
   Background,
   ConnectionMode,
-  Controls,
   ReactFlow as ReactFlowInstance,
 } from "reactflow"
 
@@ -41,6 +40,8 @@ export const BuilderFlowProvider = ({ ...props }) => {
       onNodesChange={onNodesChange}
       onEdgesChange={onEdgesChange}
       onConnect={onConnect}
+      minZoom={0.1}
+      maxZoom={10}
       proOptions={{
         hideAttribution: true,
       }}
@@ -57,7 +58,6 @@ export const BuilderFlowProvider = ({ ...props }) => {
       {...props}
     >
       <BuilderSpeedDial />
-      <Controls position="bottom-right" />
       <Background />
       <SavingLabel />
     </ReactFlowInstance>

@@ -1,8 +1,8 @@
 import { DropdownMenuItem } from "@/components"
-import { useNodeSheetStore } from "@/hooks"
+import { useDashboardStore } from "@/hooks"
 
 export const EditCommand = () => {
-  const { handleOpenSheet } = useNodeSheetStore()
+  const { handleOpenSheet } = useDashboardStore()
 
   return (
     <DropdownMenuItem className="cursor-pointer" onClick={handleOpenSheet}>

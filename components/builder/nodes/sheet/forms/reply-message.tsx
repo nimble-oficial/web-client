@@ -39,7 +39,6 @@ export const ReplyMessageNodeSheetForm = <T extends FieldValues>({
               </FormDescription>
 
               <TextareaWithLimit
-                limit={2000}
                 placeholder="Type your message here."
                 id="content"
                 {...field}
