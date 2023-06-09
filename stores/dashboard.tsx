@@ -12,6 +12,7 @@ export interface Command {
 export interface SelectedCommand extends Command {
   builderId: string
   allowedChannel: string
+  allowedRole: string
 }
 
 interface Commands {

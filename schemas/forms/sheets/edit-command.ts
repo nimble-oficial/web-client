@@ -1,3 +1,4 @@
+import { DEFAULT_OPTION_VALUES } from "@/constants/default-option-values"
 import { z } from "zod"
 
 export const editCommandSchema = z.object({
@@ -22,7 +23,11 @@ export const editCommandSchema = z.object({
       message: "Description cannot exceed 100 characters.",
     }),
   enabled: z.boolean().default(true),
-  allowedChannel: z.string().optional().default("all"),
+  allowedChannel: z
+    .string()
+    .optional()
+    .default(DEFAULT_OPTION_VALUES.allowedChannel),
+  allowedRole: z.string().optional().default(DEFAULT_OPTION_VALUES.allowedRole),
 })
 
 export type EditCommandSchema = z.infer<typeof editCommandSchema>

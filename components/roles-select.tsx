@@ -1,3 +1,4 @@
+import { useState } from "react"
 import {
   Button,
   Command,
@@ -12,56 +13,43 @@ import {
   PopoverTrigger,
   Skeleton,
 } from "@/components"
-import { useDashboardStore, useGetGuildChannelsQuery } from "@/hooks"
+import { DEFAULT_OPTION_VALUES } from "@/constants/default-option-values"
+import { useDashboardStore, useGetGuildRoles } from "@/hooks"
 import { Check, ChevronsUpDown, ServerCrash } from "lucide-react"
-import { useState } from "react"
 import { Control, FieldValues, UseFormSetValue } from "react-hook-form"
 
-import { DEFAULT_OPTION_VALUES } from "@/constants/default-option-values"
 import { cn } from "@/lib/utils"
 
-interface ChannelsMultiSelectProps<T extends FieldValues> {
+interface RolesMultiSelectProps<T extends FieldValues> {
   setValue: UseFormSetValue<T>
-  channelType?: "text" | "voice"
   control: Control<T>
 }
 
-const CHANNEL_TYPES = {
-  text: 0,
-  voice: 2,
-}
-
-export function ChannelSelect<T extends FieldValues>({
+export function RolesSelect<T extends FieldValues>({
   setValue,
-  channelType = "text",
   control,
-}: ChannelsMultiSelectProps<T>) {
+}: RolesMultiSelectProps<T>) {
   const [open, setOpen] = useState(false)
 
   const { selectedGuild } = useDashboardStore()
 
-  const { data, isLoading, error } = useGetGuildChannelsQuery({
+  const { data, isLoading, error } = useGetGuildRoles({
     guildId: selectedGuild?.id!,
   })
 
-  const channels = data?.data
+  const roles = data?.data?.filter((role) => role.name !== "@everyone")
 
-  const onlyTextChannels =
-    channels?.filter(
-      (channel) => CHANNEL_TYPES[channelType] === channel.type
-    ) || []
+  const getRoleName = (value: string) => {
+    if (value === DEFAULT_OPTION_VALUES.allowedRole) return "All Roles"
 
-  const getChannelName = (value: string) => {
-    if (value === DEFAULT_OPTION_VALUES.allowedChannel) return "All Channels"
-
-    return onlyTextChannels.find((channel) => channel.id === value)?.name
+    return roles?.find((role) => role.id === value)?.name
   }
 
   // TODO: USE MULTI SELECT!!
   return (
     <FormField
       control={control}
-      name="allowedChannel"
+      name="allowedRole"
       render={({ field: { value } }) => (
         <Popover open={open} onOpenChange={setOpen}>
           <PopoverTrigger asChild>
@@ -76,23 +64,18 @@ export function ChannelSelect<T extends FieldValues>({
                     !value && "text-muted-foreground"
                   )}
                 >
-                  {isLoading
-                    ? "Loading your channels..."
-                    : getChannelName(value)}
+                  {isLoading ? "Loading your roles..." : getRoleName(value)}
                   <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                 </Button>
               </FormControl>
             </div>
           </PopoverTrigger>
 
-          <PopoverContent className="w-[550px] p-0">
+          <PopoverContent className="max-h-[300px] w-[550px] overflow-y-auto p-0">
             <Command className="w-full">
-              <CommandInput
-                className="w-full"
-                placeholder="Search channels..."
-              />
+              <CommandInput className="w-full" placeholder="Search roles..." />
 
-              {!isLoading && <CommandEmpty>No channel found.</CommandEmpty>}
+              {!isLoading && <CommandEmpty>No role found.</CommandEmpty>}
 
               <CommandGroup>
                 {!!error && !isLoading && (
@@ -105,8 +88,8 @@ export function ChannelSelect<T extends FieldValues>({
                       </h3>
 
                       <p className="mb-4 mt-2 text-sm text-muted-foreground">
-                        We couldn&#39;t load channels from your server. Try
-                        again later.
+                        We couldn&#39;t load roles from your server. Try again
+                        later.
                       </p>
                     </div>
                   </CommandEmpty>
@@ -122,33 +105,38 @@ export function ChannelSelect<T extends FieldValues>({
                   <>
                     <CommandItem
                       onSelect={() => {
-                        setValue("allowedChannel", DEFAULT_OPTION_VALUES.allowedChannel)
+                        setValue(
+                          "allowedRole",
+                          DEFAULT_OPTION_VALUES.allowedRole
+                        )
                         setOpen(false)
                       }}
                     >
                       <Check
                         className={cn(
                           "mr-2 h-4 w-4",
-                          value === DEFAULT_OPTION_VALUES.allowedChannel ? "opacity-100" : "opacity-0"
+                          value === DEFAULT_OPTION_VALUES.allowedRole
+                            ? "opacity-100"
+                            : "opacity-0"
                         )}
                       />
-                      All Channels
+                      All Roles
                     </CommandItem>
-                    {onlyTextChannels.map((channel) => (
+                    {roles?.map((role) => (
                       <CommandItem
-                        key={channel.id}
+                        key={role.id}
                         onSelect={() => {
-                          setValue("allowedChannel", channel.id)
+                          setValue("allowedRole", role.id)
                           setOpen(false)
                         }}
                       >
                         <Check
                           className={cn(
                             "mr-2 h-4 w-4",
-                            value === channel.id ? "opacity-100" : "opacity-0"
+                            value === role.id ? "opacity-100" : "opacity-0"
                           )}
                         />
-                        {channel.name}
+                        {role.name}
                       </CommandItem>
                     ))}
                   </>

@@ -13,12 +13,9 @@ import {
   SheetClose,
   SheetFooter,
 } from "@/components"
-import {
-  CreateCommandData,
-  useCreateCommandMutation,
-  useDashboardStore,
-} from "@/hooks"
+import { useCreateCommandMutation, useDashboardStore } from "@/hooks"
 import { CreateCommandSchema, createCommandSchema } from "@/schemas"
+import { CreateCommandData } from "@/services"
 import { customAPIError, parseCommandName } from "@/utils"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
@@ -54,7 +51,7 @@ export function CreateCommandDialog({
 
       const { data } = await mutateAsync({
         ...formValues,
-        guildId: selectedGuild.guildId,
+        guildId: selectedGuild?.id!,
         name: parseCommandName(formValues.name),
       })
 
@@ -62,7 +59,7 @@ export function CreateCommandDialog({
 
       const createdCommand: Payload = {
         ...formValues,
-        guildId: selectedGuild.guildId,
+        guildId: selectedGuild?.id!,
         enabled: true,
         _id: data?.data?._id,
         builderId: data?.data?.builderId,
@@ -70,7 +67,6 @@ export function CreateCommandDialog({
       }
 
       handleCloseDialog()
-
       handleAddNewCommand(createdCommand)
 
       toast.success("Command created successfully!")
@@ -134,7 +130,11 @@ export function CreateCommandDialog({
 
             <SheetFooter>
               <SheetClose asChild>
-                <Button type="submit" onClick={handleCreate}>
+                <Button
+                  type="submit"
+                  onClick={handleCreate}
+                  disabled={isLoading}
+                >
                   Save Changes
                 </Button>
               </SheetClose>
