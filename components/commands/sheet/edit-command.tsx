@@ -3,14 +3,15 @@ import {
   ChannelSelect,
   CommandsSheetProvider,
   Form,
-  FormDescription,
   FormField,
   FormLabel,
   FormMessage,
   Input,
   Label,
+  RolesSelect,
   Switch,
 } from "@/components"
+import { DEFAULT_OPTION_VALUES } from "@/constants/default-option-values"
 import { useDashboardStore, useEditCommandMutation } from "@/hooks"
 import { EditCommandSchema, editCommandSchema } from "@/schemas"
 import { EditCommandData } from "@/services"
@@ -43,7 +44,14 @@ export const EditCommandSheet = () => {
       setValue("name", selectedCommand.name)
       setValue("description", selectedCommand.description)
       setValue("enabled", selectedCommand.enabled)
-      setValue("allowedChannel", selectedCommand?.allowedChannel ?? "all")
+      setValue(
+        "allowedChannel",
+        selectedCommand?.allowedChannel ?? DEFAULT_OPTION_VALUES.allowedChannel
+      )
+      setValue(
+        "allowedRole",
+        selectedCommand?.allowedRole ?? DEFAULT_OPTION_VALUES.allowedRole
+      )
     }
   }, [selectedCommand, setValue])
 
@@ -80,7 +88,7 @@ export const EditCommandSheet = () => {
       handleCloseSheet={handleCloseSheet}
       handleSaveCommand={handleSubmit(handleSaveCommand)}
       title={`Edit "${selectedCommand.name}" command`}
-      description=" Edit the command, its description, enable command and more."
+      description=" Edit the command, its description, handle authorizations and more."
     >
       <Form {...form}>
         <form
@@ -125,11 +133,12 @@ export const EditCommandSheet = () => {
 
           <div className="flex flex-col justify-start gap-2">
             <FormLabel>Allow for Specific Channel</FormLabel>
-            <FormDescription>
-              Select only text channel to allow this command to be triggered in.
-            </FormDescription>
-
             <ChannelSelect setValue={setValue} control={control} />
+          </div>
+
+          <div className="flex flex-col justify-start gap-2">
+            <FormLabel>Allow for Specific Role</FormLabel>
+            <RolesSelect setValue={setValue} control={control} />
           </div>
 
           <FormField

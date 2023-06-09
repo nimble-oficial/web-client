@@ -12,7 +12,6 @@ export const sendMessageNodeSchema = z.object({
       message: "Content cannot exceed 2000 characters.",
     }),
   enabled: z.boolean().default(true),
-  // allowedChannel: z.string().optional().default("all"),
 })
 
 export type SendMessageNodeSchema = z.infer<typeof sendMessageNodeSchema>

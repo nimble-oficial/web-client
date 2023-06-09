@@ -1,4 +1,3 @@
-import { useState } from "react"
 import {
   Button,
   Command,
@@ -15,8 +14,10 @@ import {
 } from "@/components"
 import { useDashboardStore, useGetGuildChannelsQuery } from "@/hooks"
 import { Check, ChevronsUpDown, ServerCrash } from "lucide-react"
+import { useState } from "react"
 import { Control, FieldValues, UseFormSetValue } from "react-hook-form"
 
+import { DEFAULT_OPTION_VALUES } from "@/constants/default-option-values"
 import { cn } from "@/lib/utils"
 
 interface ChannelsMultiSelectProps<T extends FieldValues> {
@@ -51,7 +52,7 @@ export function ChannelSelect<T extends FieldValues>({
     ) || []
 
   const getChannelName = (value: string) => {
-    if (value === "all") return "All Channels"
+    if (value === DEFAULT_OPTION_VALUES.allowedChannel) return "All Channels"
 
     return onlyTextChannels.find((channel) => channel.id === value)?.name
   }
@@ -121,14 +122,14 @@ export function ChannelSelect<T extends FieldValues>({
                   <>
                     <CommandItem
                       onSelect={() => {
-                        setValue("allowedChannel", "all")
+                        setValue("allowedChannel", DEFAULT_OPTION_VALUES.allowedChannel)
                         setOpen(false)
                       }}
                     >
                       <Check
                         className={cn(
                           "mr-2 h-4 w-4",
-                          value === "all" ? "opacity-100" : "opacity-0"
+                          value === DEFAULT_OPTION_VALUES.allowedChannel ? "opacity-100" : "opacity-0"
                         )}
                       />
                       All Channels

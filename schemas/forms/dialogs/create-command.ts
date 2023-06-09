@@ -22,12 +22,6 @@ export const createCommandSchema = z.object({
       message: "Description cannot exceed 100 characters.",
     }),
   guildId: z.string(),
-  options: z.object({
-    notEnabledMessage: z.string().max(200, {
-      message: "Not enabled message cannot exceed 100 characters.",
-    }),
-    canSendNotEnabledMessage: z.boolean().default(true),
-  }),
 })
 
 export type CreateCommandSchema = z.infer<typeof createCommandSchema>

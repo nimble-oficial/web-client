@@ -13,7 +13,6 @@ export const replyMessageNodeSchema = z
         message: "Reply content cannot exceed 2000 characters.",
       }),
     enabled: z.boolean().optional().default(true),
-    // allowedChannel: z.string().optional().default("all"),
   })
   .strict()
 
