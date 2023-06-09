@@ -1,4 +1,4 @@
-import { Edge, Viewport } from "reactflow"
+import { Edge, Node, Viewport } from "reactflow"
 
 import { api } from "../api"
 
