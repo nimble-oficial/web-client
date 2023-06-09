@@ -24,6 +24,12 @@
   pointer-events: all;
   visibility: visible;
 }
+
+.dark .react-flow__node {
+  background-color: #0f172a;
+  color: white;
+}
+
 .react-flow__node:focus,
 .react-flow__node-default.selectable.selected,
 .react-flow__node-default.selectable:focus,
