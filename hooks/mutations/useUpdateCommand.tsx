@@ -1,11 +1,6 @@
-import { EditCommandSchema } from "@/schemas"
-import { api } from "@/services/api"
+import { EditCommandData, updateCommand } from "@/services"
 import { UseMutationOptions, useMutation } from "@tanstack/react-query"
 import { AxiosResponse } from "axios"
-
-export interface EditCommandData extends EditCommandSchema {
-  commandId: string
-}
 
 export interface Response {
   data: null
@@ -21,17 +16,7 @@ export const useEditCommandMutation = (
 ) => {
   const mutation = useMutation({
     ...options,
-
-    mutationFn: (data: EditCommandData) => {
-      const { description, enabled, name, commandId, allowedChannel } = data
-
-      return api.patch(`/commands/${commandId}`, {
-        name,
-        description,
-        enabled,
-        allowedChannel,
-      })
-    },
+    mutationFn: (data: EditCommandData) => updateCommand<Response>(data),
   })
 
   return mutation

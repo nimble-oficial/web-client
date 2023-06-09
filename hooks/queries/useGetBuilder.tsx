@@ -1,4 +1,4 @@
-import { api } from "@/services/api"
+import { getCurrentBuilder } from "@/services"
 import { useQuery } from "@tanstack/react-query"
 
 interface UseGetBuilderQueryProps {
@@ -8,9 +8,7 @@ interface UseGetBuilderQueryProps {
 export const useGetBuilderQuery = ({ builderId }: UseGetBuilderQueryProps) => {
   return useQuery(
     [`builderId-${builderId}`],
-    () => {
-      return api.get(`/builders/${builderId}`)
-    },
+    async () => getCurrentBuilder(builderId),
     {
       enabled: !!builderId,
     }

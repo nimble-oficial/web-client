@@ -1,11 +1,6 @@
-import { api } from "@/services/api"
+import { DeleteCommandData, deleteCommand } from "@/services"
 import { UseMutationOptions, useMutation } from "@tanstack/react-query"
 import { AxiosResponse } from "axios"
-
-export interface DeleteCommandData {
-  commandId: string
-  builderId: string
-}
 
 interface Response {
   data: null
@@ -21,11 +16,7 @@ export const useDeleteCommandMutation = (
 ) => {
   const mutation = useMutation({
     ...options,
-    mutationFn: (data: DeleteCommandData) => {
-      const { builderId, commandId } = data
-
-      return api.delete(`commands/by-builder/${builderId}/${commandId}`)
-    },
+    mutationFn: (data: DeleteCommandData) => deleteCommand<Response>(data),
   })
 
   return mutation

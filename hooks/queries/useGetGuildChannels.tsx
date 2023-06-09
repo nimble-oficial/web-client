@@ -1,4 +1,4 @@
-import { api } from "@/services/api"
+import { getGuildChannels } from "@/services"
 import { useQuery } from "@tanstack/react-query"
 
 interface UseGetGuildChannelsProps {
@@ -24,9 +24,7 @@ export const useGetGuildChannelsQuery = ({
 }: UseGetGuildChannelsProps) => {
   return useQuery(
     ["guild-channels", guildId],
-    async () => {
-      return api.get<Response>(`/guilds/${guildId}/channels`)
-    },
+    () => getGuildChannels<Response>(guildId),
     {
       enabled: !!guildId && enabled,
     }

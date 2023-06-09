@@ -1,4 +1,4 @@
-import { api } from "@/services/api"
+import { getCurrentGuild } from "@/services"
 import { useQuery } from "@tanstack/react-query"
 
 interface UseGetGuildProps {
@@ -6,13 +6,7 @@ interface UseGetGuildProps {
 }
 
 export const useGetGuildQuery = ({ guildId }: UseGetGuildProps) => {
-  return useQuery(
-    ["guild", guildId],
-    async () => {
-      return api.get(`/guilds/${guildId}`)
-    },
-    {
-      enabled: !!guildId,
-    }
-  )
+  return useQuery(["guild", guildId], async () => getCurrentGuild(guildId), {
+    enabled: !!guildId,
+  })
 }

@@ -1,9 +1,9 @@
-import { customAPIError } from "@/utils/get-error-from-api"
+import { Response, useSaveBuilderMutation } from "@/hooks"
+import { SaveBuilderData } from "@/services"
+import { customAPIError } from "@/utils"
 import { MutateOptions } from "@tanstack/react-query"
 import { AxiosResponse } from "axios"
 import { toast } from "sonner"
-
-import { Response, SaveBuilderData, useSaveBuilderMutation } from "./mutations"
 
 export const useSaveBuilder = () => {
   const { mutateAsync, ...rest } = useSaveBuilderMutation()

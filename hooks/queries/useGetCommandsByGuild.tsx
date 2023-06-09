@@ -1,4 +1,4 @@
-import { api } from "@/services/api"
+import { getCommandsByGuild } from "@/services"
 import { useQuery } from "@tanstack/react-query"
 
 interface UseGetCommandsByGuildQueryProps {
@@ -8,7 +8,7 @@ interface UseGetCommandsByGuildQueryProps {
 export const useGetCommandsByGuildQuery = ({
   guildId,
 }: UseGetCommandsByGuildQueryProps) => {
-  return useQuery([`commands-by-guild-${guildId}`], () => {
-    return api.get(`/commands/by-guild/${guildId}`)
-  })
+  return useQuery([`commands-by-guild-${guildId}`], async () =>
+    getCommandsByGuild(guildId)
+  )
 }

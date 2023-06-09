@@ -1,16 +1,6 @@
-import { api } from "@/services/api"
+import { CreateCommandData, createCommand } from "@/services"
 import { UseMutationOptions, useMutation } from "@tanstack/react-query"
 import { AxiosResponse } from "axios"
-
-export interface CreateCommandData {
-  name: string
-  description: string
-  guildId: string
-  // options: {
-  //   notEnabledMessage: string
-  //   canSendNotEnabledMessage: boolean
-  // }
-}
 
 interface Response {
   data: {
@@ -29,10 +19,7 @@ export const useCreateCommandMutation = (
 ) => {
   const mutation = useMutation({
     ...options,
-
-    mutationFn: (data: CreateCommandData) => {
-      return api.post(`/commands`, data)
-    },
+    mutationFn: (data: CreateCommandData) => createCommand<Response>(data),
   })
 
   return mutation

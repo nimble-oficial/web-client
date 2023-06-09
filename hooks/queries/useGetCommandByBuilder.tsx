@@ -1,4 +1,4 @@
-import { api } from "@/services/api"
+import { getCommandByBuilder } from "@/services"
 import { SelectedCommand } from "@/stores/dashboard"
 import { useQuery } from "@tanstack/react-query"
 
@@ -15,7 +15,7 @@ interface Response {
 export const useGetCommandByGuildQuery = ({
   builderId,
 }: UseGetCommandByGuildQueryProps) => {
-  return useQuery<Response>([`commands-by-builder-${builderId}`], () => {
-    return api.get(`/commands/by-builder/${builderId}`)
-  })
+  return useQuery([`commands-by-builder-${builderId}`], async () =>
+    getCommandByBuilder<Response>(builderId)
+  )
 }

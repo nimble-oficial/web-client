@@ -1,4 +1,4 @@
-import { api } from "@/services/api"
+import { getGuildRoles } from "@/services"
 import { useQuery } from "@tanstack/react-query"
 
 interface UseGetGuildRolesProps {
@@ -12,9 +12,7 @@ export const useGetGuildRoles = ({
 }: UseGetGuildRolesProps) => {
   return useQuery(
     ["guild-roles", guildId],
-    async () => {
-      return api.get(`/guilds/${guildId}/roles`)
-    },
+    async () => getGuildRoles(guildId),
     {
       enabled: !!guildId && enabled,
     }
