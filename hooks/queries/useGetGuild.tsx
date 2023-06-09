@@ -6,7 +6,7 @@ interface UseGetGuildProps {
 }
 
 export const useGetGuildQuery = ({ guildId }: UseGetGuildProps) => {
-  return useQuery(["guild", guildId], async () => getCurrentGuild(guildId), {
+  return useQuery(["guild", guildId], () => getCurrentGuild(guildId), {
     enabled: !!guildId,
   })
 }

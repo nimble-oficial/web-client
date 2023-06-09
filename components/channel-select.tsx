@@ -40,7 +40,7 @@ export function ChannelSelect<T extends FieldValues>({
   const { selectedGuild } = useDashboardStore()
 
   const { data, isLoading, error } = useGetGuildChannelsQuery({
-    guildId: selectedGuild.guildId,
+    guildId: selectedGuild?.id!,
   })
 
   const channels = data?.data.data

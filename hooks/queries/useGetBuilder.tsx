@@ -8,7 +8,7 @@ interface UseGetBuilderQueryProps {
 export const useGetBuilderQuery = ({ builderId }: UseGetBuilderQueryProps) => {
   return useQuery(
     [`builderId-${builderId}`],
-    async () => getCurrentBuilder(builderId),
+    () => getCurrentBuilder(builderId),
     {
       enabled: !!builderId,
     }

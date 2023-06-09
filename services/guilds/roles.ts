@@ -1,4 +1,4 @@
-import { api } from "../api"
+import { appAdataper } from "@/infra"
 
 export const getGuildRoles = <T>(id: string) =>
-  api.get<T>(`/guilds/${id}/roles`)
+  appAdataper.get<T>(`/guilds/${id}/roles`)

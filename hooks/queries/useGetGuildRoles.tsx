@@ -10,11 +10,7 @@ export const useGetGuildRoles = ({
   guildId,
   enabled = true,
 }: UseGetGuildRolesProps) => {
-  return useQuery(
-    ["guild-roles", guildId],
-    async () => getGuildRoles(guildId),
-    {
-      enabled: !!guildId && enabled,
-    }
-  )
+  return useQuery(["guild-roles", guildId], () => getGuildRoles(guildId), {
+    enabled: !!guildId && enabled,
+  })
 }

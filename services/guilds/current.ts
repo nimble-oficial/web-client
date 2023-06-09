@@ -1,3 +1,4 @@
-import { api } from "../api"
+import { appAdataper } from "@/infra"
 
-export const getCurrentGuild = <T>(id: string) => api.get<T>(`/guilds/${id}`)
+export const getCurrentGuild = <T>(id: string) =>
+  appAdataper.get<T>(`/guilds/${id}`)

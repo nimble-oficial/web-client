@@ -15,7 +15,7 @@ interface Response {
 export const useGetCommandByGuildQuery = ({
   builderId,
 }: UseGetCommandByGuildQueryProps) => {
-  return useQuery([`commands-by-builder-${builderId}`], async () =>
+  return useQuery([`commands-by-builder-${builderId}`], () =>
     getCommandByBuilder<Response>(builderId)
   )
 }

@@ -1,4 +1,4 @@
-import { api } from "../api"
+import { appAdataper } from "@/infra"
 
 export const getGuildChannels = <T>(guildId: string) =>
-  api.get<T>(`/guilds/${guildId}/channels`)
+  appAdataper.get<T>(`/guilds/${guildId}/channels`)

@@ -15,7 +15,7 @@ export const useGetCommandsByGuildQuery = ({
 }: UseGetCommandsByGuildQueryProps) => {
   return useQuery(
     [`commands-by-guild-${guildId}`],
-    async () => await getCommandsByGuild<Response>(guildId),
+    () => getCommandsByGuild<Response>(guildId),
     {
       enabled: !!guildId,
     }

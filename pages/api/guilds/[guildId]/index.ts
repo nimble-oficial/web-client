@@ -9,8 +9,8 @@ export default async function handler(
   res: NextApiResponse
 ) {
   try {
-    const userGuilds = await rest.get(Routes.userGuilds())
-    return res.status(200).json(userGuilds)
+    const roles = await rest.get(Routes.guild(req.query.guildId as string))
+    return res.status(200).json(roles)
   } catch (err) {
     res.status(500).json(customAPIError(err))
   }
