@@ -4,18 +4,8 @@ import { api } from "../api"
 
 export interface EditCommandData extends EditCommandSchema {
   commandId: string
+  guildId: string
 }
 
-export const updateCommand = <T>({
-  commandId,
-  name,
-  description,
-  enabled,
-  allowedChannel,
-}: EditCommandData) =>
-  api.patch<T>(`/commands/${commandId}`, {
-    name,
-    description,
-    enabled,
-    allowedChannel,
-  })
+export const updateCommand = <T>(data: EditCommandData) =>
+  api.patch<T>(`/commands/${data.commandId}`, data)

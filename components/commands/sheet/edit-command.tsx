@@ -1,3 +1,4 @@
+import { useEffect } from "react"
 import {
   ChannelSelect,
   CommandsSheetProvider,
@@ -12,6 +13,7 @@ import {
 } from "@/components"
 import { useDashboardStore, useEditCommandMutation } from "@/hooks"
 import { EditCommandSchema, editCommandSchema } from "@/schemas"
+import { EditCommandData } from "@/services"
 import { customAPIError, parseCommandName } from "@/utils"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Controller, useForm } from "react-hook-form"
@@ -20,6 +22,7 @@ import { toast } from "sonner"
 export const EditCommandSheet = () => {
   const {
     isSheetOpen,
+    selectedGuild,
     selectedCommand,
     handleCloseSheet,
     handleEditCommand,
@@ -30,21 +33,26 @@ export const EditCommandSheet = () => {
 
   const form = useForm<EditCommandSchema>({
     resolver: zodResolver(editCommandSchema),
-    defaultValues: {
-      name: selectedCommand?.name ?? "",
-      description: selectedCommand?.description ?? "",
-      enabled: selectedCommand?.enabled ?? true,
-      allowedChannel: selectedCommand?.allowedChannel ?? "all",
-    },
   })
 
   const { handleSubmit, setValue, getValues, control } = form
 
+  // TODO: fix this workaround
+  useEffect(() => {
+    if (selectedCommand) {
+      setValue("name", selectedCommand.name)
+      setValue("description", selectedCommand.description)
+      setValue("enabled", selectedCommand.enabled)
+      setValue("allowedChannel", selectedCommand?.allowedChannel ?? "all")
+    }
+  }, [selectedCommand, setValue])
+
   const handleSaveCommand = async () => {
     try {
-      const payload = {
+      const payload: EditCommandData = {
         ...getValues(),
         commandId: selectedCommand._id,
+        guildId: selectedGuild?.id!,
       }
 
       payload.name = parseCommandName(payload.name)

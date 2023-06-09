@@ -29,7 +29,7 @@ export const DashboardCommandsCard = () => {
 
   const { data, isLoading, refetch, isRefetching } = useGetCommandsByGuildQuery(
     {
-      guildId: selectedGuild.guildId,
+      guildId: selectedGuild?.id!,
     }
   )
 

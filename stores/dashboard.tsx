@@ -1,3 +1,4 @@
+import { Guild } from "@/components"
 import { create } from "zustand"
 
 export interface Command {
@@ -13,13 +14,8 @@ export interface SelectedCommand extends Command {
   allowedChannel: string
 }
 
-interface Guild {
-  name: string
-  guildId: string
-}
-
-export interface Commands {
-  selectedGuild: Guild
+interface Commands {
+  selectedGuild: Guild | null
   commands: Command[]
   selectedCommand: SelectedCommand
   isSheetOpen: boolean
@@ -36,10 +32,7 @@ export interface Commands {
 interface DashboardStore extends Commands {}
 
 const initialStates = {
-  selectedGuild: {
-    name: "Familia Gaymer",
-    guildId: "442508456495284224",
-  },
+  selectedGuild: null,
   commands: [],
   selectedCommand: {} as SelectedCommand,
   isSheetOpen: false,

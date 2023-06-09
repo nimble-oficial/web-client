@@ -16,11 +16,10 @@ export const useDeleteCommand = ({
 
   const handleDelete = useCallback(async () => {
     try {
-      if (!builderId) {
-        return
-      }
-
-      await mutateAsync({ commandId: selectedCommand._id, builderId })
+      await mutateAsync({
+        commandId: selectedCommand._id,
+        builderId: builderId || selectedCommand?.builderId,
+      })
 
       handleDeleteCommand(selectedCommand._id)
 
@@ -38,6 +37,7 @@ export const useDeleteCommand = ({
     onClose,
     onDeleteConfirm,
     selectedCommand._id,
+    selectedCommand?.builderId,
   ])
 
   return { handleDelete, isLoading }
