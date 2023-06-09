@@ -6,7 +6,7 @@ import { Textarea } from "./textarea"
 
 interface TextareaWithLimitProps
   extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
-  limit: number
+  limit?: number
 }
 
 const TextareaWithLimit = React.forwardRef<
