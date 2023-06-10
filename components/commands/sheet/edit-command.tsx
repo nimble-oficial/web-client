@@ -42,7 +42,7 @@ export const EditCommandSheet = () => {
   useEffect(() => {
     if (selectedCommand) {
       setValue("name", selectedCommand.name)
-      setValue("description", selectedCommand.description)
+      setValue("description", selectedCommand?.description ?? "")
       setValue("enabled", selectedCommand.enabled)
       setValue(
         "allowedChannel",
@@ -122,7 +122,7 @@ export const EditCommandSheet = () => {
               <div className="flex flex-col justify-start gap-2">
                 <FormLabel htmlFor="description">Description</FormLabel>
                 <Input
-                  placeholder="Eg.: !ping"
+                  placeholder="Eg.: Replies with pong"
                   className="col-span-3"
                   id="description"
                   {...field}
