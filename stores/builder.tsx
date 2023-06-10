@@ -12,6 +12,7 @@ import {
   applyEdgeChanges,
   applyNodeChanges,
 } from "reactflow"
+import { toast } from "sonner"
 import { create } from "zustand"
 
 interface BuilderStore {
@@ -34,7 +35,7 @@ const initialStates: Pick<
   "nodes" | "edges" | "builderId" | "viewport"
 > = {
   viewport: {
-    zoom: 1,
+    zoom: 2,
     x: 0,
     y: 0,
   },
@@ -61,6 +62,11 @@ export const builderStore = create<BuilderStore>((set, get) => ({
     set({ edges })
   },
   onNodesChange: (changes: NodeChange[]) => {
+    if (changes.some((change) => change.type === "remove")) {
+      toast.error("You can't remove root node")
+      return
+    }
+
     set({
       nodes: applyNodeChanges(changes, get().nodes),
     })
