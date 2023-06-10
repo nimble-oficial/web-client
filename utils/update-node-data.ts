@@ -24,11 +24,11 @@ export const updateNodeData = <T extends {}>({
   clonedNodes[selectedNode.index] = {
     ...clonedNodes[selectedNode.index],
     style: {
-      ...clonedNodes[selectedNode.index].style,
+      ...(clonedNodes[selectedNode.index]?.style || {}),
       ...style,
     },
     data: {
-      ...clonedNodes[selectedNode.index].data,
+      ...clonedNodes[selectedNode.index]?.data,
       ...overrides,
     },
   }
