@@ -15,6 +15,8 @@ import {
 import { toast } from "sonner"
 import { create } from "zustand"
 
+import { SelectedNode } from "./node-sheet"
+
 interface BuilderStore {
   nodes: Node[]
   edges: Edge[]
@@ -62,7 +64,17 @@ export const builderStore = create<BuilderStore>((set, get) => ({
     set({ edges })
   },
   onNodesChange: (changes: NodeChange[]) => {
-    if (changes.some((change) => change.type === "remove")) {
+    const rootNode = get().nodes?.find((node) => {
+      const selectedNode = node as SelectedNode
+
+      return selectedNode?.isRoot ?? false
+    })
+
+    const isTryingToRemoveRootNode = changes.some(
+      (change) => change.type === "remove" && change.id === rootNode?.id
+    )
+
+    if (isTryingToRemoveRootNode) {
       toast.error("You can't remove root node")
       return
     }
