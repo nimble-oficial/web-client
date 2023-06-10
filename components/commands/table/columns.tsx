@@ -96,7 +96,7 @@ export const columns: ColumnDef<SelectedCommand>[] = [
     },
   },
   {
-    accessorKey: "allowedRoles",
+    accessorKey: "allowedRole",
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Allowed Role" />
     ),
