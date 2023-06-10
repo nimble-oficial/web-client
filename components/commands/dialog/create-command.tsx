@@ -13,6 +13,7 @@ import {
   SheetClose,
   SheetFooter,
 } from "@/components"
+import { DEFAULT_OPTION_VALUES } from "@/constants"
 import { useCreateCommandMutation, useDashboardStore } from "@/hooks"
 import { CreateCommandSchema, createCommandSchema } from "@/schemas"
 import { CreateCommandData } from "@/services"
@@ -62,6 +63,7 @@ export function CreateCommandDialog({
         _id: data?.data?._id,
         builderId: data?.data?.builderId,
         createdAt: new Date(),
+        ...DEFAULT_OPTION_VALUES,
       }
 
       handleCloseDialog()
