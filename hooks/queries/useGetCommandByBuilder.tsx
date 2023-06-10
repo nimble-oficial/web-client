@@ -7,9 +7,7 @@ interface UseGetCommandByGuildQueryProps {
 }
 
 interface Response {
-  data: {
-    data: SelectedCommand
-  }
+  data: SelectedCommand
 }
 
 export const useGetCommandByGuildQuery = ({
