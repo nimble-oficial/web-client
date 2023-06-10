@@ -9,7 +9,6 @@ interface NodePayload {
   description: string
   variant: NodeType
   key: SpeedDialGroupChildrenKey
-  type: NodeType
 }
 
 export const useAddNewNodeToBuilder = () => {
@@ -17,7 +16,7 @@ export const useAddNewNodeToBuilder = () => {
   const prevPosition = useRef(0)
 
   const handleAddNewNodeToBuilder = useCallback(
-    ({ description, label, variant, key, type, ...rest }: NodePayload) => {
+    ({ description, label, variant, key, ...rest }: NodePayload) => {
       prevPosition.current += 50
 
       const createdNode: Node = {
@@ -34,7 +33,6 @@ export const useAddNewNodeToBuilder = () => {
         width: 150,
         height: 40,
         style: getNodeVariantsStyles(variant),
-        type,
       }
 
       handleAddNode(createdNode)
