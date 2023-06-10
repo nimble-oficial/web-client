@@ -1,10 +1,5 @@
 import { useMemo } from "react"
-import {
-  BuilderSpeedDial,
-  DefaultEdge,
-  EventsNode,
-  SavingLabel,
-} from "@/components"
+import { BuilderSpeedDial, DefaultEdge, SavingLabel } from "@/components"
 import { useBuilderStore, useNodeSheetStore } from "@/hooks"
 import { SelectedNode } from "@/stores"
 import {
@@ -15,10 +10,6 @@ import {
 
 const edgeTypes = {
   default: DefaultEdge,
-}
-
-const nodeTypes = {
-  events: EventsNode,
 }
 
 export const BuilderFlowProvider = ({ ...props }) => {
@@ -35,13 +26,12 @@ export const BuilderFlowProvider = ({ ...props }) => {
     <ReactFlowInstance
       nodes={nodesWithIndexField}
       edges={edges}
-      nodeTypes={nodeTypes}
       edgeTypes={edgeTypes}
       onNodesChange={onNodesChange}
       onEdgesChange={onEdgesChange}
       onConnect={onConnect}
-      minZoom={0.1}
-      maxZoom={10}
+      // minZoom={0.1}
+      // maxZoom={10}
       proOptions={{
         hideAttribution: true,
       }}

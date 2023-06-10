@@ -1,5 +1,6 @@
 import { NodeType, SpeedDialGroup } from "@/data/speed-dial"
-import { useAddNewNodeToBuilder } from "@/hooks"
+import { useAddNewNodeToBuilder, useNodeSheetStore } from "@/hooks"
+import { SelectedNode } from "@/stores"
 
 import { cn } from "@/lib/utils"
 import {
@@ -15,6 +16,7 @@ interface ItemsProps {
 }
 
 export const Children = ({ group }: ItemsProps) => {
+  const { handleSelectNode, handleOpenSheet } = useNodeSheetStore()
   const { handleAddNewNodeToBuilder } = useAddNewNodeToBuilder()
 
   return (
@@ -27,13 +29,18 @@ export const Children = ({ group }: ItemsProps) => {
                 <div
                   role="button"
                   onClick={() => {
-                    handleAddNewNodeToBuilder({
+                    const node = {
                       ...child,
                       description: child.description,
                       label: child.label,
                       variant: group.variant as NodeType,
                       key: child.key,
-                    })
+                    }
+
+                    const createdNode = handleAddNewNodeToBuilder(node)
+
+                    handleSelectNode(createdNode as SelectedNode)
+                    handleOpenSheet()
                   }}
                 >
                   <child.element />
