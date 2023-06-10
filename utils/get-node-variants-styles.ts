@@ -1,9 +1,6 @@
 import { NodeType } from "@/data/speed-dial"
 
 const styles = {
-  events: {
-    border: "1px solid #5a8eff",
-  },
   messages: {
     border: "1px solid #00aca2",
   },
