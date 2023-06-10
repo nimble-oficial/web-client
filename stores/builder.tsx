@@ -7,6 +7,7 @@ import {
   OnConnect,
   OnEdgesChange,
   OnNodesChange,
+  Viewport,
   addEdge,
   applyEdgeChanges,
   applyNodeChanges,
@@ -17,7 +18,9 @@ interface BuilderStore {
   nodes: Node[]
   edges: Edge[]
   builderId: string | null
+  viewport: Viewport
   handleAddNode: (node: Node) => void
+  handleChangeViewport: (viewport: Viewport) => void
   handleChangeNodes: (nodes: Node[]) => void
   handleChangeEdges: (edges: Edge[]) => void
   handleChangeBuilderId: (builderId: string) => void
@@ -26,7 +29,15 @@ interface BuilderStore {
   onConnect: OnConnect
 }
 
-const initialStates: Pick<BuilderStore, "nodes" | "edges" | "builderId"> = {
+const initialStates: Pick<
+  BuilderStore,
+  "nodes" | "edges" | "builderId" | "viewport"
+> = {
+  viewport: {
+    zoom: 1,
+    x: 0,
+    y: 0,
+  },
   builderId: null,
   nodes: [],
   edges: [],
@@ -63,5 +74,8 @@ export const builderStore = create<BuilderStore>((set, get) => ({
     set({
       edges: addEdge(connection, get().edges),
     })
+  },
+  handleChangeViewport: (viewport) => {
+    set({ viewport })
   },
 }))

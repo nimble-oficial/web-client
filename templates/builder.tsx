@@ -15,7 +15,12 @@ export const BuilderTemplate = () => {
 
   const builderId = query.builderId as string
 
-  const { handleChangeBuilderId, handleChangeNodes } = useBuilderStore()
+  const {
+    handleChangeBuilderId,
+    handleChangeNodes,
+    handleChangeEdges,
+    handleChangeViewport,
+  } = useBuilderStore()
 
   const { data, isLoading } = useGetBuilderQuery({ builderId })
 
@@ -24,6 +29,16 @@ export const BuilderTemplate = () => {
   useEffect(() => {
     handleChangeBuilderId(builderId)
   }, [builderId, handleChangeBuilderId])
+
+  useEffect(() => {
+    handleChangeEdges(builderData?.edges)
+  }, [builderData?.edges, handleChangeEdges])
+
+  useEffect(() => {
+    if (!builderData?.viewport) return
+
+    handleChangeViewport(builderData?.viewport)
+  }, [builderData?.viewport, handleChangeViewport])
 
   // This can be helpful to find the node in array directly.
   // This decreases the complexity of finding the node in array from O(n) to O(1).
@@ -37,13 +52,5 @@ export const BuilderTemplate = () => {
     handleChangeNodes(nodesWithIndexField)
   }, [handleChangeNodes, nodesWithIndexField])
 
-  return (
-    <>
-      {isLoading ? (
-        <div>Loading...</div>
-      ) : (
-        <BuilderFlow builderId={builderId} {...builderData} />
-      )}
-    </>
-  )
+  return <>{isLoading ? <div>Loading...</div> : <BuilderFlow />}</>
 }
