@@ -119,17 +119,17 @@ export const columns: ColumnDef<SelectedCommand>[] = [
       <DataTableColumnHeader column={column} title="Created At" />
     ),
     cell: ({ row }) => {
+      const parsedDate = formatDistanceStrict(
+        new Date(row.original.createdAt),
+        new Date(),
+        {
+          addSuffix: true,
+        }
+      )
+
       return (
         <div className="flex w-[100px] items-center">
-          <span>
-            {formatDistanceStrict(
-              new Date(row.original.createdAt),
-              new Date(),
-              {
-                addSuffix: true,
-              }
-            )}
-          </span>
+          <span>{parsedDate}</span>
         </div>
       )
     },
