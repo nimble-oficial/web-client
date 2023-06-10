@@ -16,7 +16,7 @@ export const Builder = () => {
   const { setViewport } = useReactFlow()
 
   useEffect(() => {
-    if (viewport.x && viewport.y) {
+    if (viewport) {
       setViewport(viewport)
     }
   }, [setViewport, viewport])
