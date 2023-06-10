@@ -1,3 +1,4 @@
+import { useState } from "react"
 import {
   Button,
   Command,
@@ -12,13 +13,11 @@ import {
   PopoverTrigger,
   Skeleton,
 } from "@/components"
-import { useDashboardStore, useGetGuildChannelsQuery } from "@/hooks"
-import { Check, ChevronsUpDown, ServerCrash } from "lucide-react"
-import { useState } from "react"
-import { Control, FieldValues, UseFormSetValue } from "react-hook-form"
-
 import { DEFAULT_OPTION_VALUES } from "@/constants/default-option-values"
-import { cn } from "@/lib/utils"
+import { useDashboardStore, useGetGuildChannelsQuery } from "@/hooks"
+import { cn } from "@/lib"
+import { Check, ChevronsUpDown, ServerCrash } from "lucide-react"
+import { Control, FieldValues, UseFormSetValue } from "react-hook-form"
 
 interface ChannelsMultiSelectProps<T extends FieldValues> {
   setValue: UseFormSetValue<T>
@@ -85,7 +84,7 @@ export function ChannelSelect<T extends FieldValues>({
             </div>
           </PopoverTrigger>
 
-          <PopoverContent className="w-[550px] p-0">
+          <PopoverContent className="max-h-[300px] w-[550px] overflow-y-auto p-0">
             <Command className="w-full">
               <CommandInput
                 className="w-full"
@@ -122,14 +121,19 @@ export function ChannelSelect<T extends FieldValues>({
                   <>
                     <CommandItem
                       onSelect={() => {
-                        setValue("allowedChannel", DEFAULT_OPTION_VALUES.allowedChannel)
+                        setValue(
+                          "allowedChannel",
+                          DEFAULT_OPTION_VALUES.allowedChannel
+                        )
                         setOpen(false)
                       }}
                     >
                       <Check
                         className={cn(
                           "mr-2 h-4 w-4",
-                          value === DEFAULT_OPTION_VALUES.allowedChannel ? "opacity-100" : "opacity-0"
+                          value === DEFAULT_OPTION_VALUES.allowedChannel
+                            ? "opacity-100"
+                            : "opacity-0"
                         )}
                       />
                       All Channels

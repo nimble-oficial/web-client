@@ -14,7 +14,7 @@ export const Content = () => {
 
   return (
     <>
-      <DropdownMenuContent className="w-56">
+      <DropdownMenuContent className="z-20 w-56">
         <EditCommand />
         <DeleteCommand handleOpenDialog={() => setShowDialog(true)} />
       </DropdownMenuContent>

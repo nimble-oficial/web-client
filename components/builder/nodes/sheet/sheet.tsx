@@ -8,10 +8,6 @@ import {
   SendMessageNodeSheet,
 } from "."
 
-type Sheets = {
-  [key in SpeedDialGroupChildrenKey]: () => JSX.Element
-}
-
 export const NodesSheet = () => {
   const { selectedNode } = useNodeSheetStore()
 

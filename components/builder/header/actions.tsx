@@ -1,4 +1,8 @@
-import { BuilderSettingsButton, SaveBuilderButton } from "@/components"
+import {
+  BuilderSettingsButton,
+  BuilderZoomButton,
+  SaveBuilderButton,
+} from "@/components"
 
 interface BuilderFlowHeaderActionsProps {
   builderId: string
@@ -10,6 +14,7 @@ export const BuilderFlowHeaderActions = ({
   return (
     <div className="flex gap-2">
       <SaveBuilderButton builderId={builderId} />
+      <BuilderZoomButton />
       <BuilderSettingsButton />
     </div>
   )

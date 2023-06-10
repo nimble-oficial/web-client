@@ -15,7 +15,6 @@ export const SendMessageNodeSheet = () => {
     defaultValues: {
       content: selectedNode?.data?.content ?? "",
       enabled: selectedNode?.data?.enabled ?? true,
-      // allowedChannel: selectedNode?.data?.allowedChannel ?? "all",
     },
   })
 
@@ -26,10 +25,11 @@ export const SendMessageNodeSheet = () => {
       const updatedNodes = updateNodeData({
         nodes,
         selectedNode,
+        style: {
+          opacity: getValues("enabled") ? "1" : "0.5",
+        },
         overrides: getValues(),
       })
-
-      console.log(getValues())
 
       handleChangeNodes(updatedNodes)
       handleCloseSheet()

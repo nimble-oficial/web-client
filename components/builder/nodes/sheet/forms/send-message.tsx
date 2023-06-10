@@ -5,8 +5,9 @@ import {
   FormMessage,
   Label,
   Switch,
-  Textarea,
+  TextareaWithLimit,
 } from "@/components"
+import { useDashboardStore, useGetGuildMembers } from "@/hooks"
 import { SendMessageNodeSchema } from "@/schemas"
 import { Control, Controller, UseFormSetValue } from "react-hook-form"
 
@@ -19,6 +20,11 @@ export const SendMessageNodeSheetForm = ({
   setValue,
   control,
 }: SendMessageNodeSheetFormProps) => {
+  const { selectedGuild } = useDashboardStore()
+  const { data } = useGetGuildMembers({ guildId: selectedGuild?.id! })
+
+  const members = data?.data
+
   return (
     <>
       <FormField
@@ -33,7 +39,7 @@ export const SendMessageNodeSheetForm = ({
                 The message that will be sent to the user.
               </FormDescription>
 
-              <Textarea
+              <TextareaWithLimit
                 {...field}
                 placeholder="Type your message here."
                 id="content"
