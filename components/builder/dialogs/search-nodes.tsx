@@ -26,7 +26,7 @@ export const SearchNodesDialog = () => {
         {nodes.map((node) => {
           return (
             <CommandItem
-              className="cursor-pointer"
+              className="cursor-pointer rounded-none"
               key={node.id}
               onSelect={() => {
                 setOpen(false)
