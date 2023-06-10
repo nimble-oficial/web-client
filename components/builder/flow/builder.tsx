@@ -16,10 +16,10 @@ export const Builder = () => {
   const { setViewport } = useReactFlow()
 
   useEffect(() => {
-    if (viewport) {
+    if (viewport.x && viewport.y) {
       setViewport(viewport)
     }
-  }, [nodes, setViewport, viewport])
+  }, [setViewport, viewport])
 
   return (
     <ReactFlow
