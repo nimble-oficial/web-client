@@ -78,9 +78,45 @@ export const columns: ColumnDef<SelectedCommand>[] = [
     },
   },
   {
+    accessorKey: "allowedChannel",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Allowed Channel" />
+    ),
+    cell: ({ row }) => {
+      return (
+        <div className="flex space-x-2">
+          <span className="max-w-[100px] truncate font-medium">
+            {row.original?.allowedChannel?.name ?? "All"}
+          </span>
+        </div>
+      )
+    },
+    filterFn: (row, id, value) => {
+      return value.includes(row.getValue(id))
+    },
+  },
+  {
+    accessorKey: "allowedRole",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Allowed Role" />
+    ),
+    cell: ({ row }) => {
+      return (
+        <div className="flex space-x-2">
+          <span className="max-w-[100px] truncate font-medium">
+            {row.original?.allowedRole?.name ?? "All"}
+          </span>
+        </div>
+      )
+    },
+    filterFn: (row, id, value) => {
+      return value.includes(row.getValue(id))
+    },
+  },
+  {
     accessorKey: "Created",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Created" />
+      <DataTableColumnHeader column={column} title="Created At" />
     ),
     cell: ({ row }) => {
       return (
