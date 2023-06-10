@@ -1,5 +1,6 @@
 export * from "./authenticated-user"
 export * from "./channels"
 export * from "./current"
+export * from "./members"
 export * from "./roles"
 export * from "./search-member"
