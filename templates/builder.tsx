@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useMemo } from "react"
 import { useRouter } from "next/router"
 import { BuilderFlow } from "@/components"
 import { useBuilderStore, useGetBuilderQuery } from "@/hooks"
@@ -15,7 +15,7 @@ export const BuilderTemplate = () => {
 
   const builderId = query.builderId as string
 
-  const { handleChangeBuilderId } = useBuilderStore()
+  const { handleChangeBuilderId, handleChangeNodes } = useBuilderStore()
 
   const { data, isLoading } = useGetBuilderQuery({ builderId })
 
@@ -24,6 +24,18 @@ export const BuilderTemplate = () => {
   useEffect(() => {
     handleChangeBuilderId(builderId)
   }, [builderId, handleChangeBuilderId])
+
+  // This can be helpful to find the node in array directly.
+  // This decreases the complexity of finding the node in array from O(n) to O(1).
+  const nodesWithIndexField = useMemo(() => {
+    if (!builderData?.nodes) return []
+
+    return builderData?.nodes?.map((n, i) => ({ ...n, index: i }))
+  }, [builderData?.nodes])
+
+  useEffect(() => {
+    handleChangeNodes(nodesWithIndexField)
+  }, [handleChangeNodes, nodesWithIndexField])
 
   return (
     <>
