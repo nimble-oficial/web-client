@@ -11,7 +11,7 @@
 .react-flow__node {
   cursor: grab;
   padding: 10px;
-  border-radius: 3px;
+  border-radius: 6px;
   width: 150px;
   font-size: 12px;
   color: #222;
@@ -20,7 +20,8 @@
   box-shadow: none !important;
   outline: none;
   z-index: 1000;
-
+  /* TODO: this could be a feature :) */
+  /* transition: all 0.1s ease-out; */
   pointer-events: all;
   visibility: visible;
 }
@@ -34,7 +35,7 @@
 .react-flow__node-default.selectable.selected,
 .react-flow__node-default.selectable:focus,
 .react-flow__node:hover {
-  box-shadow: 0 0 0 0.5px #1a192b;
+  /* box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1) !important; */
 }
 
 @layer base {

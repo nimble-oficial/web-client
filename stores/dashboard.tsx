@@ -5,14 +5,24 @@ export interface Command {
   _id: string
   name: string
   enabled: boolean
-  description: string
+  description?: string
   createdAt: Date
+}
+
+export interface AllowedChannel {
+  id: string
+  name: string
+}
+
+export interface AllowedRole {
+  id: string
+  name: string
 }
 
 export interface SelectedCommand extends Command {
   builderId: string
-  allowedChannel: string
-  allowedRole: string
+  allowedChannel: AllowedChannel
+  allowedRole: AllowedRole
 }
 
 interface Commands {

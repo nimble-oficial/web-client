@@ -1,14 +1,12 @@
+import { CreateCommandSchema } from "@/schemas"
+
 import { api } from "../api"
 
 export interface CreateCommandData {
   name: string
-  description: string
+  description?: string
   guildId: string
-  // options: {
-  //   notEnabledMessage: string
-  //   canSendNotEnabledMessage: boolean
-  // }
 }
 
-export const createCommand = <T>(data: CreateCommandData) =>
+export const createCommand = <T>(data: CreateCommandSchema) =>
   api.post<T>(`/commands`, data)

@@ -12,15 +12,11 @@ export const createCommandSchema = z.object({
       message: "Name cannot exceed 20 characters.",
     }),
   description: z
-    .string({
-      required_error: "Description is required.",
-    })
-    .min(1, {
-      message: "Description is required.",
-    })
+    .string()
     .max(100, {
       message: "Description cannot exceed 100 characters.",
-    }),
+    })
+    .optional(),
   guildId: z.string(),
 })
 
