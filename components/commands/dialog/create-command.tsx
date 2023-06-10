@@ -55,8 +55,6 @@ export function CreateCommandDialog({
         name: parseCommandName(formValues.name),
       })
 
-      resetFormFields()
-
       const createdCommand: Payload = {
         ...formValues,
         guildId: selectedGuild?.id!,
@@ -68,6 +66,7 @@ export function CreateCommandDialog({
 
       handleCloseDialog()
       handleAddNewCommand(createdCommand)
+      resetFormFields()
 
       toast.success("Command created successfully!")
     } catch (err) {
@@ -117,7 +116,7 @@ export function CreateCommandDialog({
                 <div className="flex flex-col justify-start gap-2">
                   <FormLabel htmlFor="description">Description</FormLabel>
                   <Input
-                    placeholder="Eg.: !ping"
+                    placeholder="Eg.: Replies with pong"
                     className="col-span-3"
                     id="description"
                     {...field}

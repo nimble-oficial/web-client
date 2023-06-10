@@ -74,6 +74,8 @@ export const EditCommandSheet = () => {
 
       handleEditCommand(newCommandPayload)
       handleSelectCommand(newCommandPayload)
+      handleCloseSheet()
+
       toast.success("Command updated successfully!")
     } catch (err) {
       toast.error(customAPIError(err).message)
