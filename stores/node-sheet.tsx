@@ -3,6 +3,7 @@ import { create } from "zustand"
 
 export interface SelectedNode extends Node {
   index: number
+  isRoot: boolean
 }
 
 interface NodeSheetStore {

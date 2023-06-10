@@ -5,11 +5,7 @@ import {
   BuilderFlowHeaderProvider,
 } from "@/components"
 
-interface BuilderHeaderProps {
-  builderId: string
-}
-
-export const BuilderHeader = ({ builderId }: BuilderHeaderProps) => {
+export const BuilderHeader = () => {
   return (
     <>
       <Head>
@@ -18,7 +14,7 @@ export const BuilderHeader = ({ builderId }: BuilderHeaderProps) => {
 
       <BuilderFlowHeaderProvider>
         <BuilderBackButton />
-        <BuilderFlowHeaderActions builderId={builderId} />
+        <BuilderFlowHeaderActions />
       </BuilderFlowHeaderProvider>
     </>
   )

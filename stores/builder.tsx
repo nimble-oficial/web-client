@@ -1,4 +1,3 @@
-import { getNodeVariantsStyles } from "@/utils/get-node-variants-styles"
 import {
   Connection,
   Edge,
@@ -8,6 +7,7 @@ import {
   OnConnect,
   OnEdgesChange,
   OnNodesChange,
+  Viewport,
   addEdge,
   applyEdgeChanges,
   applyNodeChanges,
@@ -17,13 +17,13 @@ import { create } from "zustand"
 interface BuilderStore {
   nodes: Node[]
   edges: Edge[]
-  lastSave: Date | null
   builderId: string | null
+  viewport: Viewport
   handleAddNode: (node: Node) => void
+  handleChangeViewport: (viewport: Viewport) => void
   handleChangeNodes: (nodes: Node[]) => void
   handleChangeEdges: (edges: Edge[]) => void
   handleChangeBuilderId: (builderId: string) => void
-  setLastSave: (time: Date | null) => void
   onNodesChange: OnNodesChange
   onEdgesChange: OnEdgesChange
   onConnect: OnConnect
@@ -31,23 +31,15 @@ interface BuilderStore {
 
 const initialStates: Pick<
   BuilderStore,
-  "nodes" | "edges" | "lastSave" | "builderId"
+  "nodes" | "edges" | "builderId" | "viewport"
 > = {
-  lastSave: null,
+  viewport: {
+    zoom: 1,
+    x: 0,
+    y: 0,
+  },
   builderId: null,
-  nodes: [
-    {
-      id: "1",
-      type: "events",
-      data: {
-        label: "Received a message",
-        isRoot: true,
-        key: "received-message",
-      },
-      style: getNodeVariantsStyles("events"),
-      position: { x: 250, y: 5 },
-    },
-  ],
+  nodes: [],
   edges: [],
 }
 
@@ -68,9 +60,6 @@ export const builderStore = create<BuilderStore>((set, get) => ({
   handleChangeEdges: (edges) => {
     set({ edges })
   },
-  setLastSave: (time) => {
-    set({ lastSave: time })
-  },
   onNodesChange: (changes: NodeChange[]) => {
     set({
       nodes: applyNodeChanges(changes, get().nodes),
@@ -85,5 +74,8 @@ export const builderStore = create<BuilderStore>((set, get) => ({
     set({
       edges: addEdge(connection, get().edges),
     })
+  },
+  handleChangeViewport: (viewport) => {
+    set({ viewport })
   },
 }))

@@ -1,43 +1,32 @@
-import { useEffect } from "react"
 import {
-  BuilderFlowProvider,
+  Builder,
   BuilderFlowWrapper,
   BuilderHeader,
+  DefaultEdge,
   EditCommandSheet,
   NodesSheet,
+  SearchNodesDialog,
 } from "@/components"
-import { useBuilderStore } from "@/hooks"
-import { Edge, Node, ReactFlowProvider, Viewport } from "reactflow"
+import { ReactFlowProvider } from "reactflow"
 
 import "reactflow/dist/style.css"
 
 export interface BuilderFlowProps {
-  edges: Edge[]
-  nodes: Node[]
-  viewport: Viewport
   builderId: string
 }
 
-export const BuilderFlow = ({
-  nodes,
-  edges,
-  viewport,
-  builderId,
-  ...props
-}: BuilderFlowProps) => {
-  const { handleChangeEdges, handleChangeNodes } = useBuilderStore()
+export const EDGE_TYPES = {
+  default: DefaultEdge,
+}
 
-  useEffect(() => {
-    handleChangeEdges(edges)
-    handleChangeNodes(nodes)
-  }, [edges, nodes, handleChangeEdges, handleChangeNodes])
-
+export const BuilderFlow = () => {
   return (
     <ReactFlowProvider>
       <BuilderFlowWrapper>
-        <BuilderHeader builderId={builderId} />
-        <BuilderFlowProvider {...props} />
+        <BuilderHeader />
+        <Builder />
         <NodesSheet />
+        <SearchNodesDialog />
         <EditCommandSheet />
       </BuilderFlowWrapper>
     </ReactFlowProvider>

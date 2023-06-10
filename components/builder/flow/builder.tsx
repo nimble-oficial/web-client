@@ -1,37 +1,34 @@
-import { useMemo } from "react"
-import { BuilderSpeedDial, DefaultEdge, SavingLabel } from "@/components"
+import { useEffect } from "react"
 import { useBuilderStore, useNodeSheetStore } from "@/hooks"
 import { SelectedNode } from "@/stores"
-import {
-  Background,
-  ConnectionMode,
-  ReactFlow as ReactFlowInstance,
-} from "reactflow"
+import { Background, ConnectionMode, ReactFlow, useReactFlow } from "reactflow"
 
-const edgeTypes = {
-  default: DefaultEdge,
-}
+import { EDGE_TYPES } from "./builder-flow"
+import { SavingLabel } from "./saving-label"
+import { BuilderSpeedDial } from "./speed-dial"
 
-export const BuilderFlowProvider = ({ ...props }) => {
+export const Builder = () => {
   const { handleSelectNode, handleOpenSheet } = useNodeSheetStore()
 
-  const { nodes, edges, onEdgesChange, onNodesChange, onConnect } =
+  const { onEdgesChange, onNodesChange, onConnect, viewport, nodes, edges } =
     useBuilderStore()
 
-  const nodesWithIndexField = useMemo(() => {
-    return nodes?.map((n, i) => ({ ...n, index: i }))
-  }, [nodes])
+  const { setViewport } = useReactFlow()
+
+  useEffect(() => {
+    if (viewport.x && viewport.y) {
+      setViewport(viewport)
+    }
+  }, [setViewport, viewport])
 
   return (
-    <ReactFlowInstance
-      nodes={nodesWithIndexField}
+    <ReactFlow
+      nodes={nodes}
       edges={edges}
-      edgeTypes={edgeTypes}
+      edgeTypes={EDGE_TYPES}
       onNodesChange={onNodesChange}
       onEdgesChange={onEdgesChange}
       onConnect={onConnect}
-      // minZoom={0.1}
-      // maxZoom={10}
       proOptions={{
         hideAttribution: true,
       }}
@@ -44,12 +41,10 @@ export const BuilderFlowProvider = ({ ...props }) => {
         handleSelectNode(node as SelectedNode)
         handleOpenSheet()
       }}
-      fitView
-      {...props}
     >
       <BuilderSpeedDial />
       <Background />
       <SavingLabel />
-    </ReactFlowInstance>
+    </ReactFlow>
   )
 }

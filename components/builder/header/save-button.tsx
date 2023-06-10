@@ -4,16 +4,16 @@ import { customAPIError } from "@/utils"
 import { useViewport } from "reactflow"
 import { toast } from "sonner"
 
-interface SaveBuilderButtonProps {
-  builderId: string
-}
-
-export const SaveBuilderButton = ({ builderId }: SaveBuilderButtonProps) => {
+export const SaveBuilderButton = () => {
   const viewport = useViewport()
 
   const { handleSave, isLoading } = useSaveBuilder()
 
-  const { edges, nodes } = useBuilderStore()
+  const { edges, nodes, builderId } = useBuilderStore()
+
+  if (!builderId) {
+    return null
+  }
 
   return (
     <Button

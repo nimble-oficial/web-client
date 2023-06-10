@@ -5,6 +5,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components"
+import { FIT_ZOOM_DURATION, ZOOM_LEVELS } from "@/constants"
 import { Minus, Plus } from "lucide-react"
 import { useReactFlow, useViewport } from "reactflow"
 
@@ -24,51 +25,50 @@ export const BuilderZoomButton = () => {
       </Button>
 
       <DropdownMenu>
-        <DropdownMenuTrigger>
+        <DropdownMenuTrigger asChild>
           <Button variant="outline" size="sm" className="rounded-none">
             <span className="text-xs">{Math.round(viewport.zoom * 100)}%</span>
           </Button>
         </DropdownMenuTrigger>
 
         <DropdownMenuContent>
-          <DropdownMenuItem onClick={() => zoomIn()} className="cursor-pointer">
+          <DropdownMenuItem
+            onClick={() => zoomIn({ duration: FIT_ZOOM_DURATION })}
+            className="cursor-pointer"
+          >
             Zoom in
           </DropdownMenuItem>
 
           <DropdownMenuItem
-            onClick={() => zoomOut()}
+            onClick={() => zoomOut({ duration: FIT_ZOOM_DURATION })}
             className="cursor-pointer"
           >
             Zoom out
           </DropdownMenuItem>
 
           <DropdownMenuItem
-            onClick={() => fitView()}
+            onClick={() => fitView({ duration: FIT_ZOOM_DURATION })}
             className="cursor-pointer"
           >
             Zoom to fit
           </DropdownMenuItem>
 
-          <DropdownMenuItem
-            onClick={() => setViewport({ ...viewport, zoom: 0.25 })}
-            className="cursor-pointer"
-          >
-            Zoom to 25%
-          </DropdownMenuItem>
-
-          <DropdownMenuItem
-            onClick={() => setViewport({ ...viewport, zoom: 0.5 })}
-            className="cursor-pointer"
-          >
-            Zoom to 50%
-          </DropdownMenuItem>
-
-          <DropdownMenuItem
-            onClick={() => setViewport({ ...viewport, zoom: 1 })}
-            className="cursor-pointer"
-          >
-            Zoom to 100%
-          </DropdownMenuItem>
+          {Object.entries(ZOOM_LEVELS).map(([key, value]) => (
+            <DropdownMenuItem
+              key={key}
+              onClick={() =>
+                setViewport(
+                  { ...viewport, zoom: value },
+                  {
+                    duration: FIT_ZOOM_DURATION,
+                  }
+                )
+              }
+              className="cursor-pointer"
+            >
+              Zoom to {key}
+            </DropdownMenuItem>
+          ))}
         </DropdownMenuContent>
       </DropdownMenu>
 
