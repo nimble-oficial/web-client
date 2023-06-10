@@ -34,7 +34,7 @@ export const SendMessageNodeSheet = () => {
       handleChangeNodes(updatedNodes)
       handleCloseSheet()
 
-      toast.error("Data updated successfully!")
+      toast.success("Data updated successfully!")
     } catch (err) {
       toast.error(customAPIError(err).message)
     }
