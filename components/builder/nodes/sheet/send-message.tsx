@@ -25,6 +25,9 @@ export const SendMessageNodeSheet = () => {
       const updatedNodes = updateNodeData({
         nodes,
         selectedNode,
+        style: {
+          opacity: getValues("enabled") ? "1" : "0.5",
+        },
         overrides: getValues(),
       })
 

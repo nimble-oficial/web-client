@@ -34,9 +34,10 @@ export const ReplyMessageNodeSheet = () => {
       const updatedNodes = updateNodeData({
         nodes,
         selectedNode,
-        overrides: {
-          ...getValues(),
+        style: {
+          opacity: getValues("enabled") ? "1" : "0.5",
         },
+        overrides: getValues(),
       })
 
       handleChangeNodes(updatedNodes)
