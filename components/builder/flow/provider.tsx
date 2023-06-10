@@ -1,5 +1,10 @@
-import { useMemo } from "react"
-import { BuilderSpeedDial, DefaultEdge, SavingLabel } from "@/components"
+import { useEffect, useMemo } from "react"
+import {
+  BuilderFlowProps,
+  BuilderSpeedDial,
+  DefaultEdge,
+  SavingLabel,
+} from "@/components"
 import { useBuilderStore, useNodeSheetStore } from "@/hooks"
 import { SelectedNode } from "@/stores"
 import {
@@ -12,15 +17,28 @@ const edgeTypes = {
   default: DefaultEdge,
 }
 
-export const BuilderFlowProvider = ({ ...props }) => {
+type BuilderFlowProviderProps = Omit<BuilderFlowProps, "viewport" | "builderId">
+
+export const BuilderFlowProvider = ({
+  edges,
+  nodes,
+  ...props
+}: BuilderFlowProviderProps) => {
   const { handleSelectNode, handleOpenSheet } = useNodeSheetStore()
 
-  const { nodes, edges, onEdgesChange, onNodesChange, onConnect } =
+  const { onEdgesChange, onNodesChange, onConnect, handleChangeNodes } =
     useBuilderStore()
 
+  // This can be helpful to find the node in array directly.
+  // This decreases the complexity of finding the node in array from O(n) to O(1).
   const nodesWithIndexField = useMemo(() => {
     return nodes?.map((n, i) => ({ ...n, index: i }))
   }, [nodes])
+
+  useEffect(() => {
+    handleChangeNodes(nodesWithIndexField)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <ReactFlowInstance
@@ -30,8 +48,6 @@ export const BuilderFlowProvider = ({ ...props }) => {
       onNodesChange={onNodesChange}
       onEdgesChange={onEdgesChange}
       onConnect={onConnect}
-      // minZoom={0.1}
-      // maxZoom={10}
       proOptions={{
         hideAttribution: true,
       }}
