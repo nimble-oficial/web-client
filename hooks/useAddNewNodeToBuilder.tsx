@@ -38,6 +38,8 @@ export const useAddNewNodeToBuilder = () => {
       }
 
       handleAddNode(createdNode)
+
+      return createdNode
     },
     [handleAddNode]
   )
