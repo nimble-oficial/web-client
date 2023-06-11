@@ -11,10 +11,11 @@ import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-  Skeleton,
+  RolesSelectSkeleton,
 } from "@/components"
 import { DEFAULT_OPTION_VALUES } from "@/constants/default-option-values"
 import { useDashboardStore, useGetGuildRoles } from "@/hooks"
+import { getRoleSelectOptionLabel } from "@/utils"
 import { Check, ChevronsUpDown, ServerCrash } from "lucide-react"
 import { Control, FieldValues, UseFormSetValue } from "react-hook-form"
 
@@ -39,18 +40,12 @@ export function RolesSelect<T extends FieldValues>({
 
   const roles = data?.data?.filter((role) => role.name !== "@everyone")
 
-  const getRoleName = (value: string) => {
-    if (value === DEFAULT_OPTION_VALUES.allowedRole) return "All Roles"
-
-    return roles?.find((role) => role.id === value)?.name
-  }
-
   // TODO: USE MULTI SELECT!!
   return (
     <FormField
       control={control}
       name="allowedRole"
-      render={({ field: { value } }) => (
+      render={({ field }) => (
         <Popover open={open} onOpenChange={setOpen}>
           <PopoverTrigger asChild>
             <div className="grid w-full gap-2">
@@ -61,10 +56,12 @@ export function RolesSelect<T extends FieldValues>({
                   role="combobox"
                   className={cn(
                     "w-full justify-between",
-                    !value && "text-muted-foreground"
+                    !field.value && "text-muted-foreground"
                   )}
                 >
-                  {isLoading ? "Loading your roles..." : getRoleName(value)}
+                  {isLoading
+                    ? "Loading your roles..."
+                    : getRoleSelectOptionLabel(field.value?.id, roles)}
                   <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                 </Button>
               </FormControl>
@@ -96,11 +93,7 @@ export function RolesSelect<T extends FieldValues>({
                 )}
 
                 {isLoading && !error ? (
-                  <div className="space-y-1">
-                    <Skeleton className="h-[30px] w-full" />
-                    <Skeleton className="h-[30px] w-full" />
-                    <Skeleton className="h-[30px] w-full" />
-                  </div>
+                  <RolesSelectSkeleton />
                 ) : (
                   <>
                     <CommandItem
@@ -115,7 +108,8 @@ export function RolesSelect<T extends FieldValues>({
                       <Check
                         className={cn(
                           "mr-2 h-4 w-4",
-                          value === DEFAULT_OPTION_VALUES.allowedRole
+                          field.value.id ===
+                            DEFAULT_OPTION_VALUES.allowedRole.id
                             ? "opacity-100"
                             : "opacity-0"
                         )}
@@ -126,14 +120,19 @@ export function RolesSelect<T extends FieldValues>({
                       <CommandItem
                         key={role.id}
                         onSelect={() => {
-                          setValue("allowedRole", role.id)
+                          setValue("allowedRole", {
+                            id: role.id,
+                            name: role.name,
+                          })
                           setOpen(false)
                         }}
                       >
                         <Check
                           className={cn(
                             "mr-2 h-4 w-4",
-                            value === role.id ? "opacity-100" : "opacity-0"
+                            field.value.id === role.id
+                              ? "opacity-100"
+                              : "opacity-0"
                           )}
                         />
                         {role.name}

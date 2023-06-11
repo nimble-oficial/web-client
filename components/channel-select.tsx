@@ -1,6 +1,7 @@
 import { useState } from "react"
 import {
   Button,
+  ChannelSelectSkeleton,
   Command,
   CommandEmpty,
   CommandGroup,
@@ -11,11 +12,11 @@ import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-  Skeleton,
 } from "@/components"
-import { DEFAULT_OPTION_VALUES } from "@/constants/default-option-values"
-import { useDashboardStore, useGetGuildChannelsQuery } from "@/hooks"
+import { DEFAULT_OPTION_VALUES } from "@/constants"
+import { useGetGuildChannelsByType } from "@/hooks"
 import { cn } from "@/lib"
+import { getChannelSelectOptionLabel } from "@/utils"
 import { Check, ChevronsUpDown, ServerCrash } from "lucide-react"
 import { Control, FieldValues, UseFormSetValue } from "react-hook-form"
 
@@ -25,43 +26,22 @@ interface ChannelsMultiSelectProps<T extends FieldValues> {
   control: Control<T>
 }
 
-const CHANNEL_TYPES = {
-  text: 0,
-  voice: 2,
-}
-
 export function ChannelSelect<T extends FieldValues>({
   setValue,
   channelType = "text",
   control,
 }: ChannelsMultiSelectProps<T>) {
   const [open, setOpen] = useState(false)
+  const { error, isLoading, getChannelsByType } = useGetGuildChannelsByType()
 
-  const { selectedGuild } = useDashboardStore()
-
-  const { data, isLoading, error } = useGetGuildChannelsQuery({
-    guildId: selectedGuild?.id!,
-  })
-
-  const channels = data?.data
-
-  const onlyTextChannels =
-    channels?.filter(
-      (channel) => CHANNEL_TYPES[channelType] === channel.type
-    ) || []
-
-  const getChannelName = (value: string) => {
-    if (value === DEFAULT_OPTION_VALUES.allowedChannel) return "All Channels"
-
-    return onlyTextChannels.find((channel) => channel.id === value)?.name
-  }
+  const channels = getChannelsByType(channelType)
 
   // TODO: USE MULTI SELECT!!
   return (
     <FormField
       control={control}
       name="allowedChannel"
-      render={({ field: { value } }) => (
+      render={({ field }) => (
         <Popover open={open} onOpenChange={setOpen}>
           <PopoverTrigger asChild>
             <div className="grid w-full gap-2">
@@ -72,12 +52,12 @@ export function ChannelSelect<T extends FieldValues>({
                   role="combobox"
                   className={cn(
                     "w-full justify-between",
-                    !value && "text-muted-foreground"
+                    !field.value && "text-muted-foreground"
                   )}
                 >
                   {isLoading
                     ? "Loading your channels..."
-                    : getChannelName(value)}
+                    : getChannelSelectOptionLabel(field.value?.id, channels)}
                   <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                 </Button>
               </FormControl>
@@ -112,11 +92,7 @@ export function ChannelSelect<T extends FieldValues>({
                 )}
 
                 {isLoading && !error ? (
-                  <div className="space-y-1">
-                    <Skeleton className="h-[30px] w-full" />
-                    <Skeleton className="h-[30px] w-full" />
-                    <Skeleton className="h-[30px] w-full" />
-                  </div>
+                  <ChannelSelectSkeleton />
                 ) : (
                   <>
                     <CommandItem
@@ -131,25 +107,31 @@ export function ChannelSelect<T extends FieldValues>({
                       <Check
                         className={cn(
                           "mr-2 h-4 w-4",
-                          value === DEFAULT_OPTION_VALUES.allowedChannel
+                          field?.value?.id ===
+                            DEFAULT_OPTION_VALUES.allowedChannel.id
                             ? "opacity-100"
                             : "opacity-0"
                         )}
                       />
                       All Channels
                     </CommandItem>
-                    {onlyTextChannels.map((channel) => (
+                    {channels.map((channel) => (
                       <CommandItem
                         key={channel.id}
                         onSelect={() => {
-                          setValue("allowedChannel", channel.id)
+                          setValue("allowedChannel", {
+                            id: channel.id,
+                            name: channel.name,
+                          })
                           setOpen(false)
                         }}
                       >
                         <Check
                           className={cn(
                             "mr-2 h-4 w-4",
-                            value === channel.id ? "opacity-100" : "opacity-0"
+                            field.value.id === channel.id
+                              ? "opacity-100"
+                              : "opacity-0"
                           )}
                         />
                         {channel.name}

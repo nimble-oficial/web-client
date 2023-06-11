@@ -18,6 +18,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
+  GuildSwitcherSkeleton,
   Input,
   Label,
   Popover,
@@ -28,7 +29,6 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-  Skeleton,
 } from "@/components"
 import { useDashboardStore, useGetUserGuilds } from "@/hooks"
 import { getGuildIcon } from "@/utils"
@@ -68,7 +68,7 @@ export function Guildwitcher({ className }: TeamSwitcherProps) {
   }, [guilds, handleSelectGuild])
 
   if (isLoading) {
-    return <Skeleton className="h-[35px] w-[200px]" />
+    return <GuildSwitcherSkeleton />
   }
 
   return (

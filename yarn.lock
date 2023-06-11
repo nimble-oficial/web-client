@@ -1241,10 +1241,22 @@
   dependencies:
     "@tanstack/table-core" "8.9.1"
 
+"@tanstack/react-virtual@^3.0.0-beta.54":
+  version "3.0.0-beta.54"
+  resolved "https://registry.yarnpkg.com/@tanstack/react-virtual/-/react-virtual-3.0.0-beta.54.tgz#755979455adf13f2584937204a3f38703e446037"
+  integrity sha512-D1mDMf4UPbrtHRZZriCly5bXTBMhylslm4dhcHqTtDJ6brQcgGmk8YD9JdWBGWfGSWPKoh2x1H3e7eh+hgPXtQ==
+  dependencies:
+    "@tanstack/virtual-core" "3.0.0-beta.54"
+
 "@tanstack/table-core@8.9.1":
   version "8.9.1"
   resolved "https://registry.npmjs.org/@tanstack/table-core/-/table-core-8.9.1.tgz"
   integrity sha512-2+R83n8vMZND0q3W1lSiF7co9nFbeWbjAErFf27xwbeA9E0wtUu5ZDfgj+TZ6JzdAEQAgfxkk/QNFAKiS8E4MA==
+
+"@tanstack/virtual-core@3.0.0-beta.54":
+  version "3.0.0-beta.54"
+  resolved "https://registry.yarnpkg.com/@tanstack/virtual-core/-/virtual-core-3.0.0-beta.54.tgz#12259d007911ad9fce1388385c54a9141f4ecdc4"
+  integrity sha512-jtkwqdP2rY2iCCDVAFuaNBH3fiEi29aTn2RhtIoky8DTTiCdc48plpHHreLwmv1PICJ4AJUUESaq3xa8fZH8+g==
 
 "@tokenizer/token@^0.3.0":
   version "0.3.0"
@@ -4464,6 +4476,11 @@ use-sync-external-store@1.2.0, use-sync-external-store@^1.2.0:
   version "1.2.0"
   resolved "https://registry.npmjs.org/use-sync-external-store/-/use-sync-external-store-1.2.0.tgz"
   integrity sha512-eEgnFxGQ1Ife9bzYs6VLi8/4X6CObHMw9Qr9tPY43iKwsPw8xE8+EFsf/2cFZ5S3esXgpWgtSCtLNS41F+sKPA==
+
+use-undoable@^3.3.12:
+  version "3.3.12"
+  resolved "https://registry.yarnpkg.com/use-undoable/-/use-undoable-3.3.12.tgz#c60067dadd8e34921c68d223f1a571a0bea24810"
+  integrity sha512-xFBmHaxJaeTXQDHQvCgvHhxKyKhz9g1vw2rviYlXvNJvJvPysHD3jnvSt6SoAWrpDwKbDwndfFPsBMpQGU7xrw==
 
 usehooks-ts@^2.9.1:
   version "2.9.1"
