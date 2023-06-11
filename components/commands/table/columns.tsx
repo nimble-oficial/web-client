@@ -3,13 +3,14 @@ import {
   DataTableColumnHeader,
   DataTableRowActions,
 } from "@/components"
-import { SelectedCommand } from "@/stores"
+import { Command } from "@/stores"
 import { ColumnDef } from "@tanstack/react-table"
 import { formatDistanceStrict } from "date-fns"
 
-export const columns: ColumnDef<SelectedCommand>[] = [
+export const columns: ColumnDef<Command>[] = [
   {
     id: "select",
+    accessorFn: (row) => row._id,
     header: ({ table }) => (
       <Checkbox
         checked={table.getIsAllPageRowsSelected()}
@@ -30,6 +31,7 @@ export const columns: ColumnDef<SelectedCommand>[] = [
     enableHiding: false,
   },
   {
+    accessorFn: (row) => row.name,
     accessorKey: "name",
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Name" />
@@ -45,6 +47,7 @@ export const columns: ColumnDef<SelectedCommand>[] = [
     },
   },
   {
+    accessorFn: (row) => row.description,
     accessorKey: "description",
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Description" />
@@ -60,6 +63,7 @@ export const columns: ColumnDef<SelectedCommand>[] = [
     },
   },
   {
+    accessorFn: (row) => row.enabled,
     accessorKey: "enabled",
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Enabled" />
@@ -78,6 +82,7 @@ export const columns: ColumnDef<SelectedCommand>[] = [
     },
   },
   {
+    accessorFn: (row) => row.allowedChannel,
     accessorKey: "allowedChannel",
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Allowed Channel" />
@@ -96,6 +101,7 @@ export const columns: ColumnDef<SelectedCommand>[] = [
     },
   },
   {
+    accessorFn: (row) => row.allowedRole,
     accessorKey: "allowedRole",
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Allowed Role" />
@@ -114,6 +120,7 @@ export const columns: ColumnDef<SelectedCommand>[] = [
     },
   },
   {
+    accessorFn: (row) => row.createdAt,
     accessorKey: "Created",
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Created At" />
@@ -135,6 +142,7 @@ export const columns: ColumnDef<SelectedCommand>[] = [
     },
   },
   {
+    accessorFn: () => "actions",
     id: "actions",
     cell: ({ row }) => <DataTableRowActions row={row} />,
   },

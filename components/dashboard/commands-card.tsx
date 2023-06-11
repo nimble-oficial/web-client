@@ -5,11 +5,11 @@ import {
   CardContent,
   CardHeader,
   CardTitle,
+  CommandsCardSkeleton,
   CreateCommandDialog,
   DataTable,
   EditCommandSheet,
   RefreshDashboardCommandsDataButton,
-  Skeleton,
   Tooltip,
   TooltipContent,
   TooltipProvider,
@@ -55,7 +55,7 @@ export const DashboardCommandsCard = () => {
               Commands
             </CardTitle>
             <p className="text-sm text-muted-foreground">
-              All commands that are available for your bot.
+              All commands that are available for your server
             </p>
           </div>
 
@@ -89,11 +89,7 @@ export const DashboardCommandsCard = () => {
 
         <CardContent>
           {isLoading ? (
-            <div className="flex w-full flex-col gap-1">
-              <Skeleton className="mb-4 h-8 w-64" />
-              <Skeleton className="h-12 w-full rounded-none" />
-              <Skeleton className="h-12 w-full rounded-none" />
-            </div>
+            <CommandsCardSkeleton />
           ) : (
             <DataTable data={commands} columns={columns} />
           )}

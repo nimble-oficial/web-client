@@ -6,7 +6,7 @@ interface UseGetGuildRolesProps {
   enabled?: boolean
 }
 
-export interface Role {
+export interface GuildRole {
   id: string
   name: string
 }
@@ -17,7 +17,7 @@ export const useGetGuildRoles = ({
 }: UseGetGuildRolesProps) => {
   return useQuery(
     ["guild-roles", guildId],
-    () => getGuildRoles<Role[]>(guildId),
+    () => getGuildRoles<GuildRole[]>(guildId),
     {
       enabled: !!guildId && enabled,
     }

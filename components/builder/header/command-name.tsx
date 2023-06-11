@@ -1,4 +1,7 @@
-import { BuilderHeaderCommandDropdown, Skeleton } from "@/components"
+import {
+  BuilderFlowHeaderCommandNameSkeleton,
+  BuilderHeaderCommandDropdown,
+} from "@/components"
 
 interface BuilderFlowHeaderProviderProps {
   isLoading: boolean
@@ -12,7 +15,7 @@ export const BuilderFlowHeaderCommandName = ({
   return (
     <div>
       {isLoading ? (
-        <Skeleton className="h-6 w-[150px]" />
+        <BuilderFlowHeaderCommandNameSkeleton />
       ) : (
         <BuilderHeaderCommandDropdown commandName={name} />
       )}

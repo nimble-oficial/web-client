@@ -16,7 +16,7 @@ export const SearchNodesDialog = () => {
 
   useKeyPress("j", () => setOpen((open) => !open))
 
-  // TODO: if an user has too many nodes, this will be slow. We need to implement a virtualized list.
+  // TODO: if an user has too much nodes, this will be slow. We need to implement a virtualized list.
   return (
     <CommandDialog open={open} onOpenChange={setOpen}>
       <CommandInput placeholder="Type a node or search..." />
