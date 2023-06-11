@@ -1,7 +1,7 @@
 import { useViewport } from "reactflow"
 import { useInterval } from "usehooks-ts"
 
-import { useBuilderStore } from "./stores"
+import { useBuilderStore } from "../stores"
 import { useSaveBuilder } from "./useSaveBuilder"
 
 const SECONDS_TO_AUTO_SAVE = 30

@@ -3,8 +3,8 @@ import { DeleteCommandDialogProps } from "@/components"
 import { customAPIError } from "@/utils"
 import { toast } from "sonner"
 
-import { useDeleteCommandMutation } from "./mutations"
-import { useBuilderStore, useDashboardStore } from "./stores"
+import { useDeleteCommandMutation } from "../mutations"
+import { useBuilderStore, useDashboardStore } from "../stores"
 
 export const useDeleteCommand = ({
   onClose,
