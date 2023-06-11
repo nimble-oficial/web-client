@@ -1,12 +1,7 @@
 import { SpeedDialGroupChildrenKey } from "@/data/speed-dial"
 import { useNodeSheetStore } from "@/hooks"
 
-import {
-  MoverUserToChannelNodeSheet,
-  ReplyMessageNodeSheet,
-  ReplyMessageWithChatGptNodeSheet,
-  SendMessageNodeSheet,
-} from "."
+import { ReplyMessageNodeSheet, SendMessageNodeSheet } from "."
 
 export const NodesSheet = () => {
   const { selectedNode } = useNodeSheetStore()
@@ -18,10 +13,10 @@ export const NodesSheet = () => {
       return <ReplyMessageNodeSheet />
     case "send-message":
       return <SendMessageNodeSheet />
-    case "reply-with-chat-gpt":
-      return <ReplyMessageWithChatGptNodeSheet />
-    case "move-users-to-channel":
-      return <MoverUserToChannelNodeSheet />
+    // case "reply-with-chat-gpt":
+    //   return <ReplyMessageWithChatGptNodeSheet />
+    // case "move-users-to-channel":
+    //   return <MoverUserToChannelNodeSheet />
     case "invite-created":
       return <div>invite-created</div>
     case "received-message":

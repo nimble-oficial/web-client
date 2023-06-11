@@ -1,11 +1,8 @@
 import { useEffect } from "react"
+import { BuilderSpeedDial, EDGE_TYPES, SavingLabel } from "@/components"
 import { useBuilderStore, useNodeSheetStore } from "@/hooks"
 import { SelectedNode } from "@/stores"
 import { Background, ConnectionMode, ReactFlow, useReactFlow } from "reactflow"
-
-import { EDGE_TYPES } from "./builder-flow"
-import { SavingLabel } from "./saving-label"
-import { BuilderSpeedDial } from "./speed-dial"
 
 export const Builder = () => {
   const { handleSelectNode, handleOpenSheet } = useNodeSheetStore()
