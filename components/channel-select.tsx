@@ -47,6 +47,7 @@ export function ChannelSelect<T extends FieldValues>({
             <div className="grid w-full gap-2">
               <FormControl>
                 <Button
+                  id="allowedChannel"
                   type="button"
                   variant="outline"
                   role="combobox"
