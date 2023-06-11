@@ -7,6 +7,9 @@ export interface Command {
   enabled: boolean
   description?: string
   createdAt: Date
+  builderId: string
+  allowedChannel: AllowedChannel
+  allowedRole: AllowedRole
 }
 
 export interface AllowedChannel {
@@ -19,19 +22,13 @@ export interface AllowedRole {
   name: string
 }
 
-export interface SelectedCommand extends Command {
-  builderId: string
-  allowedChannel: AllowedChannel
-  allowedRole: AllowedRole
-}
-
 interface Commands {
   selectedGuild: Guild | null
   commands: Command[]
-  selectedCommand: SelectedCommand
+  selectedCommand: Command
   isSheetOpen: boolean
-  handleEditCommand: (command: SelectedCommand) => void
-  handleSelectCommand: (command: SelectedCommand) => void
+  handleEditCommand: (command: Command) => void
+  handleSelectCommand: (command: Command) => void
   handleOpenSheet: () => void
   handleCloseSheet: () => void
   handleSetCommands: (commands: Command[]) => void
@@ -45,7 +42,7 @@ interface DashboardStore extends Commands {}
 const initialStates = {
   selectedGuild: null,
   commands: [],
-  selectedCommand: {} as SelectedCommand,
+  selectedCommand: {} as Command,
   isSheetOpen: false,
 }
 
