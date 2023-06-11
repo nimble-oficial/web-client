@@ -56,7 +56,7 @@ export function CreateCommandDialog({
         name: parseCommandName(formValues.name),
       })
 
-      const createdCommand: Payload = {
+      const createdCommand = {
         ...formValues,
         guildId: selectedGuild?.id!,
         enabled: true,

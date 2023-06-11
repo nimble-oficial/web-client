@@ -11,13 +11,13 @@ import {
   DropdownMenuTrigger,
 } from "@/components"
 import { useDashboardStore } from "@/hooks"
-import { SelectedCommand } from "@/stores"
+import { Command } from "@/stores"
 import { Row } from "@tanstack/react-table"
 import { Edit, MoreHorizontal, Trash, Workflow } from "lucide-react"
 import { createPortal } from "react-dom"
 
 interface DataTableRowActionsProps {
-  row: Row<SelectedCommand>
+  row: Row<Command>
 }
 
 export function DataTableRowActions({ row }: DataTableRowActionsProps) {
@@ -43,7 +43,7 @@ export function DataTableRowActions({ row }: DataTableRowActionsProps) {
             className="cursor-pointer"
             onClick={() => {
               handleOpenSheet()
-              handleSelectCommand(row.original as SelectedCommand)
+              handleSelectCommand(row.original as Command)
             }}
           >
             <Edit className="mr-2 h-3.5 w-3.5 text-muted-foreground/70" />
@@ -62,7 +62,7 @@ export function DataTableRowActions({ row }: DataTableRowActionsProps) {
           <DropdownMenuItem
             className="cursor-pointer"
             onClick={() => {
-              handleSelectCommand(row.original as SelectedCommand)
+              handleSelectCommand(row.original)
               setShowDialog(true)
             }}
           >
