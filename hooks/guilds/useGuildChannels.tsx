@@ -1,7 +1,7 @@
 import { useCallback, useMemo } from "react"
 
-import { useGetGuildChannelsQuery } from "./queries"
-import { useDashboardStore } from "./stores"
+import { useGetGuildChannelsQuery } from "../queries"
+import { useDashboardStore } from "../stores"
 
 const CHANNEL_TYPES = {
   text: 0,
