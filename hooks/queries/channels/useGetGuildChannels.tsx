@@ -14,13 +14,15 @@ export interface GuildChannel {
   type: number
 }
 
+type Response = GuildChannel[]
+
 export const useGetGuildChannelsQuery = ({
   guildId,
   enabled = true,
 }: UseGetGuildChannelsProps) => {
   return useQuery(
     ["guild-channels", guildId],
-    () => getGuildChannels<GuildChannel[]>(guildId),
+    () => getGuildChannels<Response>(guildId),
     {
       enabled: !!guildId && enabled,
     }

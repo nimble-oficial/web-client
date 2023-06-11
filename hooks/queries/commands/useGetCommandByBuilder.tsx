@@ -1,5 +1,5 @@
 import { getCommandByBuilder } from "@/services"
-import { SelectedCommand } from "@/stores/dashboard"
+import { Command } from "@/stores/dashboard"
 import { useQuery } from "@tanstack/react-query"
 
 interface UseGetCommandByGuildQueryProps {
@@ -7,7 +7,7 @@ interface UseGetCommandByGuildQueryProps {
 }
 
 interface Response {
-  data: SelectedCommand
+  data: Command
 }
 
 export const useGetCommandByGuildQuery = ({
