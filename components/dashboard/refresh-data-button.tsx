@@ -1,12 +1,11 @@
-import { RefreshCw } from "lucide-react"
-
-import { Button } from "../ui/button"
 import {
+  Button,
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "../ui/tooltip"
+} from "@/components"
+import { RefreshCw } from "lucide-react"
 
 interface RefreshDashboardCommandsDataButtonProps {
   isRefetching: boolean
