@@ -1,15 +1,12 @@
+import { useBuilderStore, useSaveBuilder } from "@/hooks"
 import { useViewport } from "reactflow"
 import { useInterval } from "usehooks-ts"
-
-import { useBuilderStore } from "../stores"
-import { useSaveBuilder } from "./useSaveBuilder"
 
 const SECONDS_TO_AUTO_SAVE = 30
 const INTERVAL_TO_AUTO_SAVE = SECONDS_TO_AUTO_SAVE * 1000
 
 export const useBuilderAutoSave = () => {
   const { builderId, edges, nodes } = useBuilderStore()
-
   const { handleSave, isLoading } = useSaveBuilder()
   const viewport = useViewport()
 
