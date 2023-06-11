@@ -89,8 +89,8 @@ export const EditCommandSheet = () => {
       buttonLabel={isLoading ? "Saving..." : "Save Changes"}
       handleCloseSheet={handleCloseSheet}
       handleSaveCommand={handleSubmit(handleSaveCommand)}
-      title={`Edit "${selectedCommand.name}" command`}
-      description=" Edit the command, its description, handle authorizations and more."
+      title={`Edit "${selectedCommand.name}"`}
+      description="Edit the command, its description, handle authorizations and more."
     >
       <Form {...form}>
         <form
@@ -134,12 +134,14 @@ export const EditCommandSheet = () => {
           />
 
           <div className="flex flex-col justify-start gap-2">
-            <FormLabel>Allow for Specific Channel</FormLabel>
+            <FormLabel htmlFor="allowedChannel">
+              Allow for Specific Channel
+            </FormLabel>
             <ChannelSelect setValue={setValue} control={control} />
           </div>
 
           <div className="flex flex-col justify-start gap-2">
-            <FormLabel>Allow for Specific Role</FormLabel>
+            <FormLabel htmlFor="allowedRole">Allow for Specific Role</FormLabel>
             <RolesSelect setValue={setValue} control={control} />
           </div>
 

@@ -51,6 +51,7 @@ export function RolesSelect<T extends FieldValues>({
             <div className="grid w-full gap-2">
               <FormControl>
                 <Button
+                  id="allowedRole"
                   type="button"
                   variant="outline"
                   role="combobox"
