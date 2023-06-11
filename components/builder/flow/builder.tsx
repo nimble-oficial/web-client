@@ -10,13 +10,15 @@ export const Builder = () => {
   const { onEdgesChange, onNodesChange, onConnect, viewport, nodes, edges } =
     useBuilderStore()
 
-  const { setViewport } = useReactFlow()
+  const { fitView, setViewport } = useReactFlow()
 
   useEffect(() => {
     if (viewport) {
       setViewport(viewport)
+    } else {
+      fitView()
     }
-  }, [setViewport, viewport])
+  }, [fitView, nodes, setViewport, viewport])
 
   return (
     <ReactFlow
