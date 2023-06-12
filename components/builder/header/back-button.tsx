@@ -1,13 +1,12 @@
-import { useRouter } from "next/router"
-import { Button } from "@/components"
-import { ArrowLeft } from "lucide-react"
+import { useRouter } from "next/navigation"
+import { Button, Icons } from "@/components"
 
 export const BuilderBackButton = () => {
   const { push } = useRouter()
 
   return (
     <Button variant="ghost" onClick={() => push("/dashboard")} size="sm">
-      <ArrowLeft size={16} />
+      <Icons.arrowLeft size={16} />
     </Button>
   )
 }

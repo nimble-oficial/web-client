@@ -1,6 +1,5 @@
-import { Button, DataTableViewOptions, Input } from "@/components"
+import { Button, DataTableViewOptions, Icons, Input } from "@/components"
 import { Table } from "@tanstack/react-table"
-import { X } from "lucide-react"
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>
@@ -31,7 +30,7 @@ export function DataTableToolbar<TData>({
             className="h-8 px-2 lg:px-3"
           >
             Reset
-            <X className="ml-2 h-4 w-4" />
+            <Icons.close className="ml-2 h-4 w-4" />
           </Button>
         )}
       </div>

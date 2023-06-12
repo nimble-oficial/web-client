@@ -1,3 +1,5 @@
+"use client"
+
 import { Form, NodeSheetProvider } from "@/components"
 import { useBuilderStore, useNodeSheetStore } from "@/hooks"
 import { ReplyMessageNodeSchema, replyMessageNodeSchema } from "@/schemas"

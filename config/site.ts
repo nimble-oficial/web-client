@@ -1,18 +1,31 @@
 export type SiteConfig = typeof siteConfig
 
+interface NavItem {
+  title: string
+  href: string
+}
+
+const ITEMS: NavItem[] = [
+  {
+    title: "Features",
+    href: "/#features",
+  },
+  {
+    title: "Pricing",
+    href: "/pricing",
+  },
+  {
+    title: "Documentation",
+    href: "/docs",
+  },
+]
+
 export const siteConfig = {
-  name: "Next.js",
+  name: "Nimble",
   description:
-    "Beautifully designed components built with Radix UI and Tailwind CSS.",
-  mainNav: [
-    {
-      title: "Home",
-      href: "/",
-    },
-  ],
+    "Create dynamic commands, execute commands for every server event, and more with a powerful, easy to use dashboard. Easy. Open source.",
+  navItems: ITEMS,
   links: {
-    twitter: "https://twitter.com/shadcn",
-    github: "https://github.com/shadcn/ui",
-    docs: "https://ui.shadcn.com",
+    github: "https://github.com/nimble-oficial",
   },
 }

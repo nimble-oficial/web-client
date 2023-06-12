@@ -1,3 +1,5 @@
+"use client"
+
 import { useBuilderStore, useSaveBuilder } from "@/hooks"
 import { useViewport } from "reactflow"
 import { useInterval } from "usehooks-ts"

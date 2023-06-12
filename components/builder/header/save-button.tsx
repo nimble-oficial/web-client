@@ -1,3 +1,5 @@
+"use client"
+
 import { Button } from "@/components"
 import { useBuilderStore, useSaveBuilder } from "@/hooks"
 import { customAPIError } from "@/utils"

@@ -1,10 +1,9 @@
-import { Button } from "@/components"
-import { Settings } from "lucide-react"
+import { Button, Icons } from "@/components"
 
 export const BuilderSettingsButton = () => {
   return (
     <Button variant="outline" size="sm" onClick={() => {}}>
-      <Settings size={19} />
+      <Icons.settings size={19} />
     </Button>
   )
 }

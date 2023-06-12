@@ -1,3 +1,5 @@
+"use client"
+
 import { useEffect, useState } from "react"
 import {
   Button,
@@ -9,6 +11,7 @@ import {
   CreateCommandDialog,
   DataTable,
   EditCommandSheet,
+  Icons,
   RefreshDashboardCommandsDataButton,
   Tooltip,
   TooltipContent,
@@ -18,7 +21,6 @@ import {
 } from "@/components"
 import { useDashboardStore, useGetCommandsByGuildQuery } from "@/hooks"
 import { customAPIError } from "@/utils"
-import { Plus } from "lucide-react"
 import { toast } from "sonner"
 
 export const DashboardCommandsCard = () => {
@@ -70,7 +72,7 @@ export const DashboardCommandsCard = () => {
                       setIsCreateCommandDialogOpen(true)
                     }}
                   >
-                    <Plus size={16} className="mr-1.5" />
+                    <Icons.plus size={16} className="mr-1.5" />
                     Create
                   </Button>
                 </TooltipTrigger>

@@ -1,3 +1,5 @@
+"use client"
+
 interface BuilderFlowWrapperProps {
   children: React.ReactNode
 }

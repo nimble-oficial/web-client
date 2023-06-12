@@ -1,11 +1,11 @@
 import {
   Button,
+  Icons,
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "@/components"
-import { RefreshCw } from "lucide-react"
 
 interface RefreshDashboardCommandsDataButtonProps {
   isRefetching: boolean
@@ -28,7 +28,7 @@ export const RefreshDashboardCommandsDataButton = ({
               await refetch()
             }}
           >
-            <RefreshCw
+            <Icons.refreshCw
               size={16}
               className={isRefetching ? "animate-spin" : ""}
             />

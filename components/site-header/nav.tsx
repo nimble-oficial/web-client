@@ -1,32 +1,14 @@
+import { siteConfig } from "@/config"
+
 import { Logo } from "."
 
-interface NavItem {
-  title: string
-  href: string
-}
-
-const ITEMS: NavItem[] = [
-  {
-    title: "Features",
-    href: "/#features",
-  },
-  {
-    title: "Pricing",
-    href: "/pricing",
-  },
-  {
-    title: "Documentation",
-    href: "/docs",
-  },
-]
-
-export const Nav = () => {
+export const Nav = async () => {
   return (
     <div className="flex h-20 items-center justify-between py-6">
       <div className="flex gap-6 md:gap-10">
         <Logo />
         <nav className="hidden gap-6 md:flex">
-          {ITEMS.map((item, index) => (
+          {siteConfig.navItems.map((item, index) => (
             <a
               key={index}
               className="flex items-center text-lg font-medium text-foreground/60 transition-colors hover:text-foreground/80 sm:text-sm"
@@ -37,7 +19,9 @@ export const Nav = () => {
           ))}
         </nav>
         <button className="flex items-center space-x-2 md:hidden">
-          <span className="hidden font-bold sm:inline-block">??</span>
+          <span className="hidden font-bold sm:inline-block">
+            <Logo />
+          </span>
           <span className="font-bold">Menu</span>
         </button>
       </div>

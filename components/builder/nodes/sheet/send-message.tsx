@@ -1,3 +1,5 @@
+"use client"
+
 import { Form, NodeSheetProvider, SendMessageNodeSheetForm } from "@/components"
 import { useBuilderStore, useNodeSheetStore } from "@/hooks"
 import { SendMessageNodeSchema, sendMessageNodeSchema } from "@/schemas"

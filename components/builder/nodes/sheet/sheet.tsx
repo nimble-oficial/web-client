@@ -1,3 +1,5 @@
+"use client"
+
 import { SpeedDialGroupChildrenKey } from "@/data/speed-dial"
 import { useNodeSheetStore } from "@/hooks"
 

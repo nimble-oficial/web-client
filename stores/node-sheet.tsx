@@ -1,3 +1,5 @@
+"use client"
+
 import { Node } from "reactflow"
 import { create } from "zustand"
 

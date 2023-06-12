@@ -1,6 +1,11 @@
+"use client"
+
 import { useEffect, useMemo } from "react"
-import { useRouter } from "next/router"
 import { useBuilderStore, useGetBuilderQuery } from "@/hooks"
+
+interface UseInitBuilderProps {
+  builderId: string
+}
 
 /**
  *`useInitBuilder` is a hook that initializes the builder.
@@ -8,6 +13,7 @@ import { useBuilderStore, useGetBuilderQuery } from "@/hooks"
  *
  * We dispatch events to stores because we want to share the data between components.
  *
+ * @param {string} builderId - The id of the builder.
  * @returns {boolean} isLoading - It returns boolean if the data is being fetched from the server.
  *
  * @example
@@ -17,11 +23,7 @@ import { useBuilderStore, useGetBuilderQuery } from "@/hooks"
  *  return <div>Loading...</div>
  * }
  */
-export const useInitBuilder = () => {
-  const { query } = useRouter()
-
-  const builderId = query.builderId as string
-
+export const useInitBuilder = ({ builderId }: UseInitBuilderProps) => {
   const {
     handleChangeBuilderId,
     handleChangeNodes,

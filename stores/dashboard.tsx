@@ -1,3 +1,5 @@
+"use client"
+
 import { Guild } from "@/components"
 import { create } from "zustand"
 
@@ -10,6 +12,8 @@ export interface Command {
   builderId: string
   allowedChannel: AllowedChannel
   allowedRole: AllowedRole
+  commandNotEnabledMessage: string
+  sendCommandNotEnabledMessage: boolean
 }
 
 export interface AllowedChannel {

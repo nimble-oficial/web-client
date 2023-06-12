@@ -1,3 +1,5 @@
+"use client"
+
 import { useCallback, useRef } from "react"
 import { NodeType, SpeedDialGroupChildrenKey } from "@/data/speed-dial"
 import { useBuilderStore } from "@/hooks"

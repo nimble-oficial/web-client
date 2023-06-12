@@ -83,7 +83,7 @@ export const columns: ColumnDef<Command>[] = [
   },
   {
     accessorFn: (row) => row.allowedChannel,
-    accessorKey: "allowedChannel",
+    accessorKey: "Allowed Channel",
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Allowed Channel" />
     ),
@@ -102,7 +102,7 @@ export const columns: ColumnDef<Command>[] = [
   },
   {
     accessorFn: (row) => row.allowedRole,
-    accessorKey: "allowedRole",
+    accessorKey: "Allowed Role",
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Allowed Role" />
     ),
@@ -121,7 +121,7 @@ export const columns: ColumnDef<Command>[] = [
   },
   {
     accessorFn: (row) => row.createdAt,
-    accessorKey: "Created",
+    accessorKey: "Created At",
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Created At" />
     ),
@@ -142,7 +142,6 @@ export const columns: ColumnDef<Command>[] = [
     },
   },
   {
-    accessorFn: () => "actions",
     id: "actions",
     cell: ({ row }) => <DataTableRowActions row={row} />,
   },

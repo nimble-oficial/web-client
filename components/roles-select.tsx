@@ -1,3 +1,5 @@
+"use client"
+
 import { useState } from "react"
 import {
   Button,
@@ -8,6 +10,7 @@ import {
   CommandItem,
   FormControl,
   FormField,
+  Icons,
   Popover,
   PopoverContent,
   PopoverTrigger,
@@ -16,7 +19,6 @@ import {
 import { DEFAULT_OPTION_VALUES } from "@/constants/default-option-values"
 import { useDashboardStore, useGetGuildRoles } from "@/hooks"
 import { getRoleSelectOptionLabel } from "@/utils"
-import { Check, ChevronsUpDown, ServerCrash } from "lucide-react"
 import { Control, FieldValues, UseFormSetValue } from "react-hook-form"
 
 import { cn } from "@/lib/utils"
@@ -63,7 +65,7 @@ export function RolesSelect<T extends FieldValues>({
                   {isLoading
                     ? "Loading your roles..."
                     : getRoleSelectOptionLabel(field.value?.id, roles)}
-                  <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                  <Icons.chevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                 </Button>
               </FormControl>
             </div>
@@ -79,7 +81,7 @@ export function RolesSelect<T extends FieldValues>({
                 {!!error && !isLoading && (
                   <CommandEmpty className="border border-dashed">
                     <div className="mx-auto flex w-full flex-col items-center justify-center py-4 text-center">
-                      <ServerCrash size={25} />
+                      <Icons.serverCrash size={25} />
 
                       <h3 className="mt-4 text-lg font-semibold">
                         Something went wrong
@@ -106,7 +108,7 @@ export function RolesSelect<T extends FieldValues>({
                         setOpen(false)
                       }}
                     >
-                      <Check
+                      <Icons.check
                         className={cn(
                           "mr-2 h-4 w-4",
                           field.value.id ===
@@ -128,7 +130,7 @@ export function RolesSelect<T extends FieldValues>({
                           setOpen(false)
                         }}
                       >
-                        <Check
+                        <Icons.check
                           className={cn(
                             "mr-2 h-4 w-4",
                             field.value.id === role.id

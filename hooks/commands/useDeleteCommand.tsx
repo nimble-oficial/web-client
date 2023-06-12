@@ -1,3 +1,5 @@
+"use client"
+
 import { useCallback } from "react"
 import { DeleteCommandDialogProps } from "@/components"
 import { customAPIError } from "@/utils"

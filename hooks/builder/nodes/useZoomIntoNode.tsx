@@ -1,3 +1,5 @@
+"use client"
+
 import { FIT_ZOOM_DURATION } from "@/constants"
 import { SelectedNode } from "@/stores"
 import { Node, useReactFlow } from "reactflow"

@@ -1,3 +1,5 @@
+"use client"
+
 import { ComponentPropsWithoutRef, useEffect, useState } from "react"
 import {
   Avatar,
@@ -19,6 +21,7 @@ import {
   DialogTitle,
   DialogTrigger,
   GuildSwitcherSkeleton,
+  Icons,
   Input,
   Label,
   Popover,
@@ -31,10 +34,8 @@ import {
   SelectValue,
 } from "@/components"
 import { useDashboardStore, useGetUserGuilds } from "@/hooks"
+import { cn } from "@/lib"
 import { getGuildIcon } from "@/utils"
-import { Check, ChevronsUpDown, PlusCircle } from "lucide-react"
-
-import { cn } from "@/lib/utils"
 
 export interface Guild {
   id: string
@@ -97,7 +98,7 @@ export function Guildwitcher({ className }: TeamSwitcherProps) {
 
               {selectedGuild.name}
 
-              <ChevronsUpDown className="ml-auto h-4 w-4 shrink-0 opacity-50" />
+              <Icons.chevronsUpDown className="ml-auto h-4 w-4 shrink-0 opacity-50" />
             </Button>
           )}
         </PopoverTrigger>
@@ -130,7 +131,7 @@ export function Guildwitcher({ className }: TeamSwitcherProps) {
 
                   {guild.name}
 
-                  <Check
+                  <Icons.check
                     className={cn(
                       "ml-auto h-4 w-4",
                       selectedGuild?.name === guild.name
@@ -153,7 +154,7 @@ export function Guildwitcher({ className }: TeamSwitcherProps) {
                       setShowNewTeamDialog(true)
                     }}
                   >
-                    <PlusCircle className="mr-2 h-5 w-5" />
+                    <Icons.plusCircle className="mr-2 h-5 w-5" />
                     Create Team
                   </CommandItem>
                 </DialogTrigger>

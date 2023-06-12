@@ -1,9 +1,10 @@
+"use client"
+
 import {
   Builder,
   BuilderFlowWrapper,
   BuilderHeader,
   BuilderLoader,
-  DefaultEdge,
   EditCommandSheet,
   NodesSheet,
   SearchNodesDialog,
@@ -13,12 +14,12 @@ import { ReactFlowProvider } from "reactflow"
 
 import "reactflow/dist/style.css"
 
-export const EDGE_TYPES = {
-  default: DefaultEdge,
+interface BuilderFlowProps {
+  builderId: string
 }
 
-export const BuilderFlow = () => {
-  const { isLoading } = useInitBuilder()
+export const BuilderFlow = ({ builderId }: BuilderFlowProps) => {
+  const { isLoading } = useInitBuilder({ builderId })
 
   return (
     <ReactFlowProvider>

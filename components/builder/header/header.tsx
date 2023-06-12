@@ -1,4 +1,5 @@
-import Head from "next/head"
+"use client"
+
 import {
   BuilderBackButton,
   BuilderFlowHeaderActions,
@@ -7,15 +8,9 @@ import {
 
 export const BuilderHeader = () => {
   return (
-    <>
-      <Head>
-        <title>Builder</title>
-      </Head>
-
-      <BuilderFlowHeaderProvider>
-        <BuilderBackButton />
-        <BuilderFlowHeaderActions />
-      </BuilderFlowHeaderProvider>
-    </>
+    <BuilderFlowHeaderProvider>
+      <BuilderBackButton />
+      <BuilderFlowHeaderActions />
+    </BuilderFlowHeaderProvider>
   )
 }

@@ -1,12 +1,14 @@
+"use client"
+
 import {
   Button,
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
+  Icons,
 } from "@/components"
 import { FIT_ZOOM_DURATION, ZOOM_LEVELS } from "@/constants"
-import { Minus, Plus } from "lucide-react"
 import { useReactFlow, useViewport } from "reactflow"
 
 export const BuilderZoomButton = () => {
@@ -21,7 +23,7 @@ export const BuilderZoomButton = () => {
         className="rounded-r-none"
         onClick={() => zoomOut()}
       >
-        <Minus size={15} />
+        <Icons.minus size={15} />
       </Button>
 
       <DropdownMenu>
@@ -78,7 +80,7 @@ export const BuilderZoomButton = () => {
         className="rounded-l-none"
         onClick={() => zoomIn()}
       >
-        <Plus size={15} />
+        <Icons.plus size={15} />
       </Button>
     </div>
   )

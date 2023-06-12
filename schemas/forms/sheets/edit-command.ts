@@ -14,7 +14,13 @@ export const editCommandSchema = z.object({
     })
     .optional(),
   enabled: z.boolean().default(true),
-
+  sendCommandNotEnabledMessage: z.boolean().default(true),
+  commandNotEnabledMessage: z
+    .string()
+    .max(2000, {
+      message: "Command not enabled message cannot exceed 2000 characters.",
+    })
+    .optional(),
   allowedChannel: z
     .object({
       id: z

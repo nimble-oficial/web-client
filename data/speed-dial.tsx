@@ -1,7 +1,4 @@
-import { ArrowUpDown, MessageSquare, Network, Reply, Send } from "lucide-react"
-
-import { SpeedDialButton } from "@/components/builder/flow/speed-dial/actions/button"
-import { Icons } from "@/components/icons"
+import { Icons, SpeedDialButton } from "@/components"
 
 export type SpeedDialMessagesGroupChildrenKey =
   | "reply-message"
@@ -58,7 +55,7 @@ export const SPEED_DIAL_GROUPS: SpeedDialGroup[] = [
     variant: "messages",
     Icon: () => (
       <SpeedDialButton>
-        <MessageSquare />
+        <Icons.messageSquare />
       </SpeedDialButton>
     ),
     children: [
@@ -70,7 +67,7 @@ export const SPEED_DIAL_GROUPS: SpeedDialGroup[] = [
         content: "",
         element: () => (
           <SpeedDialButton>
-            <Send className="-rotate-4" />
+            <Icons.send className="-rotate-4" />
           </SpeedDialButton>
         ),
       },
@@ -82,7 +79,7 @@ export const SPEED_DIAL_GROUPS: SpeedDialGroup[] = [
         replyContent: "",
         element: () => (
           <SpeedDialButton>
-            <Reply className="-rotate-4" />
+            <Icons.reply className="-rotate-4" />
           </SpeedDialButton>
         ),
       },
@@ -94,7 +91,7 @@ export const SPEED_DIAL_GROUPS: SpeedDialGroup[] = [
         replyContent: "",
         element: () => (
           <SpeedDialButton>
-            <Icons.chatgpt />
+            <Icons.chatgpt size={24} className="dark:text-white" />
           </SpeedDialButton>
         ),
       },
@@ -105,7 +102,7 @@ export const SPEED_DIAL_GROUPS: SpeedDialGroup[] = [
     variant: "channels",
     Icon: () => (
       <SpeedDialButton>
-        <Network />
+        <Icons.network />
       </SpeedDialButton>
     ),
     children: [
@@ -117,7 +114,7 @@ export const SPEED_DIAL_GROUPS: SpeedDialGroup[] = [
         channelId: "",
         element: () => (
           <SpeedDialButton>
-            <ArrowUpDown className="-rotate-4" />
+            <Icons.arrowUpDown className="-rotate-4" />
           </SpeedDialButton>
         ),
       },

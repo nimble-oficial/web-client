@@ -1,3 +1,5 @@
+"use client"
+
 import { ChannelSelect, FormField, Label, Switch } from "@/components"
 import {
   Control,

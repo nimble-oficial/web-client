@@ -1,3 +1,4 @@
+export * from "./capitalize"
 export * from "./get-channel-select-option-label"
 export * from "./get-discord-images"
 export * from "./get-error-from-api"

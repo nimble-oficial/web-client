@@ -1,3 +1,5 @@
+"use client"
+
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import {
@@ -9,11 +11,11 @@ import {
   DropdownMenuSeparator,
   DropdownMenuShortcut,
   DropdownMenuTrigger,
+  Icons,
 } from "@/components"
 import { useDashboardStore } from "@/hooks"
 import { Command } from "@/stores"
 import { Row } from "@tanstack/react-table"
-import { Edit, MoreHorizontal, Trash, Workflow } from "lucide-react"
 import { createPortal } from "react-dom"
 
 interface DataTableRowActionsProps {
@@ -34,7 +36,7 @@ export function DataTableRowActions({ row }: DataTableRowActionsProps) {
             variant="ghost"
             className="flex h-8 w-8 p-0 data-[state=open]:bg-muted"
           >
-            <MoreHorizontal className="h-4 w-4" />
+            <Icons.moreHorizontal className="h-4 w-4" />
             <span className="sr-only">Open menu</span>
           </Button>
         </DropdownMenuTrigger>
@@ -46,14 +48,14 @@ export function DataTableRowActions({ row }: DataTableRowActionsProps) {
               handleSelectCommand(row.original as Command)
             }}
           >
-            <Edit className="mr-2 h-3.5 w-3.5 text-muted-foreground/70" />
+            <Icons.edit className="mr-2 h-3.5 w-3.5 text-muted-foreground/70" />
             Edit
           </DropdownMenuItem>
           <DropdownMenuItem
             className="cursor-pointer"
             onClick={() => push(`/builder/${row.original.builderId}`)}
           >
-            <Workflow className="mr-2 h-3.5 w-3.5 text-muted-foreground/70" />
+            <Icons.workflow className="mr-2 h-3.5 w-3.5 text-muted-foreground/70" />
             Builder
           </DropdownMenuItem>
 
@@ -66,7 +68,7 @@ export function DataTableRowActions({ row }: DataTableRowActionsProps) {
               setShowDialog(true)
             }}
           >
-            <Trash className="mr-2 h-3.5 w-3.5 text-muted-foreground/70" />
+            <Icons.trash className="mr-2 h-3.5 w-3.5 text-muted-foreground/70" />
             Delete
             <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
           </DropdownMenuItem>
