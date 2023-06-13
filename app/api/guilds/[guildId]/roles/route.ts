@@ -17,7 +17,7 @@ export async function GET(
   try {
     const { params } = routeContextSchema.parse(context)
 
-    const roles = await rest.get(Routes.guildRoles(params.guildId as string))
+    const roles = await rest.get(Routes.guildRoles(params.guildId))
 
     return new Response(JSON.stringify(roles), { status: 200 })
   } catch (err) {
