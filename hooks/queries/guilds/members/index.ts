@@ -1,2 +1,2 @@
-export * from "./useGetGuildMembers"
-export * from "./useSearchGuildMember"
+export * from "./use-get-guild-members"
+export * from "./use-search-guild-member"

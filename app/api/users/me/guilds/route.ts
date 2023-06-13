@@ -9,6 +9,6 @@ export async function GET() {
 
     return new Response(JSON.stringify(userGuilds), { status: 200 })
   } catch (err) {
-    return new Response(JSON.stringify(customAPIError(err)), { status: 500 })
+    return new Response(customAPIError(err), { status: 500 })
   }
 }

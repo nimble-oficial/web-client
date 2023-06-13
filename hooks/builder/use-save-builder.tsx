@@ -35,7 +35,7 @@ export const useSaveBuilder = () => {
     try {
       await mutateAsync(data, options)
     } catch (err) {
-      toast.error(customAPIError(err).message)
+      toast.error(customAPIError(err))
     }
   }
 

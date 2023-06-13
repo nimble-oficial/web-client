@@ -1,5 +1,5 @@
 import { CSSProperties } from "react"
-import { SelectedNode } from "@/stores/node-sheet"
+import { SelectedNode } from "@/stores"
 import { Node } from "reactflow"
 
 interface UpdateNodeDataProps<T> {

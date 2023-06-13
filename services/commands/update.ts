@@ -1,6 +1,5 @@
+import { api } from "@/infra"
 import { EditCommandSchema } from "@/schemas"
-
-import { api } from "../api"
 
 export interface EditCommandData extends EditCommandSchema {
   commandId: string

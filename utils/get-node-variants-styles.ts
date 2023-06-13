@@ -1,4 +1,4 @@
-import { NodeType } from "@/data/speed-dial"
+import { NodeType } from "@/data"
 
 const styles = {
   messages: {

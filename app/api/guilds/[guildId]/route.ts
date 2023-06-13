@@ -25,6 +25,6 @@ export async function GET(
       return new Response(JSON.stringify(err.issues), { status: 422 })
     }
 
-    return new Response(JSON.stringify(customAPIError(err)), { status: 500 })
+    return new Response(customAPIError(err), { status: 500 })
   }
 }

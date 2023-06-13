@@ -40,7 +40,7 @@ export const DashboardCommandsCard = () => {
       await refetch()
       toast.success("Successfully refreshed data!")
     } catch (err) {
-      toast.error(customAPIError(err).message)
+      toast.error(customAPIError(err))
     }
   }
 

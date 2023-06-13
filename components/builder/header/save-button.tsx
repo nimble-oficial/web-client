@@ -31,7 +31,7 @@ export const SaveBuilderButton = () => {
           })
           toast.success("Builder saved successfully!")
         } catch (err) {
-          toast.error(customAPIError(err).message)
+          toast.error(customAPIError(err))
         }
       }}
     >

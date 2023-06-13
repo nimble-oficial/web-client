@@ -74,7 +74,7 @@ export function CreateCommandDialog({
 
       toast.success("Command created successfully!")
     } catch (err) {
-      toast.error(customAPIError(err).message)
+      toast.error(customAPIError(err))
     }
   }
 

@@ -47,7 +47,7 @@ export const ReplyMessageNodeSheet = () => {
 
       toast.success("Data updated successfully!")
     } catch (err) {
-      toast.error(customAPIError(err).message)
+      toast.error(customAPIError(err))
     }
   }
 

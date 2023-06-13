@@ -1,1 +1,1 @@
-export * from "./useDeleteCommand"
+export * from "./use-delete-command"

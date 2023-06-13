@@ -92,7 +92,7 @@ export const EditCommandSheet = () => {
 
       toast.success("Command updated successfully!")
     } catch (err) {
-      toast.error(customAPIError(err).message)
+      toast.error(customAPIError(err))
     }
   }
 

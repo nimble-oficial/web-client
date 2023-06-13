@@ -1,6 +1,5 @@
+import { api } from "@/infra"
 import { CreateCommandSchema } from "@/schemas"
-
-import { api } from "../api"
 
 export interface CreateCommandData {
   name: string

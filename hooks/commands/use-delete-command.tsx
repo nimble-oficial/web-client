@@ -30,7 +30,7 @@ export const useDeleteCommand = ({
 
       toast.success("Command deleted successfully.")
     } catch (err) {
-      toast.error(customAPIError(err).message)
+      toast.error(customAPIError(err))
     }
   }, [
     builderId,

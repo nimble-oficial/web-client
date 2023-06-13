@@ -1,1 +1,1 @@
-export * from "./useGetGuildChannels"
+export * from "./use-get-guild-channels-query"
