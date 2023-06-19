@@ -42,7 +42,7 @@ export const WithIcon = ({ data, isConnectable, ...props }: NodeProps) => {
       />
 
       {!!data?.name ? (
-        <div className="flex flex-col items-start">
+        <div className="flex flex-col items-start line-clamp-1">
           <Label>{data.label}</Label>
           <Title>{data.name}</Title>
         </div>

@@ -45,7 +45,7 @@ export function CreateCommandDialog({
       const formValues = getValues()
 
       const { data } = await mutateAsync({
-        ...formValues,
+        description: formValues.description,
         guildId: selectedGuild?.id!,
         name: parseCommandName(formValues.name),
       })
@@ -57,6 +57,8 @@ export function CreateCommandDialog({
         _id: data?.data?._id,
         builderId: data?.data?.builderId,
         createdAt: new Date(),
+        sendCommandNotEnabledMessage: true,
+        commandNotEnabledMessage: `${formValues.name} is not enabled.`,
         ...DEFAULT_OPTION_VALUES,
       }
 

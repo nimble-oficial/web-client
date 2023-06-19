@@ -2,11 +2,12 @@
 
 import { useEffect } from "react"
 import { Form, NodeSheetProvider } from "@/components"
-import { useBuilderStore, useNodeSheetStore } from "@/hooks"
+import { useBuilderStore, useNodeSheetStore, useSaveBuilder } from "@/hooks"
 import { ReplyMessageNodeSchema, replyMessageNodeSchema } from "@/schemas"
 import { customAPIError, updateNodeData } from "@/utils"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
+import { useViewport } from "reactflow"
 import { toast } from "sonner"
 
 import { ReplyMessageNodeSheetForm } from "./forms"
@@ -18,8 +19,10 @@ export interface ReplyMessageFormData {
 }
 
 export const ReplyMessageNodeSheet = () => {
+  const { handleSave: saveBuilderMutation } = useSaveBuilder()
   const { selectedNode, handleCloseSheet } = useNodeSheetStore()
-  const { nodes, handleChangeNodes } = useBuilderStore()
+  const { nodes, handleChangeNodes, builderId, edges } = useBuilderStore()
+  const viewport = useViewport()
 
   const form = useForm<ReplyMessageNodeSchema>({
     resolver: zodResolver(replyMessageNodeSchema),
@@ -37,7 +40,7 @@ export const ReplyMessageNodeSheet = () => {
     }
   }, [reset, selectedNode])
 
-  const handleSaveNodeChanges = () => {
+  const handleSaveNodeChanges = async () => {
     try {
       const updatedNodes = updateNodeData({
         nodes,
@@ -50,6 +53,13 @@ export const ReplyMessageNodeSheet = () => {
 
       handleChangeNodes(updatedNodes)
       handleCloseSheet()
+
+      await saveBuilderMutation({
+        builderId: builderId!,
+        nodes: updatedNodes,
+        edges,
+        viewport,
+      })
 
       toast.success("Data updated successfully!")
     } catch (err) {

@@ -17,7 +17,7 @@ export const Title = ({ children, className }: TitleProps) => {
   return (
     <TooltipProvider>
       <Tooltip>
-        <TooltipTrigger>
+        <TooltipTrigger asChild>
           <span
             className={cn(
               "mt-[-1px] text-left text-[9px] line-clamp-1",

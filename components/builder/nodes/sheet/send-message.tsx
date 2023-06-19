@@ -2,16 +2,19 @@
 
 import { useEffect } from "react"
 import { Form, NodeSheetProvider, SendMessageNodeSheetForm } from "@/components"
-import { useBuilderStore, useNodeSheetStore } from "@/hooks"
+import { useBuilderStore, useNodeSheetStore, useSaveBuilder } from "@/hooks"
 import { SendMessageNodeSchema, sendMessageNodeSchema } from "@/schemas"
 import { customAPIError, updateNodeData } from "@/utils"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
+import { useViewport } from "reactflow"
 import { toast } from "sonner"
 
 export const SendMessageNodeSheet = () => {
+  const { handleSave: saveBuilderMutation } = useSaveBuilder()
   const { selectedNode, handleCloseSheet } = useNodeSheetStore()
-  const { nodes, handleChangeNodes } = useBuilderStore()
+  const { nodes, edges, builderId, handleChangeNodes } = useBuilderStore()
+  const viewport = useViewport()
 
   const form = useForm<SendMessageNodeSchema>({
     resolver: zodResolver(sendMessageNodeSchema),
@@ -29,7 +32,7 @@ export const SendMessageNodeSheet = () => {
     }
   }, [selectedNode, reset])
 
-  const handleSave = () => {
+  const handleSave = async () => {
     try {
       const updatedNodes = updateNodeData({
         nodes,
@@ -42,6 +45,13 @@ export const SendMessageNodeSheet = () => {
 
       handleChangeNodes(updatedNodes)
       handleCloseSheet()
+
+      await saveBuilderMutation({
+        builderId: builderId!,
+        nodes: updatedNodes,
+        edges,
+        viewport,
+      })
 
       toast.success("Data updated successfully!")
     } catch (err) {

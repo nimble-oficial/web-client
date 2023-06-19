@@ -7,25 +7,70 @@ import {
   SavingLabel,
   WithIcon,
 } from "@/components"
-import { useBuilderStore, useNodeSheetStore } from "@/hooks"
+import {
+  useBuilderStore,
+  useMultiKeyPress,
+  useNodeSheetStore,
+  useSaveBuilder,
+} from "@/hooks"
 import { SelectedNode } from "@/stores"
-import { Background, ConnectionMode, ReactFlow, useReactFlow } from "reactflow"
+import { customAPIError } from "@/utils"
+import {
+  Background,
+  ConnectionMode,
+  ReactFlow,
+  useReactFlow,
+  useViewport,
+} from "reactflow"
+import { toast } from "sonner"
 
 export const Builder = () => {
   const { handleSelectNode, handleOpenSheet } = useNodeSheetStore()
+  const reactflowViewport = useViewport()
 
-  const { onEdgesChange, onNodesChange, onConnect, viewport, nodes, edges } =
-    useBuilderStore()
+  const {
+    onEdgesChange,
+    onNodesChange,
+    onConnect,
+    nodes,
+    edges,
+    builderId,
+    viewport: storedViewport,
+  } = useBuilderStore()
+
+  const { handleSave } = useSaveBuilder()
 
   const { fitView, setViewport } = useReactFlow()
 
   useEffect(() => {
-    if (viewport) {
-      setViewport(viewport)
+    if (storedViewport) {
+      setViewport(storedViewport)
     } else {
       fitView()
     }
-  }, [fitView, setViewport, viewport])
+  }, [fitView, setViewport, storedViewport])
+
+  useMultiKeyPress(["Control", "S"], (ev) => {
+    try {
+      ev.preventDefault()
+
+      toast.promise(
+        handleSave({
+          nodes,
+          builderId: builderId!,
+          edges,
+          viewport: reactflowViewport,
+        }),
+        {
+          loading: "Saving...",
+          success: "Saved!",
+          error: "Error!",
+        }
+      )
+    } catch (err) {
+      toast.error(customAPIError(err))
+    }
+  })
 
   const nodeTypes = useMemo(() => {
     return {
