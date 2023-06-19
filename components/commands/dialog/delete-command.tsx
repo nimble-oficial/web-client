@@ -40,7 +40,11 @@ export function DeleteCommandDialog({
 
         <AlertDialogFooter>
           <AlertDialogCancel disabled={isLoading}>Cancel</AlertDialogCancel>
-          <AlertDialogAction onClick={handleDelete} disabled={isLoading}>
+          <AlertDialogAction
+            onClick={handleDelete}
+            disabled={isLoading}
+            data-testid="delete-command-dialog-confirm-button"
+          >
             {isLoading ? "Deleting..." : "Delete"}
           </AlertDialogAction>
         </AlertDialogFooter>

@@ -53,10 +53,11 @@ export function CreateCommandDialog({
       const createdCommand = {
         ...formValues,
         guildId: selectedGuild?.id!,
+        name: parseCommandName(formValues.name),
         enabled: true,
         _id: data?.data?._id,
         builderId: data?.data?.builderId,
-        createdAt: new Date(),
+        createdAt: new Date().toString(),
         sendCommandNotEnabledMessage: true,
         commandNotEnabledMessage: `${formValues.name} is not enabled.`,
         ...DEFAULT_OPTION_VALUES,
@@ -74,7 +75,10 @@ export function CreateCommandDialog({
 
   return (
     <Dialog open={isOpen} onOpenChange={handleCloseDialog}>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent
+        className="sm:max-w-[425px]"
+        data-testid="create-command-dialog"
+      >
         <DialogHeader>
           <DialogTitle>Create Command</DialogTitle>
 
@@ -96,6 +100,7 @@ export function CreateCommandDialog({
                 <div className="flex flex-col justify-start gap-2">
                   <FormLabel htmlFor="name">Name</FormLabel>
                   <Input
+                    data-testid="create-command-name"
                     placeholder="Eg.: !ping"
                     className="col-span-3"
                     id="name"
@@ -128,6 +133,7 @@ export function CreateCommandDialog({
             <SheetFooter>
               <SheetClose asChild>
                 <Button
+                  data-testid="create-command-button"
                   type="submit"
                   onClick={handleCreate}
                   disabled={isLoading}
