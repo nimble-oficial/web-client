@@ -30,6 +30,7 @@ export const ReplyMessageNodeSheet = () => {
   useEffect(() => {
     if (selectedNode) {
       reset({
+        name: selectedNode.data?.name ?? "",
         replyContent: selectedNode.data?.replyContent ?? "",
         enabled: selectedNode.data?.enabled ?? true,
       })

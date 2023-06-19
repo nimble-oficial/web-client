@@ -37,13 +37,13 @@ export const dashboardConfig: DashboardConfig = {
       external: false,
       enabled: true,
     },
-    {
-      title: "Billing",
-      href: "/billing",
-      icon: "billing",
-      external: false,
-      enabled: true,
-    },
+    // {
+    //   title: "Billing",
+    //   href: "/billing",
+    //   icon: "billing",
+    //   external: false,
+    //   enabled: true,
+    // },
     {
       title: "Settings",
       href: "/settings",

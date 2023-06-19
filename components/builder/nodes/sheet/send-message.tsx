@@ -15,10 +15,6 @@ export const SendMessageNodeSheet = () => {
 
   const form = useForm<SendMessageNodeSchema>({
     resolver: zodResolver(sendMessageNodeSchema),
-    defaultValues: {
-      content: selectedNode?.data?.content ?? "",
-      enabled: selectedNode?.data?.enabled ?? true,
-    },
   })
 
   const { handleSubmit, getValues, reset, control } = form
@@ -28,6 +24,7 @@ export const SendMessageNodeSheet = () => {
       reset({
         content: selectedNode.data?.content ?? "",
         enabled: selectedNode.data?.enabled ?? true,
+        name: selectedNode.data?.name ?? "",
       })
     }
   }, [selectedNode, reset])

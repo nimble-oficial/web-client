@@ -6,6 +6,12 @@ import { create } from "zustand"
 export interface SelectedNode extends Node {
   index: number
   isRoot: boolean
+  data: {
+    name: string
+    enabled: boolean
+    content?: string
+    replyContent?: string
+  }
 }
 
 interface NodeSheetStore {

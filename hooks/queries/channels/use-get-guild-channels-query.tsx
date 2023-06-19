@@ -1,6 +1,7 @@
 import { getGuildChannels } from "@/services"
-import { GuildChannel } from "@/stores"
 import { useQuery } from "@tanstack/react-query"
+
+import { GuildChannel } from "@/types/discord"
 
 interface UseGetGuildChannelsProps {
   guildId: string

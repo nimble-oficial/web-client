@@ -29,6 +29,10 @@
 }
 
 .dark .react-flow__node {
+  border: 1px solid transparent !important;
+}
+
+.dark .react-flow__node {
   background-color: #0f172a;
   color: white;
 }

@@ -6,6 +6,7 @@ import {
   FormField,
   FormLabel,
   FormMessage,
+  Input,
   TextareaWithLimit,
 } from "@/components"
 import { SendMessageNodeSchema } from "@/schemas"
@@ -20,6 +21,30 @@ export const SendMessageNodeSheetForm = ({
 }: SendMessageNodeSheetFormProps) => {
   return (
     <>
+      <FormField
+        control={control}
+        name="name"
+        render={({ field }) => (
+          <div className="flex flex-col items-start gap-2">
+            <div className="grid w-full gap-2">
+              <FormLabel htmlFor="name">Name</FormLabel>
+
+              <FormDescription>The name of the node.</FormDescription>
+
+              <Input
+                type="text"
+                id="name"
+                {...field}
+                value={field.value}
+                placeholder="Eg.: Send Hello World!"
+              />
+
+              <FormMessage />
+            </div>
+          </div>
+        )}
+      />
+
       <FormField
         control={control}
         name="content"

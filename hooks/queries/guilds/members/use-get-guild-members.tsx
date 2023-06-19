@@ -1,6 +1,7 @@
 import { getGuildMembers } from "@/services"
-import { Member } from "@/stores"
 import { useQuery } from "@tanstack/react-query"
+
+import { Member } from "@/types/discord"
 
 interface UseGetGuildMembersProps {
   guildId: string
