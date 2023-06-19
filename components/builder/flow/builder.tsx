@@ -63,7 +63,7 @@ export const Builder = () => {
         }),
         {
           loading: "Saving...",
-          success: "Saved!",
+          success: "Builder saved successfully!",
           error: "Error!",
         }
       )
