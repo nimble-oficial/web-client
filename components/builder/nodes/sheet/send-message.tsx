@@ -1,26 +1,38 @@
+"use client"
+
+import { useEffect } from "react"
 import { Form, NodeSheetProvider, SendMessageNodeSheetForm } from "@/components"
-import { useBuilderStore, useNodeSheetStore } from "@/hooks"
+import { useBuilderStore, useNodeSheetStore, useSaveBuilder } from "@/hooks"
 import { SendMessageNodeSchema, sendMessageNodeSchema } from "@/schemas"
 import { customAPIError, updateNodeData } from "@/utils"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
+import { useViewport } from "reactflow"
 import { toast } from "sonner"
 
 export const SendMessageNodeSheet = () => {
+  const { handleSave: saveBuilderMutation } = useSaveBuilder()
   const { selectedNode, handleCloseSheet } = useNodeSheetStore()
-  const { nodes, handleChangeNodes } = useBuilderStore()
+  const { nodes, edges, builderId, handleChangeNodes } = useBuilderStore()
+  const viewport = useViewport()
 
   const form = useForm<SendMessageNodeSchema>({
     resolver: zodResolver(sendMessageNodeSchema),
-    defaultValues: {
-      content: selectedNode?.data?.content ?? "",
-      enabled: selectedNode?.data?.enabled ?? true,
-    },
   })
 
-  const { handleSubmit, getValues, setValue, control } = form
+  const { handleSubmit, getValues, reset, control } = form
 
-  const handleSave = () => {
+  useEffect(() => {
+    if (selectedNode) {
+      reset({
+        content: selectedNode.data?.content ?? "",
+        enabled: selectedNode.data?.enabled ?? true,
+        name: selectedNode.data?.name ?? "",
+      })
+    }
+  }, [selectedNode, reset])
+
+  const handleSave = async () => {
     try {
       const updatedNodes = updateNodeData({
         nodes,
@@ -34,9 +46,16 @@ export const SendMessageNodeSheet = () => {
       handleChangeNodes(updatedNodes)
       handleCloseSheet()
 
+      await saveBuilderMutation({
+        builderId: builderId!,
+        nodes: updatedNodes,
+        edges,
+        viewport,
+      })
+
       toast.success("Data updated successfully!")
     } catch (err) {
-      toast.error(customAPIError(err).message)
+      toast.error(customAPIError(err))
     }
   }
 
@@ -44,7 +63,7 @@ export const SendMessageNodeSheet = () => {
     <NodeSheetProvider handleSave={handleSubmit(handleSave)}>
       <Form {...form}>
         <form onSubmit={handleSubmit(handleSave)} className="grid space-y-6">
-          <SendMessageNodeSheetForm setValue={setValue} control={control} />
+          <SendMessageNodeSheetForm control={control} />
         </form>
       </Form>
     </NodeSheetProvider>

@@ -2,6 +2,7 @@ import { z } from "zod"
 
 export const replyMessageNodeSchema = z
   .object({
+    name: z.string().max(100).optional(),
     replyContent: z
       .string({
         required_error: "Reply content is required.",

@@ -1,4 +1,4 @@
-import { GuildChannel } from "@/hooks"
+import { GuildChannel } from "@/types/discord"
 
 export const getUniqueChannels = (channels: GuildChannel[]): GuildChannel[] => {
   const uniqueItems: typeof channels = []

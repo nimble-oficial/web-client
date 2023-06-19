@@ -1,3 +1,5 @@
+"use client"
+
 import {
   Button,
   Dialog,
@@ -16,7 +18,6 @@ import {
 import { DEFAULT_OPTION_VALUES } from "@/constants"
 import { useCreateCommandMutation, useDashboardStore } from "@/hooks"
 import { CreateCommandSchema, createCommandSchema } from "@/schemas"
-import { CreateCommandData } from "@/services"
 import { customAPIError, parseCommandName } from "@/utils"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
@@ -25,13 +26,6 @@ import { toast } from "sonner"
 interface CreateCommandDialogProps {
   isOpen: boolean
   onClose: () => void
-}
-
-interface Payload extends CreateCommandData {
-  _id: string
-  enabled: boolean
-  createdAt: Date
-  builderId: string
 }
 
 export function CreateCommandDialog({
@@ -51,7 +45,7 @@ export function CreateCommandDialog({
       const formValues = getValues()
 
       const { data } = await mutateAsync({
-        ...formValues,
+        description: formValues.description,
         guildId: selectedGuild?.id!,
         name: parseCommandName(formValues.name),
       })
@@ -63,6 +57,8 @@ export function CreateCommandDialog({
         _id: data?.data?._id,
         builderId: data?.data?.builderId,
         createdAt: new Date(),
+        sendCommandNotEnabledMessage: true,
+        commandNotEnabledMessage: `${formValues.name} is not enabled.`,
         ...DEFAULT_OPTION_VALUES,
       }
 
@@ -72,7 +68,7 @@ export function CreateCommandDialog({
 
       toast.success("Command created successfully!")
     } catch (err) {
-      toast.error(customAPIError(err).message)
+      toast.error(customAPIError(err))
     }
   }
 
@@ -136,7 +132,7 @@ export function CreateCommandDialog({
                   onClick={handleCreate}
                   disabled={isLoading}
                 >
-                  Save Changes
+                  Create command
                 </Button>
               </SheetClose>
             </SheetFooter>

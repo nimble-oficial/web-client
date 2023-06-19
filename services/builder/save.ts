@@ -1,6 +1,5 @@
+import { api } from "@/infra"
 import { Edge, Node, Viewport } from "reactflow"
-
-import { api } from "../api"
 
 export interface SaveBuilderData {
   nodes: Node[]

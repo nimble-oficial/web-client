@@ -1,4 +1,4 @@
-import { Nav } from "."
+import { Nav } from "@/components"
 
 export const SiteHeader = () => {
   return (

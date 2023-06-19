@@ -1,3 +1,5 @@
+"use client"
+
 import { useState } from "react"
 import {
   Button,
@@ -8,15 +10,15 @@ import {
   CommandItem,
   FormControl,
   FormField,
+  Icons,
   Popover,
   PopoverContent,
   PopoverTrigger,
   RolesSelectSkeleton,
 } from "@/components"
-import { DEFAULT_OPTION_VALUES } from "@/constants/default-option-values"
-import { useDashboardStore, useGetGuildRoles } from "@/hooks"
+import { DEFAULT_OPTION_VALUES } from "@/constants"
+import { useAppStore } from "@/hooks"
 import { getRoleSelectOptionLabel } from "@/utils"
-import { Check, ChevronsUpDown, ServerCrash } from "lucide-react"
 import { Control, FieldValues, UseFormSetValue } from "react-hook-form"
 
 import { cn } from "@/lib/utils"
@@ -32,13 +34,9 @@ export function RolesSelect<T extends FieldValues>({
 }: RolesMultiSelectProps<T>) {
   const [open, setOpen] = useState(false)
 
-  const { selectedGuild } = useDashboardStore()
+  const { roles: guildRoles, isLoadingRoles, rolesError } = useAppStore()
 
-  const { data, isLoading, error } = useGetGuildRoles({
-    guildId: selectedGuild?.id!,
-  })
-
-  const roles = data?.data?.filter((role) => role.name !== "@everyone")
+  const roles = guildRoles?.filter((role) => role.name !== "@everyone")
 
   // TODO: USE MULTI SELECT!!
   return (
@@ -60,10 +58,10 @@ export function RolesSelect<T extends FieldValues>({
                     !field.value && "text-muted-foreground"
                   )}
                 >
-                  {isLoading
+                  {isLoadingRoles
                     ? "Loading your roles..."
                     : getRoleSelectOptionLabel(field.value?.id, roles)}
-                  <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                  <Icons.chevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                 </Button>
               </FormControl>
             </div>
@@ -73,13 +71,13 @@ export function RolesSelect<T extends FieldValues>({
             <Command className="w-full">
               <CommandInput className="w-full" placeholder="Search roles..." />
 
-              {!isLoading && <CommandEmpty>No role found.</CommandEmpty>}
+              {!isLoadingRoles && <CommandEmpty>No role found.</CommandEmpty>}
 
               <CommandGroup>
-                {!!error && !isLoading && (
+                {!!rolesError && !isLoadingRoles && (
                   <CommandEmpty className="border border-dashed">
                     <div className="mx-auto flex w-full flex-col items-center justify-center py-4 text-center">
-                      <ServerCrash size={25} />
+                      <Icons.serverCrash size={25} />
 
                       <h3 className="mt-4 text-lg font-semibold">
                         Something went wrong
@@ -93,7 +91,7 @@ export function RolesSelect<T extends FieldValues>({
                   </CommandEmpty>
                 )}
 
-                {isLoading && !error ? (
+                {isLoadingRoles && !rolesError ? (
                   <RolesSelectSkeleton />
                 ) : (
                   <>
@@ -106,7 +104,7 @@ export function RolesSelect<T extends FieldValues>({
                         setOpen(false)
                       }}
                     >
-                      <Check
+                      <Icons.check
                         className={cn(
                           "mr-2 h-4 w-4",
                           field.value.id ===
@@ -128,7 +126,7 @@ export function RolesSelect<T extends FieldValues>({
                           setOpen(false)
                         }}
                       >
-                        <Check
+                        <Icons.check
                           className={cn(
                             "mr-2 h-4 w-4",
                             field.value.id === role.id

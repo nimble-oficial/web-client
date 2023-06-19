@@ -1,4 +1,6 @@
-import { useRouter } from "next/router"
+"use client"
+
+import { useRouter } from "next/navigation"
 import {
   Avatar,
   AvatarFallback,
@@ -12,8 +14,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuShortcut,
   DropdownMenuTrigger,
+  Icons,
 } from "@/components"
-import { CreditCard, LogOut, PlusCircle, Settings, User } from "lucide-react"
 import { signOut, useSession } from "next-auth/react"
 
 export function UserNav() {
@@ -47,22 +49,22 @@ export function UserNav() {
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
             <DropdownMenuItem>
-              <User className="mr-2 h-4 w-4" />
+              <Icons.user className="mr-2 h-4 w-4" />
               <span>Profile</span>
               <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
             </DropdownMenuItem>
             <DropdownMenuItem>
-              <CreditCard className="mr-2 h-4 w-4" />
+              <Icons.creditCard className="mr-2 h-4 w-4" />
               <span>Billing</span>
               <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
             </DropdownMenuItem>
             <DropdownMenuItem>
-              <Settings className="mr-2 h-4 w-4" />
+              <Icons.settings className="mr-2 h-4 w-4" />
               <span>Settings</span>
               <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
             </DropdownMenuItem>
             <DropdownMenuItem>
-              <PlusCircle className="mr-2 h-4 w-4" />
+              <Icons.plusCircle className="mr-2 h-4 w-4" />
               <span>New Team</span>
             </DropdownMenuItem>
           </DropdownMenuGroup>
@@ -74,7 +76,7 @@ export function UserNav() {
               replace("/auth")
             }}
           >
-            <LogOut className="mr-2 h-4 w-4" />
+            <Icons.logout className="mr-2 h-4 w-4" />
             <span>Log out</span>
             <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
           </DropdownMenuItem>

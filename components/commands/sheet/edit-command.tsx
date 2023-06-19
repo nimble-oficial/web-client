@@ -1,15 +1,21 @@
+"use client"
+
 import { useEffect } from "react"
 import {
   ChannelSelect,
   CommandsSheetProvider,
+  EnableCommandSwitch,
   Form,
+  FormDescription,
   FormField,
   FormLabel,
   FormMessage,
   Input,
   Label,
   RolesSelect,
+  Separator,
   Switch,
+  TextareaWithLimit,
 } from "@/components"
 import { DEFAULT_OPTION_VALUES } from "@/constants/default-option-values"
 import { useDashboardStore, useEditCommandMutation } from "@/hooks"
@@ -52,6 +58,15 @@ export const EditCommandSheet = () => {
         "allowedRole",
         selectedCommand?.allowedRole ?? DEFAULT_OPTION_VALUES.allowedRole
       )
+      setValue(
+        "commandNotEnabledMessage",
+        selectedCommand?.commandNotEnabledMessage ??
+          `${selectedCommand.name} is not enabled.`
+      )
+      setValue(
+        "sendCommandNotEnabledMessage",
+        selectedCommand?.sendCommandNotEnabledMessage ?? true
+      )
     }
   }, [selectedCommand, setValue])
 
@@ -78,7 +93,7 @@ export const EditCommandSheet = () => {
 
       toast.success("Command updated successfully!")
     } catch (err) {
-      toast.error(customAPIError(err).message)
+      toast.error(customAPIError(err))
     }
   }
 
@@ -135,39 +150,72 @@ export const EditCommandSheet = () => {
 
           <div className="flex flex-col justify-start gap-2">
             <FormLabel htmlFor="allowedChannel">
-              Allow for Specific Channel
+              Allow for specific channel
             </FormLabel>
             <ChannelSelect setValue={setValue} control={control} />
           </div>
 
           <div className="flex flex-col justify-start gap-2">
-            <FormLabel htmlFor="allowedRole">Allow for Specific Role</FormLabel>
+            <FormLabel htmlFor="allowedRole">Allow for specific role</FormLabel>
             <RolesSelect setValue={setValue} control={control} />
           </div>
 
           <FormField
             control={control}
-            name="enabled"
-            render={() => (
-              <div className="flex items-center gap-4">
-                <div className="flex items-center space-x-2">
-                  <Controller
-                    name="enabled"
-                    control={control}
-                    render={({ field: { onChange, value } }) => (
-                      <Switch
-                        id="enabled"
-                        checked={value}
-                        onCheckedChange={onChange}
-                      />
-                    )}
-                  />
+            name="commandNotEnabledMessage"
+            render={({ field }) => (
+              <div className="flex flex-col justify-start gap-2">
+                <FormLabel htmlFor="commandNotEnabledMessage">
+                  Command not enabled message
+                </FormLabel>
 
-                  <Label htmlFor="enabled">Enabled</Label>
-                </div>
+                <TextareaWithLimit
+                  id="commandNotEnabledMessage"
+                  placeholder="Eg.: This comand is not enabled."
+                  {...field}
+                />
+
+                <FormMessage />
               </div>
             )}
           />
+
+          <Separator />
+
+          <EnableCommandSwitch control={control} />
+
+          <div className="flex flex-row items-center justify-between space-y-2 rounded-lg border p-4">
+            <div className="space-y-0.5">
+              <Label className="font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                Send command not enabled message
+              </Label>
+              <FormDescription className="peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                You can customize the message in the &quot;Command not enabled
+                message&quot; field.
+              </FormDescription>
+            </div>
+            <FormField
+              control={control}
+              name="sendCommandNotEnabledMessage"
+              render={() => (
+                <div className="flex items-center gap-4">
+                  <div className="flex items-center space-x-2">
+                    <Controller
+                      name="sendCommandNotEnabledMessage"
+                      control={control}
+                      render={({ field: { onChange, value } }) => (
+                        <Switch
+                          id="sendCommandNotEnabledMessage"
+                          checked={value}
+                          onCheckedChange={onChange}
+                        />
+                      )}
+                    />
+                  </div>
+                </div>
+              )}
+            />
+          </div>
         </form>
       </Form>
     </CommandsSheetProvider>

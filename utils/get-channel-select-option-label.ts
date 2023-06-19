@@ -1,5 +1,6 @@
 import { DEFAULT_OPTION_VALUES } from "@/constants"
-import { GuildChannel } from "@/hooks"
+
+import { GuildChannel } from "@/types/discord"
 
 export const getChannelSelectOptionLabel = (
   value: string,

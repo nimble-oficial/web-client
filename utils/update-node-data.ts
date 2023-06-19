@@ -1,5 +1,5 @@
 import { CSSProperties } from "react"
-import { SelectedNode } from "@/stores/node-sheet"
+import { SelectedNode } from "@/stores"
 import { Node } from "reactflow"
 
 interface UpdateNodeDataProps<T> {
@@ -21,14 +21,16 @@ export const updateNodeData = <T extends {}>({
     return []
   }
 
-  clonedNodes[selectedNode.index] = {
-    ...clonedNodes[selectedNode.index],
+  const selectedNodeIndex = selectedNode.index
+
+  clonedNodes[selectedNodeIndex] = {
+    ...clonedNodes[selectedNodeIndex],
     style: {
-      ...(clonedNodes[selectedNode.index]?.style || {}),
+      ...(clonedNodes[selectedNodeIndex]?.style || {}),
       ...style,
     },
     data: {
-      ...clonedNodes[selectedNode.index]?.data,
+      ...clonedNodes[selectedNodeIndex]?.data,
       ...overrides,
     },
   }

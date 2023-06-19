@@ -1,9 +1,21 @@
+"use client"
+
+import { SpeedDialGroupChildrenKey } from "@/data"
 import { Node } from "reactflow"
 import { create } from "zustand"
 
 export interface SelectedNode extends Node {
   index: number
   isRoot: boolean
+  data: {
+    name?: string
+    label: string
+    enabled: boolean
+    content?: string
+    replyContent?: string
+    description: string
+    key: SpeedDialGroupChildrenKey
+  }
 }
 
 interface NodeSheetStore {

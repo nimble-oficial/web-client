@@ -1,4 +1,5 @@
-import { useState } from "react"
+"use client"
+
 import {
   Button,
   ChannelSelectSkeleton,
@@ -9,6 +10,7 @@ import {
   CommandItem,
   FormControl,
   FormField,
+  Icons,
   Popover,
   PopoverContent,
   PopoverTrigger,
@@ -17,7 +19,7 @@ import { DEFAULT_OPTION_VALUES } from "@/constants"
 import { useGetGuildChannelsByType } from "@/hooks"
 import { cn } from "@/lib"
 import { getChannelSelectOptionLabel } from "@/utils"
-import { Check, ChevronsUpDown, ServerCrash } from "lucide-react"
+import { useState } from "react"
 import { Control, FieldValues, UseFormSetValue } from "react-hook-form"
 
 interface ChannelsMultiSelectProps<T extends FieldValues> {
@@ -59,7 +61,7 @@ export function ChannelSelect<T extends FieldValues>({
                   {isLoading
                     ? "Loading your channels..."
                     : getChannelSelectOptionLabel(field.value?.id, channels)}
-                  <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                  <Icons.chevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                 </Button>
               </FormControl>
             </div>
@@ -78,7 +80,7 @@ export function ChannelSelect<T extends FieldValues>({
                 {!!error && !isLoading && (
                   <CommandEmpty className="border border-dashed">
                     <div className="mx-auto flex w-full flex-col items-center justify-center py-4 text-center">
-                      <ServerCrash size={25} />
+                      <Icons.serverCrash size={25} />
 
                       <h3 className="mt-4 text-lg font-semibold">
                         Something went wrong
@@ -105,7 +107,7 @@ export function ChannelSelect<T extends FieldValues>({
                         setOpen(false)
                       }}
                     >
-                      <Check
+                      <Icons.check
                         className={cn(
                           "mr-2 h-4 w-4",
                           field?.value?.id ===
@@ -127,7 +129,7 @@ export function ChannelSelect<T extends FieldValues>({
                           setOpen(false)
                         }}
                       >
-                        <Check
+                        <Icons.check
                           className={cn(
                             "mr-2 h-4 w-4",
                             field.value.id === channel.id

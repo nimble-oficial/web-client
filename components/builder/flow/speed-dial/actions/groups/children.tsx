@@ -1,5 +1,9 @@
 import { NodeType, SpeedDialGroup } from "@/data/speed-dial"
-import { useAddNewNodeToBuilder, useNodeSheetStore } from "@/hooks"
+import {
+  useAddNewNodeToBuilder,
+  useBuilderStore,
+  useNodeSheetStore,
+} from "@/hooks"
 import { SelectedNode } from "@/stores"
 
 import { cn } from "@/lib/utils"
@@ -16,6 +20,7 @@ interface ItemsProps {
 }
 
 export const Children = ({ group }: ItemsProps) => {
+  const { nodes } = useBuilderStore()
   const { handleSelectNode, handleOpenSheet } = useNodeSheetStore()
   const { handleAddNewNodeToBuilder } = useAddNewNodeToBuilder()
 
@@ -35,6 +40,7 @@ export const Children = ({ group }: ItemsProps) => {
                       label: child.label,
                       variant: group.variant as NodeType,
                       key: child.key,
+                      index: nodes.length,
                     }
 
                     const createdNode = handleAddNewNodeToBuilder(node)

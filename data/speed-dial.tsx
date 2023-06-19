@@ -1,7 +1,4 @@
-import { ArrowUpDown, MessageSquare, Network, Reply, Send } from "lucide-react"
-
-import { SpeedDialButton } from "@/components/builder/flow/speed-dial/actions/button"
-import { Icons } from "@/components/icons"
+import { Icons, SpeedDialButton } from "@/components"
 
 export type SpeedDialMessagesGroupChildrenKey =
   | "reply-message"
@@ -58,7 +55,7 @@ export const SPEED_DIAL_GROUPS: SpeedDialGroup[] = [
     variant: "messages",
     Icon: () => (
       <SpeedDialButton>
-        <MessageSquare />
+        <Icons.messageSquare />
       </SpeedDialButton>
     ),
     children: [
@@ -70,7 +67,7 @@ export const SPEED_DIAL_GROUPS: SpeedDialGroup[] = [
         content: "",
         element: () => (
           <SpeedDialButton>
-            <Send className="-rotate-4" />
+            <Icons.send className="-rotate-4" />
           </SpeedDialButton>
         ),
       },
@@ -82,19 +79,19 @@ export const SPEED_DIAL_GROUPS: SpeedDialGroup[] = [
         replyContent: "",
         element: () => (
           <SpeedDialButton>
-            <Reply className="-rotate-4" />
+            <Icons.reply className="-rotate-4" />
           </SpeedDialButton>
         ),
       },
       {
-        label: "Reply with Chat GPT",
+        label: "Reply with AI",
         description:
-          '"Reply with Chat GPT" action allows you to reply message with Chat GPT. Chat GPT Will generate a reply based on the context of the message.',
+          '"Reply with AI" action allows you to reply message with AI.',
         key: "reply-with-chat-gpt",
         replyContent: "",
         element: () => (
           <SpeedDialButton>
-            <Icons.chatgpt />
+            <Icons.sparkles size={24} className="dark:text-white" />
           </SpeedDialButton>
         ),
       },
@@ -105,7 +102,7 @@ export const SPEED_DIAL_GROUPS: SpeedDialGroup[] = [
     variant: "channels",
     Icon: () => (
       <SpeedDialButton>
-        <Network />
+        <Icons.network />
       </SpeedDialButton>
     ),
     children: [
@@ -117,7 +114,7 @@ export const SPEED_DIAL_GROUPS: SpeedDialGroup[] = [
         channelId: "",
         element: () => (
           <SpeedDialButton>
-            <ArrowUpDown className="-rotate-4" />
+            <Icons.arrowUpDown className="-rotate-4" />
           </SpeedDialButton>
         ),
       },

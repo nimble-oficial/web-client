@@ -1,34 +1,27 @@
 import {
   Button,
+  Icons,
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "@/components"
-import { RefreshCw } from "lucide-react"
 
-interface RefreshDashboardCommandsDataButtonProps {
+interface RefreshDashboardDataButtonProps {
   isRefetching: boolean
   refetch: () => Promise<void>
 }
 
-export const RefreshDashboardCommandsDataButton = ({
+export const RefreshDashboardDataButton = ({
   isRefetching,
   refetch,
-}: RefreshDashboardCommandsDataButtonProps) => {
+}: RefreshDashboardDataButtonProps) => {
   return (
     <TooltipProvider>
       <Tooltip>
         <TooltipTrigger asChild>
-          <Button
-            disabled={isRefetching}
-            size="sm"
-            variant="outline"
-            onClick={async () => {
-              await refetch()
-            }}
-          >
-            <RefreshCw
+          <Button disabled={isRefetching} variant="outline" onClick={refetch}>
+            <Icons.refreshCw
               size={16}
               className={isRefetching ? "animate-spin" : ""}
             />

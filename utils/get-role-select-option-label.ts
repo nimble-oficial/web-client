@@ -1,5 +1,6 @@
 import { DEFAULT_OPTION_VALUES } from "@/constants"
-import { GuildRole } from "@/hooks"
+
+import { GuildRole } from "@/types/discord"
 
 export const getRoleSelectOptionLabel = (
   value: string,

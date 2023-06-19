@@ -1,3 +1,5 @@
+"use client"
+
 import { ComponentPropsWithoutRef, useEffect, useState } from "react"
 import {
   Avatar,
@@ -19,6 +21,7 @@ import {
   DialogTitle,
   DialogTrigger,
   GuildSwitcherSkeleton,
+  Icons,
   Input,
   Label,
   Popover,
@@ -31,10 +34,8 @@ import {
   SelectValue,
 } from "@/components"
 import { useDashboardStore, useGetUserGuilds } from "@/hooks"
+import { cn } from "@/lib"
 import { getGuildIcon } from "@/utils"
-import { Check, ChevronsUpDown, PlusCircle } from "lucide-react"
-
-import { cn } from "@/lib/utils"
 
 export interface Guild {
   id: string
@@ -47,7 +48,7 @@ type PopoverTriggerProps = ComponentPropsWithoutRef<typeof PopoverTrigger>
 
 interface TeamSwitcherProps extends PopoverTriggerProps {}
 
-export function Guildwitcher({ className }: TeamSwitcherProps) {
+export function GuildSwitcher({ className }: TeamSwitcherProps) {
   const [open, setOpen] = useState(false)
 
   const [showNewTeamDialog, setShowNewTeamDialog] = useState(false)
@@ -74,14 +75,14 @@ export function Guildwitcher({ className }: TeamSwitcherProps) {
   return (
     <Dialog open={showNewTeamDialog} onOpenChange={setShowNewTeamDialog}>
       <Popover open={open} onOpenChange={setOpen}>
-        <PopoverTrigger asChild>
+        <PopoverTrigger>
           {!!selectedGuild?.name && (
             <Button
               variant="outline"
               size="sm"
               role="combobox"
               aria-expanded={open}
-              aria-label="Select a team"
+              aria-label="Select a server"
               className={cn("w-[200px] justify-between", className)}
             >
               <Avatar className="mr-2 h-5 w-5">
@@ -97,16 +98,16 @@ export function Guildwitcher({ className }: TeamSwitcherProps) {
 
               {selectedGuild.name}
 
-              <ChevronsUpDown className="ml-auto h-4 w-4 shrink-0 opacity-50" />
+              <Icons.chevronsUpDown className="ml-auto h-4 w-4 shrink-0 opacity-50" />
             </Button>
           )}
         </PopoverTrigger>
 
-        <PopoverContent className="w-[200px] p-0">
+        <PopoverContent className="w-[200px] p-0" side="top">
           <Command>
             <CommandList>
-              <CommandInput placeholder="Search team..." />
-              <CommandEmpty>No team found.</CommandEmpty>
+              <CommandInput placeholder="Search server..." />
+              <CommandEmpty>No server found.</CommandEmpty>
               {guilds?.map((guild) => (
                 <CommandItem
                   key={guild.id}
@@ -130,7 +131,7 @@ export function Guildwitcher({ className }: TeamSwitcherProps) {
 
                   {guild.name}
 
-                  <Check
+                  <Icons.check
                     className={cn(
                       "ml-auto h-4 w-4",
                       selectedGuild?.name === guild.name
@@ -153,8 +154,8 @@ export function Guildwitcher({ className }: TeamSwitcherProps) {
                       setShowNewTeamDialog(true)
                     }}
                   >
-                    <PlusCircle className="mr-2 h-5 w-5" />
-                    Create Team
+                    <Icons.plusCircle className="mr-2 h-5 w-5" />
+                    Add new server
                   </CommandItem>
                 </DialogTrigger>
               </CommandGroup>
@@ -164,7 +165,7 @@ export function Guildwitcher({ className }: TeamSwitcherProps) {
       </Popover>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Create team</DialogTitle>
+          <DialogTitle>Add new server</DialogTitle>
 
           <DialogDescription>
             Add a new team to manage products and customers.

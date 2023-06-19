@@ -1,19 +1,20 @@
+"use client"
+
 import {
+  Button,
+  Icons,
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "@/components"
 import { useBuilderStore } from "@/hooks"
-import { XCircle } from "lucide-react"
 import {
   BaseEdge,
   EdgeLabelRenderer,
   EdgeProps,
   getBezierPath,
 } from "reactflow"
-
-import { Button } from "@/components/ui"
 
 export function DefaultEdge({
   id,
@@ -62,10 +63,10 @@ export function DefaultEdge({
               <TooltipTrigger asChild>
                 <Button
                   variant="outline"
-                  className="h-fit w-fit rounded-full bg-white p-0 dark:bg-slate-900"
+                  className="h-fit w-fit rounded-full border-none bg-white p-0 text-[10px] text-slate-800 dark:bg-slate-900 dark:text-slate-200"
                   onClick={onEdgeClick}
                 >
-                  <XCircle className="h-4 w-4" />
+                  <Icons.xCircle className="h-4 w-4" />
                   <span className="sr-only">Add</span>
                 </Button>
               </TooltipTrigger>

@@ -1,6 +1,7 @@
 import { z } from "zod"
 
 export const sendMessageNodeSchema = z.object({
+  name: z.string().max(100).optional(),
   content: z
     .string({
       required_error: "Content is required.",

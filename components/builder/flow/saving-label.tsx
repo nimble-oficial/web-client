@@ -1,7 +1,6 @@
+import { Icons } from "@/components"
 import { useBuilderAutoSave } from "@/hooks"
-import { Loader2 } from "lucide-react"
-
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib"
 
 export const SavingLabel = () => {
   const { isLoading } = useBuilderAutoSave()
@@ -13,7 +12,7 @@ export const SavingLabel = () => {
         isLoading ? "opacity-1" : "opacity-0"
       )}
     >
-      <Loader2 className="animate-spin" size={15} />
+      <Icons.spinner className="animate-spin" size={15} />
       <p className="text-sm">Saving</p>
     </div>
   )
