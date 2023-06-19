@@ -6,11 +6,11 @@ import localFont from "next/font/local"
 import { ThemeProvider } from "@/components"
 import { client, cn } from "@/lib"
 import { QueryClientProvider } from "@tanstack/react-query"
-import { SessionProvider } from "next-auth/react"
 import NextNProgress from "nextjs-progressbar"
 import { Toaster } from "sonner"
 
 import "@/styles/globals.css"
+import { NextAuthProvider } from "./providers"
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -37,7 +37,7 @@ export default function RootLayout({
           fontHeading.variable
         )}
       >
-        <SessionProvider>
+        <NextAuthProvider>
           <QueryClientProvider client={client}>
             <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
               <main className="flex-1">{children}</main>
@@ -45,7 +45,7 @@ export default function RootLayout({
               <Toaster />
             </ThemeProvider>
           </QueryClientProvider>
-        </SessionProvider>
+        </NextAuthProvider>
       </body>
     </html>
   )

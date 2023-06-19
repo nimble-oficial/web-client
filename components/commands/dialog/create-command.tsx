@@ -18,7 +18,6 @@ import {
 import { DEFAULT_OPTION_VALUES } from "@/constants"
 import { useCreateCommandMutation, useDashboardStore } from "@/hooks"
 import { CreateCommandSchema, createCommandSchema } from "@/schemas"
-import { CreateCommandData } from "@/services"
 import { customAPIError, parseCommandName } from "@/utils"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
@@ -27,13 +26,6 @@ import { toast } from "sonner"
 interface CreateCommandDialogProps {
   isOpen: boolean
   onClose: () => void
-}
-
-interface Payload extends CreateCommandData {
-  _id: string
-  enabled: boolean
-  createdAt: Date
-  builderId: string
 }
 
 export function CreateCommandDialog({
@@ -138,7 +130,7 @@ export function CreateCommandDialog({
                   onClick={handleCreate}
                   disabled={isLoading}
                 >
-                  Save Changes
+                  Create command
                 </Button>
               </SheetClose>
             </SheetFooter>

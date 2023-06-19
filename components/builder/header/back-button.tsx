@@ -2,10 +2,10 @@ import { useRouter } from "next/navigation"
 import { Button, Icons } from "@/components"
 
 export const BuilderBackButton = () => {
-  const { push } = useRouter()
+  const { back } = useRouter()
 
   return (
-    <Button variant="ghost" onClick={() => push("/dashboard")} size="sm">
+    <Button variant="ghost" onClick={back} size="sm">
       <Icons.arrowLeft size={16} />
     </Button>
   )

@@ -20,14 +20,7 @@ export const RefreshDashboardCommandsDataButton = ({
     <TooltipProvider>
       <Tooltip>
         <TooltipTrigger asChild>
-          <Button
-            disabled={isRefetching}
-            size="sm"
-            variant="outline"
-            onClick={async () => {
-              await refetch()
-            }}
-          >
+          <Button disabled={isRefetching} variant="outline" onClick={refetch}>
             <Icons.refreshCw
               size={16}
               className={isRefetching ? "animate-spin" : ""}

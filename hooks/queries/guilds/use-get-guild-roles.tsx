@@ -1,14 +1,10 @@
 import { getGuildRoles } from "@/services"
+import { GuildRole } from "@/stores"
 import { useQuery } from "@tanstack/react-query"
 
 interface UseGetGuildRolesProps {
   guildId: string
   enabled?: boolean
-}
-
-export interface GuildRole {
-  id: string
-  name: string
 }
 
 export const useGetGuildRoles = ({

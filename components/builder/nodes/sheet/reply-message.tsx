@@ -1,5 +1,6 @@
 "use client"
 
+import { useEffect } from "react"
 import { Form, NodeSheetProvider } from "@/components"
 import { useBuilderStore, useNodeSheetStore } from "@/hooks"
 import { ReplyMessageNodeSchema, replyMessageNodeSchema } from "@/schemas"
@@ -22,16 +23,20 @@ export const ReplyMessageNodeSheet = () => {
 
   const form = useForm<ReplyMessageNodeSchema>({
     resolver: zodResolver(replyMessageNodeSchema),
-    defaultValues: {
-      replyContent: selectedNode?.data?.replyContent ?? "",
-      enabled: selectedNode?.data?.enabled ?? true,
-      // allowedChannel: selectedNode?.data?.allowedChannel ?? "all",
-    },
   })
 
-  const { handleSubmit, getValues, control, setValue } = form
+  const { handleSubmit, getValues, reset, control } = form
 
-  const handleSaveBuilder = () => {
+  useEffect(() => {
+    if (selectedNode) {
+      reset({
+        replyContent: selectedNode.data?.replyContent ?? "",
+        enabled: selectedNode.data?.enabled ?? true,
+      })
+    }
+  }, [reset, selectedNode])
+
+  const handleSaveNodeChanges = () => {
     try {
       const updatedNodes = updateNodeData({
         nodes,
@@ -52,13 +57,13 @@ export const ReplyMessageNodeSheet = () => {
   }
 
   return (
-    <NodeSheetProvider handleSave={handleSubmit(handleSaveBuilder)}>
+    <NodeSheetProvider handleSave={handleSubmit(handleSaveNodeChanges)}>
       <Form {...form}>
         <form
-          onSubmit={handleSubmit(handleSaveBuilder)}
+          onSubmit={handleSubmit(handleSaveNodeChanges)}
           className="grid space-y-6"
         >
-          <ReplyMessageNodeSheetForm control={control} setValue={setValue} />
+          <ReplyMessageNodeSheetForm control={control} />
         </form>
       </Form>
     </NodeSheetProvider>

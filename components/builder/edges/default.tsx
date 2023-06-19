@@ -63,7 +63,7 @@ export function DefaultEdge({
               <TooltipTrigger asChild>
                 <Button
                   variant="outline"
-                  className="h-fit w-fit rounded-full bg-white p-0 dark:bg-slate-900"
+                  className="h-fit w-fit rounded-full border-none bg-white p-0 text-[10px] text-slate-800 dark:bg-slate-900 dark:text-slate-200"
                   onClick={onEdgeClick}
                 >
                   <Icons.xCircle className="h-4 w-4" />

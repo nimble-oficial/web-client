@@ -1,9 +1,7 @@
 "use client"
 
-import { useCallback, useMemo } from "react"
-
-import { useGetGuildChannelsQuery } from "../queries"
-import { useDashboardStore } from "../stores"
+import { useCallback } from "react"
+import { useAppStore } from "@/hooks"
 
 const CHANNEL_TYPES = {
   text: 0,
@@ -11,20 +9,10 @@ const CHANNEL_TYPES = {
 }
 
 export const useGetGuildChannelsByType = () => {
-  const { selectedGuild } = useDashboardStore()
-
-  const { data, isLoading, error } = useGetGuildChannelsQuery({
-    guildId: selectedGuild?.id!,
-  })
-
-  const channels = useMemo(() => {
-    const result = data?.data
-
-    return result || []
-  }, [data?.data])
+  const { channels, isChannelsLoading, channelsError } = useAppStore()
 
   const getChannelsByType = useCallback(
-    (type: "voice" | "text") => {
+    (type: keyof typeof CHANNEL_TYPES) => {
       const foundAllByType = channels?.filter(
         (channel) => channel.type === CHANNEL_TYPES[type]
       )
@@ -36,7 +24,7 @@ export const useGetGuildChannelsByType = () => {
 
   return {
     getChannelsByType,
-    isLoading,
-    error,
+    isLoading: isChannelsLoading,
+    error: channelsError,
   }
 }

@@ -16,8 +16,8 @@ import {
   PopoverTrigger,
   RolesSelectSkeleton,
 } from "@/components"
-import { DEFAULT_OPTION_VALUES } from "@/constants/default-option-values"
-import { useDashboardStore, useGetGuildRoles } from "@/hooks"
+import { DEFAULT_OPTION_VALUES } from "@/constants"
+import { useAppStore } from "@/hooks"
 import { getRoleSelectOptionLabel } from "@/utils"
 import { Control, FieldValues, UseFormSetValue } from "react-hook-form"
 
@@ -34,13 +34,9 @@ export function RolesSelect<T extends FieldValues>({
 }: RolesMultiSelectProps<T>) {
   const [open, setOpen] = useState(false)
 
-  const { selectedGuild } = useDashboardStore()
+  const { roles: guildRoles, isLoadingRoles, rolesError } = useAppStore()
 
-  const { data, isLoading, error } = useGetGuildRoles({
-    guildId: selectedGuild?.id!,
-  })
-
-  const roles = data?.data?.filter((role) => role.name !== "@everyone")
+  const roles = guildRoles?.filter((role) => role.name !== "@everyone")
 
   // TODO: USE MULTI SELECT!!
   return (
@@ -62,7 +58,7 @@ export function RolesSelect<T extends FieldValues>({
                     !field.value && "text-muted-foreground"
                   )}
                 >
-                  {isLoading
+                  {isLoadingRoles
                     ? "Loading your roles..."
                     : getRoleSelectOptionLabel(field.value?.id, roles)}
                   <Icons.chevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
@@ -75,10 +71,10 @@ export function RolesSelect<T extends FieldValues>({
             <Command className="w-full">
               <CommandInput className="w-full" placeholder="Search roles..." />
 
-              {!isLoading && <CommandEmpty>No role found.</CommandEmpty>}
+              {!isLoadingRoles && <CommandEmpty>No role found.</CommandEmpty>}
 
               <CommandGroup>
-                {!!error && !isLoading && (
+                {!!rolesError && !isLoadingRoles && (
                   <CommandEmpty className="border border-dashed">
                     <div className="mx-auto flex w-full flex-col items-center justify-center py-4 text-center">
                       <Icons.serverCrash size={25} />
@@ -95,7 +91,7 @@ export function RolesSelect<T extends FieldValues>({
                   </CommandEmpty>
                 )}
 
-                {isLoading && !error ? (
+                {isLoadingRoles && !rolesError ? (
                   <RolesSelectSkeleton />
                 ) : (
                   <>

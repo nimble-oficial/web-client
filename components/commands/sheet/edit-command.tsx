@@ -4,6 +4,7 @@ import { useEffect } from "react"
 import {
   ChannelSelect,
   CommandsSheetProvider,
+  EnableCommandSwitch,
   Form,
   FormDescription,
   FormField,
@@ -181,39 +182,7 @@ export const EditCommandSheet = () => {
 
           <Separator />
 
-          <div className="flex flex-row items-center justify-between space-y-2 rounded-lg border p-4">
-            <div className="space-y-0.5">
-              <Label className="font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-                Enable command
-              </Label>
-              <FormDescription className="peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-                Disabled commands will not be available for use. Nothing will be
-                executed from builder.
-              </FormDescription>
-            </div>
-
-            <FormField
-              control={control}
-              name="enabled"
-              render={() => (
-                <div className="flex items-center gap-4">
-                  <div className="flex items-center space-x-2">
-                    <Controller
-                      name="enabled"
-                      control={control}
-                      render={({ field: { onChange, value } }) => (
-                        <Switch
-                          id="enabled"
-                          checked={value}
-                          onCheckedChange={onChange}
-                        />
-                      )}
-                    />
-                  </div>
-                </div>
-              )}
-            />
-          </div>
+          <EnableCommandSwitch control={control} />
 
           <div className="flex flex-row items-center justify-between space-y-2 rounded-lg border p-4">
             <div className="space-y-0.5">
@@ -221,8 +190,8 @@ export const EditCommandSheet = () => {
                 Send command not enabled message
               </Label>
               <FormDescription className="peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-                You can customize the message in the above field. If message is
-                empty, nothing will be sent.
+                You can customize the message in the &quot;Command not enabled
+                message&quot; field.
               </FormDescription>
             </div>
             <FormField

@@ -1,4 +1,5 @@
 import { customAPIError } from "@/utils"
+import { makeURLSearchParams } from "@discordjs/rest"
 import { Routes } from "discord-api-types/v10"
 import { z } from "zod"
 
@@ -17,7 +18,14 @@ export async function GET(
   try {
     const { params } = routeContextSchema.parse(context)
 
-    const members = await rest.get(Routes.guildMembers(params.guildId))
+    // TODO: Pagination with virtualized list
+    const query = makeURLSearchParams({
+      limit: 1000,
+    })
+
+    const members = await rest.get(Routes.guildMembers(params.guildId), {
+      query: query,
+    })
 
     return new Response(JSON.stringify(members), { status: 200 })
   } catch (err) {

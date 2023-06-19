@@ -1,7 +1,6 @@
 "use client"
 
 import React from "react"
-
 import {
   Button,
   Separator,
@@ -12,7 +11,7 @@ import {
   SheetFooter,
   SheetHeader,
   SheetTitle,
-} from "@/components/ui"
+} from "@/components"
 
 interface CommandsSheetProviderProps {
   title: string
@@ -37,7 +36,11 @@ export const CommandsSheetProvider = ({
 }: CommandsSheetProviderProps) => {
   return (
     <Sheet open={isOpen} onOpenChange={handleCloseSheet}>
-      <SheetContent position="right" size="sm">
+      <SheetContent
+        position="right"
+        size="sm"
+        className="max-h-screen overflow-auto"
+      >
         <SheetHeader>
           <SheetTitle>{title}</SheetTitle>
 

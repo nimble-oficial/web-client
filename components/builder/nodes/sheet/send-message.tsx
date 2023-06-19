@@ -1,5 +1,6 @@
 "use client"
 
+import { useEffect } from "react"
 import { Form, NodeSheetProvider, SendMessageNodeSheetForm } from "@/components"
 import { useBuilderStore, useNodeSheetStore } from "@/hooks"
 import { SendMessageNodeSchema, sendMessageNodeSchema } from "@/schemas"
@@ -20,7 +21,16 @@ export const SendMessageNodeSheet = () => {
     },
   })
 
-  const { handleSubmit, getValues, setValue, control } = form
+  const { handleSubmit, getValues, reset, control } = form
+
+  useEffect(() => {
+    if (selectedNode) {
+      reset({
+        content: selectedNode.data?.content ?? "",
+        enabled: selectedNode.data?.enabled ?? true,
+      })
+    }
+  }, [selectedNode, reset])
 
   const handleSave = () => {
     try {
@@ -46,7 +56,7 @@ export const SendMessageNodeSheet = () => {
     <NodeSheetProvider handleSave={handleSubmit(handleSave)}>
       <Form {...form}>
         <form onSubmit={handleSubmit(handleSave)} className="grid space-y-6">
-          <SendMessageNodeSheetForm setValue={setValue} control={control} />
+          <SendMessageNodeSheetForm control={control} />
         </form>
       </Form>
     </NodeSheetProvider>

@@ -19,6 +19,8 @@ export const useZoomIntoNode = (nodes: Node[]) => {
   const handleFocusNode = (node: SelectedNode) => {
     const foundNode = nodes?.[node.index]
 
+    console.log("Zooming into node", foundNode)
+
     if (!foundNode) {
       return
     }
