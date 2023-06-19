@@ -35,11 +35,13 @@ export const WithIcon = ({ data, isConnectable, ...props }: NodeProps) => {
     <div {...props} className="flex items-center py-[4px] pl-1">
       <Icon color={color}>{icon}</Icon>
 
-      <Handle
-        type="target"
-        position={Position.Top}
-        isConnectable={isConnectable}
-      />
+      {data?.key !== "command-triggered" && (
+        <Handle
+          type="target"
+          position={Position.Top}
+          isConnectable={isConnectable}
+        />
+      )}
 
       {!!data?.name ? (
         <div className="flex flex-col items-start line-clamp-1">

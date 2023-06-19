@@ -8,7 +8,7 @@ export interface Command {
   name: string
   enabled: boolean
   description?: string
-  createdAt: Date
+  createdAt: string
   builderId: string
   allowedChannel: AllowedChannel
   allowedRole: AllowedRole

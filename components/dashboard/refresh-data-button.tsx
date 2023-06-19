@@ -7,15 +7,15 @@ import {
   TooltipTrigger,
 } from "@/components"
 
-interface RefreshDashboardCommandsDataButtonProps {
+interface RefreshDashboardDataButtonProps {
   isRefetching: boolean
   refetch: () => Promise<void>
 }
 
-export const RefreshDashboardCommandsDataButton = ({
+export const RefreshDashboardDataButton = ({
   isRefetching,
   refetch,
-}: RefreshDashboardCommandsDataButtonProps) => {
+}: RefreshDashboardDataButtonProps) => {
   return (
     <TooltipProvider>
       <Tooltip>

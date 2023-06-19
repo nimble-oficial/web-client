@@ -2,10 +2,12 @@
 
 import { useEffect } from "react"
 import {
+  CommandsCardSkeleton,
   CreateCommandDashboardButton,
   DashboardCommandsCard,
+  EditCommandSheet,
   Heading,
-  RefreshDashboardCommandsDataButton,
+  RefreshDashboardDataButton,
 } from "@/components"
 import { useDashboardStore, useGetCommandsByGuildQuery } from "@/hooks"
 import { customAPIError } from "@/utils"
@@ -40,14 +42,24 @@ export default function CommandsPage() {
 
         <div className="flex items-center gap-2">
           <CreateCommandDashboardButton />
-          <RefreshDashboardCommandsDataButton
+          <RefreshDashboardDataButton
             isRefetching={isRefetching || isLoading}
             refetch={handleRefetchData}
           />
         </div>
       </div>
 
-      <DashboardCommandsCard isLoading={isLoading} commands={commands} />
+      <div className="grid grid-cols-3 gap-4">
+        {isLoading ? (
+          <CommandsCardSkeleton />
+        ) : (
+          commands?.map((command) => (
+            <DashboardCommandsCard key={command._id} {...command} />
+          ))
+        )}
+      </div>
+
+      <EditCommandSheet />
     </div>
   )
 }

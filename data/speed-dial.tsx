@@ -84,14 +84,14 @@ export const SPEED_DIAL_GROUPS: SpeedDialGroup[] = [
         ),
       },
       {
-        label: "Reply with Chat GPT",
+        label: "Reply with AI",
         description:
-          '"Reply with Chat GPT" action allows you to reply message with Chat GPT. Chat GPT Will generate a reply based on the context of the message.',
+          '"Reply with AI" action allows you to reply message with AI.',
         key: "reply-with-chat-gpt",
         replyContent: "",
         element: () => (
           <SpeedDialButton>
-            <Icons.chatgpt size={24} className="dark:text-white" />
+            <Icons.sparkles size={24} className="dark:text-white" />
           </SpeedDialButton>
         ),
       },
