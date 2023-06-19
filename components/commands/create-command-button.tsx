@@ -18,6 +18,7 @@ export const CreateCommandDashboardButton = () => {
         onClick={() => {
           setIsCreateCommandDialogOpen(true)
         }}
+        data-testid="create-command-button"
       >
         <Icons.plus size={17} className="mr-1.5" />
         New Command

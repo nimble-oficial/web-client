@@ -2,12 +2,15 @@
 
 import { useEffect } from "react"
 import {
+  Button,
   CommandsCardSkeleton,
   CreateCommandDashboardButton,
   DashboardCommandsCard,
   EditCommandSheet,
   Heading,
+  Icons,
   RefreshDashboardDataButton,
+  Search,
 } from "@/components"
 import { useDashboardStore, useGetCommandsByGuildQuery } from "@/hooks"
 import { customAPIError } from "@/utils"
@@ -47,6 +50,19 @@ export default function CommandsPage() {
             refetch={handleRefetchData}
           />
         </div>
+      </div>
+
+      <div className="flex items-center justify-between">
+        <Search placeholder="Search for commands..." />
+
+        <Button
+          variant="outline"
+          size="sm"
+          className="ml-auto hidden h-8 lg:flex"
+        >
+          <Icons.slidersHorizontal className="mr-2 h-4 w-4" />
+          Filters
+        </Button>
       </div>
 
       <div className="grid grid-cols-3 gap-4">

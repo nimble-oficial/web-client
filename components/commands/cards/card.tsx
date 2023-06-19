@@ -26,7 +26,10 @@ export const DashboardCommandsCard = (command: DashboardCommandsCardProps) => {
   const createdAtTime = useTimeAgo(new Date(createdAt))
 
   return (
-    <Card className="flex flex-col justify-between space-y-1.5 p-4">
+    <Card
+      className="flex flex-col justify-between space-y-1.5 p-4"
+      data-testid="commands-card"
+    >
       <div>
         <div className="flex items-center justify-between">
           <div className="flex gap-2">
