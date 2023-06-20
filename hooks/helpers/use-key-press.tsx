@@ -12,9 +12,11 @@ import { useEffect } from "react"
  * @returns {void}
  *
  * @example
+ * ```jsx
  * useKeyPress("Enter", () => {
  *  console.log("Enter key is pressed")
  * })
+ * ```
  *
  */
 export const useKeyPress = (targetKey: string, cb: CallableFunction): void => {

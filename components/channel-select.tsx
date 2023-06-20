@@ -20,18 +20,20 @@ import { DEFAULT_OPTION_VALUES } from "@/constants"
 import { useGetGuildChannelsByType } from "@/hooks"
 import { cn } from "@/lib"
 import { getChannelSelectOptionLabel } from "@/utils"
-import { Control, FieldValues, UseFormSetValue } from "react-hook-form"
+import { Control, FieldValues, Path, UseFormSetValue } from "react-hook-form"
 
 interface ChannelsMultiSelectProps<T extends FieldValues> {
   setValue: UseFormSetValue<T>
   channelType?: "text" | "voice"
   control: Control<T>
+  name?: string
 }
 
 export function ChannelSelect<T extends FieldValues>({
   setValue,
   channelType = "text",
   control,
+  name = "allowedChannel",
 }: ChannelsMultiSelectProps<T>) {
   const [open, setOpen] = useState(false)
   const { error, isLoading, getChannelsByType } = useGetGuildChannelsByType()
@@ -42,14 +44,14 @@ export function ChannelSelect<T extends FieldValues>({
   return (
     <FormField
       control={control}
-      name="allowedChannel"
+      name={name as Path<T>}
       render={({ field }) => (
         <Popover open={open} onOpenChange={setOpen}>
           <PopoverTrigger asChild>
             <div className="grid w-full gap-2">
               <FormControl>
                 <Button
-                  id="allowedChannel"
+                  id={name}
                   type="button"
                   variant="outline"
                   role="combobox"

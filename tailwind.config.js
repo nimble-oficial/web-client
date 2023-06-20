@@ -7,6 +7,7 @@ module.exports = {
     "app/**/*.{ts,tsx}",
     "components/**/*.{ts,tsx}",
     "data/**/*.{ts,tsx}",
+    "constants/**/*.{ts,tsx}",
   ],
   theme: {
     container: {

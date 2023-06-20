@@ -19,18 +19,20 @@ import {
 import { DEFAULT_OPTION_VALUES } from "@/constants"
 import { useAppStore } from "@/hooks"
 import { getRoleSelectOptionLabel } from "@/utils"
-import { Control, FieldValues, UseFormSetValue } from "react-hook-form"
+import { Control, FieldValues, Path, UseFormSetValue } from "react-hook-form"
 
 import { cn } from "@/lib/utils"
 
 interface RolesMultiSelectProps<T extends FieldValues> {
   setValue: UseFormSetValue<T>
   control: Control<T>
+  name?: string
 }
 
 export function RolesSelect<T extends FieldValues>({
   setValue,
   control,
+  name = "allowedRole",
 }: RolesMultiSelectProps<T>) {
   const [open, setOpen] = useState(false)
 
@@ -42,14 +44,14 @@ export function RolesSelect<T extends FieldValues>({
   return (
     <FormField
       control={control}
-      name="allowedRole"
+      name={name as Path<T>}
       render={({ field }) => (
         <Popover open={open} onOpenChange={setOpen}>
           <PopoverTrigger asChild>
             <div className="grid w-full gap-2">
               <FormControl>
                 <Button
-                  id="allowedRole"
+                  id={name}
                   type="button"
                   variant="outline"
                   role="combobox"

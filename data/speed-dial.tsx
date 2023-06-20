@@ -7,16 +7,18 @@ export type SpeedDialMessagesGroupChildrenKey =
 
 export type SpeedDialChannelsGroupChildrenKey = "move-users-to-channel"
 
-type SpeedDialServerGroupChildrenKey =
-  | "received-message"
-  | "user-joined-server"
-  | "user-left-server"
-  | "invite-created"
+type RootNodeKeys = "command-triggered"
+
+// type SpeedDialServerGroupChildrenKey =
+//   | "received-message"
+//   | "user-joined-server"
+//   | "user-left-server"
+//   | "invite-created"
 
 export type SpeedDialGroupChildrenKey =
-  | SpeedDialServerGroupChildrenKey
   | SpeedDialMessagesGroupChildrenKey
   | SpeedDialChannelsGroupChildrenKey
+  | RootNodeKeys
 
 export type NodeType = "messages" | "channels"
 

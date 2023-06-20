@@ -17,11 +17,13 @@ interface UseInitBuilderProps {
  * @returns {boolean} isLoading - It returns boolean if the data is being fetched from the server.
  *
  * @example
+ * ```jsx
  * const { isLoading } = useInitBuilder()
  *
  * if (isLoading) {
  *  return <div>Loading...</div>
  * }
+ * ```
  */
 export const useInitBuilder = ({ builderId }: UseInitBuilderProps) => {
   const {
