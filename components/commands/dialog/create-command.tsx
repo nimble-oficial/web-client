@@ -18,7 +18,7 @@ import {
 import { DEFAULT_OPTION_VALUES } from "@/constants"
 import { useCreateCommandMutation, useDashboardStore } from "@/hooks"
 import { CreateCommandSchema, createCommandSchema } from "@/schemas"
-import { customAPIError, parseCommandName } from "@/utils"
+import { getMessageFromError, parseCommandName } from "@/utils"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { toast } from "sonner"
@@ -69,7 +69,7 @@ export function CreateCommandDialog({
 
       toast.success("Command created successfully!")
     } catch (err) {
-      toast.error(customAPIError(err))
+      toast.error(getMessageFromError(err))
     }
   }
 

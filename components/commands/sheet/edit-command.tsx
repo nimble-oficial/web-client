@@ -21,7 +21,7 @@ import { DEFAULT_OPTION_VALUES } from "@/constants/default-option-values"
 import { useDashboardStore, useEditCommandMutation } from "@/hooks"
 import { EditCommandSchema, editCommandSchema } from "@/schemas"
 import { EditCommandData } from "@/services"
-import { customAPIError, parseCommandName } from "@/utils"
+import { getMessageFromError, parseCommandName } from "@/utils"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Controller, useForm } from "react-hook-form"
 import { toast } from "sonner"
@@ -93,7 +93,7 @@ export const EditCommandSheet = () => {
 
       toast.success("Command updated successfully!")
     } catch (err) {
-      toast.error(customAPIError(err))
+      toast.error(getMessageFromError(err))
     }
   }
 

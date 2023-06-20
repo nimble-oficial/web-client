@@ -2,7 +2,7 @@
 
 import { useCallback } from "react"
 import { DeleteCommandDialogProps } from "@/components"
-import { customAPIError } from "@/utils"
+import { getMessageFromError } from "@/utils"
 import { toast } from "sonner"
 
 import { useDeleteCommandMutation } from "../mutations"
@@ -30,7 +30,7 @@ export const useDeleteCommand = ({
 
       toast.success("Command deleted successfully!")
     } catch (err) {
-      toast.error(customAPIError(err))
+      toast.error(getMessageFromError(err))
     }
   }, [
     builderId,
