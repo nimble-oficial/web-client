@@ -14,7 +14,7 @@ import {
   useSaveBuilder,
 } from "@/hooks"
 import { SelectedNode } from "@/stores"
-import { customAPIError } from "@/utils"
+import { getMessageFromError } from "@/utils"
 import {
   Background,
   ConnectionMode,
@@ -68,7 +68,7 @@ export const Builder = () => {
         }
       )
     } catch (err) {
-      toast.error(customAPIError(err))
+      toast.error(getMessageFromError(err))
     }
   })
 

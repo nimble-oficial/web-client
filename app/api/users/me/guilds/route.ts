@@ -1,4 +1,4 @@
-import { customAPIError } from "@/utils"
+import { getMessageFromError } from "@/utils"
 import { Routes } from "discord-api-types/v10"
 
 import { rest } from "@/lib/discord-js"
@@ -9,6 +9,6 @@ export async function GET() {
 
     return new Response(JSON.stringify(userGuilds), { status: 200 })
   } catch (err) {
-    return new Response(customAPIError(err), { status: 500 })
+    return new Response(getMessageFromError(err), { status: 500 })
   }
 }

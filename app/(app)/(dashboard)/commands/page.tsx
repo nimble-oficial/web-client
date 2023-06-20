@@ -13,7 +13,7 @@ import {
   Search,
 } from "@/components"
 import { useDashboardStore, useGetCommandsByGuildQuery } from "@/hooks"
-import { customAPIError } from "@/utils"
+import { getMessageFromError } from "@/utils"
 import { toast } from "sonner"
 
 export default function CommandsPage() {
@@ -30,7 +30,7 @@ export default function CommandsPage() {
       await refetch()
       toast.success("Successfully refreshed data!")
     } catch (err) {
-      toast.error(customAPIError(err))
+      toast.error(getMessageFromError(err))
     }
   }
 
