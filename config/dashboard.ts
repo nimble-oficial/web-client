@@ -37,6 +37,13 @@ export const dashboardConfig: DashboardConfig = {
       external: false,
       enabled: true,
     },
+    {
+      title: "Integrations",
+      href: "/integrations",
+      icon: "toyBrick",
+      external: false,
+      enabled: true,
+    },
     // {
     //   title: "Billing",
     //   href: "/billing",
