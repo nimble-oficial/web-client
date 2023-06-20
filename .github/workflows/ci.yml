@@ -23,7 +23,7 @@ jobs:
         run: yarn format:write && yarn format:check
 
       - name: Type Check
-        run: yarn type-check
+        run: yarn typecheck
 
       - name: Test
         run: yarn test:coverage

@@ -10,7 +10,7 @@ interface Response {
   data: Command
 }
 
-export const useGetCommandByGuildQuery = ({
+export const useGetCommandByBuilderQuery = ({
   builderId,
 }: UseGetCommandByGuildQueryProps) => {
   return useQuery([`commands-by-builder-${builderId}`], () =>
