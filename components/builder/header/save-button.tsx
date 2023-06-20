@@ -2,7 +2,7 @@
 
 import { Button } from "@/components"
 import { useBuilderStore, useSaveBuilder } from "@/hooks"
-import { customAPIError } from "@/utils"
+import { getMessageFromError } from "@/utils"
 import { useViewport } from "reactflow"
 import { toast } from "sonner"
 
@@ -31,7 +31,7 @@ export const SaveBuilderButton = () => {
           })
           toast.success("Builder saved successfully!")
         } catch (err) {
-          toast.error(customAPIError(err))
+          toast.error(getMessageFromError(err))
         }
       }}
     >

@@ -4,7 +4,7 @@ import { useEffect } from "react"
 import { Form, NodeSheetProvider, SendMessageNodeSheetForm } from "@/components"
 import { useBuilderStore, useNodeSheetStore, useSaveBuilder } from "@/hooks"
 import { SendMessageNodeSchema, sendMessageNodeSchema } from "@/schemas"
-import { customAPIError, updateNodeData } from "@/utils"
+import { getMessageFromError, updateNodeData } from "@/utils"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { useViewport } from "reactflow"
@@ -55,7 +55,7 @@ export const SendMessageNodeSheet = () => {
 
       toast.success("Data updated successfully!")
     } catch (err) {
-      toast.error(customAPIError(err))
+      toast.error(getMessageFromError(err))
     }
   }
 

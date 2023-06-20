@@ -1,4 +1,4 @@
-import { customAPIError } from "@/utils"
+import { getMessageFromError } from "@/utils"
 import { makeURLSearchParams } from "@discordjs/rest"
 import { Routes } from "discord-api-types/v10"
 import { z } from "zod"
@@ -33,6 +33,6 @@ export async function GET(
       return new Response(JSON.stringify(err.issues), { status: 422 })
     }
 
-    return new Response(customAPIError(err), { status: 500 })
+    return new Response(getMessageFromError(err), { status: 500 })
   }
 }
