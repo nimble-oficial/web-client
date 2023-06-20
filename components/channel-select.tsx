@@ -1,5 +1,6 @@
 "use client"
 
+import { useState } from "react"
 import {
   Button,
   ChannelSelectSkeleton,
@@ -19,7 +20,6 @@ import { DEFAULT_OPTION_VALUES } from "@/constants"
 import { useGetGuildChannelsByType } from "@/hooks"
 import { cn } from "@/lib"
 import { getChannelSelectOptionLabel } from "@/utils"
-import { useState } from "react"
 import { Control, FieldValues, UseFormSetValue } from "react-hook-form"
 
 interface ChannelsMultiSelectProps<T extends FieldValues> {
