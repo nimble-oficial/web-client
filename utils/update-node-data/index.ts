@@ -14,7 +14,7 @@ export const updateNodeData = <T extends {}>({
   selectedNode,
   overrides,
   style,
-}: UpdateNodeDataProps<T>) => {
+}: UpdateNodeDataProps<T>): Node[] | never => {
   const clonedNodes = [...nodes]
 
   if (!selectedNode) {

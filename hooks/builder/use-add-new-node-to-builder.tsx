@@ -4,7 +4,6 @@ import { useCallback, useRef } from "react"
 import { NodeType, SpeedDialGroupChildrenKey } from "@/data/speed-dial"
 import { useBuilderStore } from "@/hooks"
 import { SelectedNode } from "@/stores"
-import { getNodeVariantsStyles } from "@/utils"
 
 interface NodePayload {
   label: string
@@ -23,7 +22,6 @@ export const useAddNewNodeToBuilder = () => {
       prevPosition.current += 50
 
       const createdNode: SelectedNode = {
-        // TODO: use uuid
         id: new Date().getTime().toString(),
         position: { x: 0, y: prevPosition.current },
         data: {
@@ -35,9 +33,8 @@ export const useAddNewNodeToBuilder = () => {
         },
         width: 150,
         height: 40,
-        style: getNodeVariantsStyles(variant),
-        index,
         isRoot: false,
+        index,
       }
 
       handleAddNode(createdNode)
