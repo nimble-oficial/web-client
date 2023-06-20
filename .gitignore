@@ -13,6 +13,8 @@ coverage
 out/
 build
 
+cypress/downloads
+
 .env
 
 # misc

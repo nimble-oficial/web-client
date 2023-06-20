@@ -28,7 +28,7 @@ export const useDeleteCommand = ({
       typeof onDeleteConfirm === "function" && onDeleteConfirm()
       onClose()
 
-      toast.success("Command deleted successfully.")
+      toast.success("Command deleted successfully!")
     } catch (err) {
       toast.error(customAPIError(err))
     }
