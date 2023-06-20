@@ -19,14 +19,6 @@ export const NodesSheet = () => {
     //   return <ReplyMessageWithChatGptNodeSheet />
     // case "move-users-to-channel":
     //   return <MoverUserToChannelNodeSheet />
-    case "invite-created":
-      return <div>invite-created</div>
-    case "received-message":
-      return <div>received-message</div>
-    case "user-joined-server":
-      return <div>user-joined-server</div>
-    case "user-left-server":
-      return <div>user-left-server</div>
     default:
       return null
   }

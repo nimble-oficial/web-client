@@ -1,17 +1,19 @@
 "use client"
 
 import { FormDescription, FormField, Label, Switch } from "@/components"
-import { Control, Controller, FieldValues } from "react-hook-form"
+import { Control, Controller, FieldPath, FieldValues } from "react-hook-form"
 
 interface EnableSwitcherProps<T extends FieldValues> {
   control: Control<T>
   title: string
+  name?: string
   description: string
 }
 
 export const EnableSwitcher = <T extends {}>({
   control,
   title,
+  name = "enabled",
   description,
 }: EnableSwitcherProps<T>) => {
   return (
@@ -29,18 +31,19 @@ export const EnableSwitcher = <T extends {}>({
         )}
       </div>
 
+      {/*  TODO: "name as FieldPath<T>" is ugly. Fix that */}
       <FormField
         control={control}
-        name="enabled"
+        name={name as FieldPath<T>}
         render={() => (
           <div className="flex items-center gap-4">
             <div className="flex items-center space-x-2">
               <Controller
-                name="enabled"
+                name={name as FieldPath<T>}
                 control={control}
                 render={({ field: { onChange, value } }) => (
                   <Switch
-                    id="enabled"
+                    id={name}
                     checked={value}
                     onCheckedChange={onChange}
                   />

@@ -16,6 +16,7 @@ build
 cypress/downloads
 
 .env
+.vscode/
 
 # misc
 .DS_Store

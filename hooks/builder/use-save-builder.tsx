@@ -13,9 +13,11 @@ import { toast } from "sonner"
  * @returns {function} handleSave - A function that saves the builder.
  *
  * @example
+ * ```jsx
  * const { handleSave } = useSaveBuilder()
  *
  * <button onClick={() => handleSave(data)}>Save</button>
+ * ```
  *
  */
 export const useSaveBuilder = () => {
