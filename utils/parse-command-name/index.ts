@@ -3,9 +3,7 @@ export const parseCommandName = (commandName: string = ""): string => {
     return ""
   }
 
-  const doesCommandNameStartsWithExclamationMark = commandName.startsWith("!")
-
-  if (!doesCommandNameStartsWithExclamationMark) {
+  if (!commandName.startsWith("!")) {
     commandName = `!${commandName}`
   }
 
