@@ -7,7 +7,7 @@ export interface CustomError {
   }
 }
 
-const customAPIError = (err: unknown) => {
+export const getMessageFromError = (err: unknown): string => {
   const customError = err as CustomError
 
   return (
@@ -16,5 +16,3 @@ const customAPIError = (err: unknown) => {
     "An Internal Error has Occurred"
   )
 }
-
-export { customAPIError }
