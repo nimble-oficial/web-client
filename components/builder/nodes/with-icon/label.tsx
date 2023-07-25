@@ -16,7 +16,7 @@ export const Label = ({ children }: LabelProps) => {
     <TooltipProvider>
       <Tooltip>
         <TooltipTrigger>
-          <span className="mb-[-1px] text-left text-[8px] text-slate-400 line-clamp-1">
+          <span className="line-clamp-1 text-left text-[7px] text-zinc-400">
             {children}
           </span>
         </TooltipTrigger>

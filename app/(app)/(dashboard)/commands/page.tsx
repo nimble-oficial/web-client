@@ -6,7 +6,6 @@ import {
   CommandsCardSkeleton,
   CreateCommandDashboardButton,
   DashboardCommandsCard,
-  EditCommandSheet,
   Heading,
   Icons,
   RefreshDashboardDataButton,
@@ -74,8 +73,6 @@ export default function CommandsPage() {
           ))
         )}
       </div>
-
-      <EditCommandSheet />
     </div>
   )
 }

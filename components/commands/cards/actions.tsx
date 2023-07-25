@@ -23,7 +23,7 @@ export const DashboardCommandsCardActions = (
   command: DashboardCommandsCardActions
 ) => {
   const { builderId } = command
-  const { handleSelectCommand, handleOpenSheet } = useDashboardStore()
+  const { handleSelectCommand } = useDashboardStore()
   const { push } = useRouter()
 
   const [showDialog, setShowDialog] = useState(false)
@@ -35,7 +35,7 @@ export const DashboardCommandsCardActions = (
           <Button
             data-testid="commands-card-actions-button"
             variant="ghost"
-            className="flex h-8 w-8 p-0 data-[state=open]:bg-muted"
+            className="data-[state=open]:bg-muted flex h-8 w-8 p-0"
           >
             <Icons.moreHorizontal className="h-4 w-4 rotate-90" />
             <span className="sr-only">Open menu</span>
@@ -45,18 +45,17 @@ export const DashboardCommandsCardActions = (
           <DropdownMenuItem
             className="cursor-pointer"
             onClick={() => {
-              handleOpenSheet()
-              handleSelectCommand(command)
+              push(`/command/${command._id}/edit`)
             }}
           >
-            <Icons.edit className="mr-2 h-3.5 w-3.5 text-muted-foreground/70" />
+            <Icons.edit className="text-muted-foreground/70 mr-2 h-3.5 w-3.5" />
             Edit
           </DropdownMenuItem>
           <DropdownMenuItem
             className="cursor-pointer"
             onClick={() => push(`/builder/${builderId}`)}
           >
-            <Icons.workflow className="mr-2 h-3.5 w-3.5 text-muted-foreground/70" />
+            <Icons.workflow className="text-muted-foreground/70 mr-2 h-3.5 w-3.5" />
             Builder
           </DropdownMenuItem>
 
@@ -70,7 +69,7 @@ export const DashboardCommandsCardActions = (
               setShowDialog(true)
             }}
           >
-            <Icons.trash className="mr-2 h-3.5 w-3.5 text-muted-foreground/70" />
+            <Icons.trash className="text-muted-foreground/70 mr-2 h-3.5 w-3.5" />
             Delete
             <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
           </DropdownMenuItem>

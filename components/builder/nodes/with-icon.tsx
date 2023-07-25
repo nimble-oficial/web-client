@@ -28,15 +28,16 @@ export const WithIcon = ({ data, isConnectable, ...props }: WithIconProps) => {
       )}
 
       {!!data?.name ? (
-        <div className="flex flex-col items-start line-clamp-1">
+        <div className="line-clamp-1 flex flex-col items-start">
           <Label>{data.label}</Label>
           <Title>{data.name}</Title>
         </div>
       ) : (
-        <Title className="mt-0">{data.label}</Title>
+        <Title className="ml-1 mt-0">{data.label}</Title>
       )}
 
       <Handle
+        className="h-9 w-9"
         type="source"
         position={Position.Bottom}
         isConnectable={isConnectable}

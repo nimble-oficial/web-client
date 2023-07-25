@@ -1,9 +1,5 @@
-import { NodeType, SpeedDialGroup } from "@/data/speed-dial"
-import {
-  useAddNewNodeToBuilder,
-  useBuilderStore,
-  useNodeSheetStore,
-} from "@/hooks"
+import { SpeedDialGroup } from "@/data/speed-dial"
+import { useAddNodeToBuilder, useBuilderStore } from "@/hooks"
 import { SelectedNode } from "@/stores"
 
 import { cn } from "@/lib/utils"
@@ -19,10 +15,12 @@ interface ItemsProps {
   group: SpeedDialGroup
 }
 
+export interface NewNodePayload
+  extends Omit<SelectedNode, "id" | "position" | "isRoot"> {}
+
 export const Children = ({ group }: ItemsProps) => {
   const { nodes } = useBuilderStore()
-  const { handleSelectNode, handleOpenSheet } = useNodeSheetStore()
-  const { handleAddNewNodeToBuilder } = useAddNewNodeToBuilder()
+  const { add } = useAddNodeToBuilder()
 
   return (
     <DropdownMenuContent className="flex flex-col items-center gap-4 border-0 bg-transparent shadow-transparent">
@@ -34,19 +32,17 @@ export const Children = ({ group }: ItemsProps) => {
                 <div
                   role="button"
                   onClick={() => {
-                    const node = {
-                      ...child,
-                      description: child.description,
-                      label: child.label,
-                      variant: group.variant as NodeType,
-                      key: child.key,
+                    const payload: NewNodePayload = {
+                      data: {
+                        enabled: true,
+                        label: child.label,
+                        key: child.key,
+                        description: child.description,
+                      },
                       index: nodes.length,
                     }
 
-                    const createdNode = handleAddNewNodeToBuilder(node)
-
-                    handleSelectNode(createdNode as SelectedNode)
-                    handleOpenSheet()
+                    add(payload)
                   }}
                 >
                   <child.element />

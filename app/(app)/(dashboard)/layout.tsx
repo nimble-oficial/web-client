@@ -9,11 +9,11 @@ import {
   useGetGuildRoles,
 } from "@/hooks"
 
-interface AppLayoutProps {
+interface DashobardLayoutProps {
   children: React.ReactNode
 }
 
-export default function AppLayout({ children }: AppLayoutProps) {
+export default function DashboardLayout({ children }: DashobardLayoutProps) {
   const { selectedGuild } = useDashboardStore()
   const {
     handleSetRoles,

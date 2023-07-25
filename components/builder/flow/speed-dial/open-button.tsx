@@ -1,13 +1,13 @@
-import { Button, DropdownMenuTrigger, Icons } from "@/components"
+import { DropdownMenuTrigger, Icons, SpeedDialButton } from "@/components"
 
 import "lucide-react"
 
 export const OpenButton = () => {
   return (
-    <DropdownMenuTrigger asChild>
-      <Button className="rounded-full border-[1px] border-slate-300 bg-white px-[15px] py-[26px] text-gray-950 shadow-md hover:bg-white hover:shadow-sm dark:border-slate-700 dark:bg-slate-900 dark:text-white">
+    <DropdownMenuTrigger>
+      <SpeedDialButton>
         <Icons.plus />
-      </Button>
+      </SpeedDialButton>
     </DropdownMenuTrigger>
   )
 }

@@ -18,12 +18,7 @@ export const Title = ({ children, className }: TitleProps) => {
     <TooltipProvider>
       <Tooltip>
         <TooltipTrigger asChild>
-          <span
-            className={cn(
-              "mt-[-1px] text-left text-[9px] line-clamp-1",
-              className
-            )}
-          >
+          <span className={cn("line-clamp-1 text-left text-[9px]", className)}>
             {children}
           </span>
         </TooltipTrigger>

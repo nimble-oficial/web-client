@@ -1,5 +1,6 @@
 export * from "./builder"
 export * from "./builder-flow"
+export * from "./context-menu"
 export * from "./loader"
 export * from "./saving-label"
 export * from "./speed-dial"

@@ -6,10 +6,10 @@ import {
   BuilderFlowHeaderCommandNameSkeleton,
   BuilderFlowHeaderProvider,
 } from "@/components"
-import { Command } from "@/stores"
+import { BuilderCommandResponse } from "@/hooks"
 
 interface BuilderHeaderProps {
-  command: Command | undefined
+  command: BuilderCommandResponse | undefined
   isFetchingCommand: boolean
 }
 
@@ -24,7 +24,9 @@ export const BuilderHeader = ({
       {isFetchingCommand && <BuilderFlowHeaderCommandNameSkeleton />}
 
       {command && (
-        <span className="text-sm text-slate-500">{command.name}</span>
+        <span className="text-sm text-zinc-500 dark:text-zinc-400">
+          {command.name}
+        </span>
       )}
 
       <BuilderFlowHeaderActions />

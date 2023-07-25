@@ -1,15 +1,8 @@
 "use client"
 
-import {
-  Builder,
-  BuilderFlowWrapper,
-  BuilderHeader,
-  BuilderLoader,
-  EditCommandSheet,
-  NodesSheet,
-  SearchNodesDialog,
-} from "@/components"
-import { useGetCommandByBuilderQuery, useInitBuilder } from "@/hooks"
+import dynamic from "next/dynamic"
+import { Builder, BuilderFlowWrapper } from "@/components"
+import { useInitBuilder } from "@/hooks"
 import { ReactFlowProvider } from "reactflow"
 
 import "reactflow/dist/style.css"
@@ -18,31 +11,25 @@ interface BuilderFlowProps {
   builderId: string
 }
 
+const DynamicNodesSheet = dynamic(() =>
+  import("../nodes/sheet/sheet").then((mod) => mod.NodesSheet)
+)
+
+const DynamicSearchNodesDialog = dynamic(() =>
+  import("../dialogs/search-nodes").then((mod) => mod.SearchNodesDialog)
+)
+
 export const BuilderFlow = ({ builderId }: BuilderFlowProps) => {
-  const { data, isLoading: isFetchingCommand } = useGetCommandByBuilderQuery({
+  const { isLoading, redo, undo } = useInitBuilder({
     builderId,
   })
 
-  const { isLoading } = useInitBuilder({ builderId })
-
   return (
     <ReactFlowProvider>
-      <BuilderFlowWrapper>
-        {isLoading ? (
-          <BuilderLoader />
-        ) : (
-          <>
-            <BuilderHeader
-              command={data?.data?.data}
-              isFetchingCommand={isFetchingCommand}
-            />
-
-            <Builder />
-            <NodesSheet />
-            <SearchNodesDialog />
-            <EditCommandSheet />
-          </>
-        )}
+      <BuilderFlowWrapper builderId={builderId} isLoading={isLoading}>
+        <Builder undo={undo} redo={redo} />
+        <DynamicNodesSheet />
+        <DynamicSearchNodesDialog />
       </BuilderFlowWrapper>
     </ReactFlowProvider>
   )

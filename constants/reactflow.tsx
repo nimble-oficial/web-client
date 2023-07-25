@@ -1,5 +1,12 @@
 import { SpeedDialGroupChildrenKey } from "@/data"
-import { Command, HelpCircle, Reply, Send, StarsIcon } from "lucide-react"
+import {
+  ArrowUpDown,
+  Command,
+  HelpCircle,
+  Reply,
+  Send,
+  StarsIcon,
+} from "lucide-react"
 
 export const FIT_ZOOM_DURATION = 1000
 export const ZOOM_LEVELS = {
@@ -8,6 +15,14 @@ export const ZOOM_LEVELS = {
   "75%": 0.75,
   "100%": 1,
 }
+export const DEFAULT_NODE_WIDTH = 200
+
+export const COPY_NODE_TO_CLIPBOARD_KEYS = ["Control", "C"]
+export const PASTE_NODE_FROM_CLIPBOARD_KEYS = ["Control", "V"]
+export const UNDO_KEYS = ["Control", "Z"]
+export const REDO_KEYS = ["Control", "Y"]
+export const SAVE_KEYS = ["Control", "S"]
+export const OPEN_SEARCH_NODES_DIALOG_KEYS = ["Meta", "J"]
 
 type StylesMap = {
   [key in SpeedDialGroupChildrenKey]: {
@@ -44,8 +59,8 @@ export const NODE_STYLES: StylesMap = {
   },
   "move-users-to-channel": {
     icon: (
-      <Send size={11} className="rotate-90 text-blue-700 dark:text-blue-300" />
+      <ArrowUpDown size={11} className="text-green-700 dark:text-green-300" />
     ),
-    color: "bg-blue-100 dark:bg-blue-900",
+    color: "bg-green-100 dark:bg-green-900",
   },
 }
