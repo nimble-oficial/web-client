@@ -1,14 +1,7 @@
 "use client"
 
-import {
-  Builder,
-  BuilderFlowWrapper,
-  BuilderHeader,
-  BuilderLoader,
-  EditCommandSheet,
-  NodesSheet,
-  SearchNodesDialog,
-} from "@/components"
+import dynamic from "next/dynamic"
+import { Builder, BuilderFlowWrapper } from "@/components"
 import { useInitBuilder } from "@/hooks"
 import { ReactFlowProvider } from "reactflow"
 
@@ -18,23 +11,25 @@ interface BuilderFlowProps {
   builderId: string
 }
 
+const DynamicNodesSheet = dynamic(() =>
+  import("../nodes/sheet/sheet").then((mod) => mod.NodesSheet)
+)
+
+const DynamicSearchNodesDialog = dynamic(() =>
+  import("../dialogs/search-nodes").then((mod) => mod.SearchNodesDialog)
+)
+
 export const BuilderFlow = ({ builderId }: BuilderFlowProps) => {
-  const { isLoading } = useInitBuilder({ builderId })
+  const { isLoading, redo, undo } = useInitBuilder({
+    builderId,
+  })
 
   return (
     <ReactFlowProvider>
-      <BuilderFlowWrapper>
-        {isLoading ? (
-          <BuilderLoader />
-        ) : (
-          <>
-            <BuilderHeader />
-            <Builder />
-            <NodesSheet />
-            <SearchNodesDialog />
-            <EditCommandSheet />
-          </>
-        )}
+      <BuilderFlowWrapper builderId={builderId} isLoading={isLoading}>
+        <Builder undo={undo} redo={redo} />
+        <DynamicNodesSheet />
+        <DynamicSearchNodesDialog />
       </BuilderFlowWrapper>
     </ReactFlowProvider>
   )

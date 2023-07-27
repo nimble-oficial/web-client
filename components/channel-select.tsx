@@ -20,18 +20,22 @@ import { DEFAULT_OPTION_VALUES } from "@/constants"
 import { useGetGuildChannelsByType } from "@/hooks"
 import { cn } from "@/lib"
 import { getChannelSelectOptionLabel } from "@/utils"
-import { Control, FieldValues, UseFormSetValue } from "react-hook-form"
+import { Control, FieldValues, Path, UseFormSetValue } from "react-hook-form"
 
 interface ChannelsMultiSelectProps<T extends FieldValues> {
   setValue: UseFormSetValue<T>
   channelType?: "text" | "voice"
   control: Control<T>
+  name?: string
+  width?: number
 }
 
 export function ChannelSelect<T extends FieldValues>({
   setValue,
   channelType = "text",
   control,
+  width = 520,
+  name = "allowedChannel",
 }: ChannelsMultiSelectProps<T>) {
   const [open, setOpen] = useState(false)
   const { error, isLoading, getChannelsByType } = useGetGuildChannelsByType()
@@ -42,19 +46,19 @@ export function ChannelSelect<T extends FieldValues>({
   return (
     <FormField
       control={control}
-      name="allowedChannel"
+      name={name as Path<T>}
       render={({ field }) => (
         <Popover open={open} onOpenChange={setOpen}>
           <PopoverTrigger asChild>
             <div className="grid w-full gap-2">
               <FormControl>
                 <Button
-                  id="allowedChannel"
+                  id={name}
                   type="button"
                   variant="outline"
                   role="combobox"
                   className={cn(
-                    "w-full justify-between",
+                    "h-[40px] w-full justify-between px-3",
                     !field.value && "text-muted-foreground"
                   )}
                 >
@@ -67,7 +71,12 @@ export function ChannelSelect<T extends FieldValues>({
             </div>
           </PopoverTrigger>
 
-          <PopoverContent className="max-h-[300px] w-[550px] overflow-y-auto p-0">
+          <PopoverContent
+            className={cn(
+              "max-h-[300px] overflow-y-auto p-0",
+              `w-[${width}px]`
+            )}
+          >
             <Command className="w-full">
               <CommandInput
                 className="w-full"
@@ -86,7 +95,7 @@ export function ChannelSelect<T extends FieldValues>({
                         Something went wrong
                       </h3>
 
-                      <p className="mb-4 mt-2 text-sm text-muted-foreground">
+                      <p className="text-muted-foreground mb-4 mt-2 text-sm">
                         We couldn&#39;t load channels from your server. Try
                         again later.
                       </p>
@@ -132,7 +141,7 @@ export function ChannelSelect<T extends FieldValues>({
                         <Icons.check
                           className={cn(
                             "mr-2 h-4 w-4",
-                            field.value.id === channel.id
+                            field?.value?.id === channel.id
                               ? "opacity-100"
                               : "opacity-0"
                           )}

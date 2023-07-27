@@ -13,6 +13,8 @@ export interface SelectedNode extends Node {
     enabled: boolean
     content?: string
     replyContent?: string
+    channelToMoveUsers?: string
+    userIdToMove?: string
     description: string
     key: SpeedDialGroupChildrenKey
   }

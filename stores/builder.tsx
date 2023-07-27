@@ -24,7 +24,13 @@ interface BuilderStore {
   edges: Edge[]
   builderId: string | null
   viewport: Viewport
-  handleAddNode: (node: Node) => void
+  showUI: boolean
+  isSearchNodesDialogOpen: boolean
+  focusedNode: SelectedNode | null
+  handleChangeFocusedNode: (node: SelectedNode | null) => void
+  handleToggleSearchNodesDialog: () => void
+  handleToggleShowUI: () => void
+  handleAddNode: (node: Node | SelectedNode) => void
   handleChangeViewport: (viewport: Viewport) => void
   handleChangeNodes: (nodes: Node[]) => void
   handleChangeEdges: (edges: Edge[]) => void
@@ -36,7 +42,13 @@ interface BuilderStore {
 
 const initialStates: Pick<
   BuilderStore,
-  "nodes" | "edges" | "builderId" | "viewport"
+  | "nodes"
+  | "edges"
+  | "builderId"
+  | "viewport"
+  | "showUI"
+  | "isSearchNodesDialogOpen"
+  | "focusedNode"
 > = {
   viewport: {
     zoom: 2,
@@ -46,6 +58,9 @@ const initialStates: Pick<
   builderId: null,
   nodes: [],
   edges: [],
+  showUI: true,
+  isSearchNodesDialogOpen: false,
+  focusedNode: null,
 }
 
 export const builderStore = create<BuilderStore>((set, get) => ({
@@ -97,5 +112,18 @@ export const builderStore = create<BuilderStore>((set, get) => ({
   },
   handleChangeViewport: (viewport) => {
     set({ viewport })
+  },
+  handleToggleShowUI: () => {
+    set((state) => ({
+      showUI: !state.showUI,
+    }))
+  },
+  handleToggleSearchNodesDialog: () => {
+    set((state) => ({
+      isSearchNodesDialogOpen: !state.isSearchNodesDialogOpen,
+    }))
+  },
+  handleChangeFocusedNode: (focusedNode) => {
+    set({ focusedNode })
   },
 }))
