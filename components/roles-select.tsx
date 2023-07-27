@@ -1,6 +1,5 @@
 "use client"
 
-import { useState } from "react"
 import {
   Button,
   Command,
@@ -19,6 +18,7 @@ import {
 import { DEFAULT_OPTION_VALUES } from "@/constants"
 import { useAppStore } from "@/hooks"
 import { getRoleSelectOptionLabel } from "@/utils"
+import { useState } from "react"
 import { Control, FieldValues, Path, UseFormSetValue } from "react-hook-form"
 
 import { cn } from "@/lib/utils"
@@ -27,11 +27,13 @@ interface RolesMultiSelectProps<T extends FieldValues> {
   setValue: UseFormSetValue<T>
   control: Control<T>
   name?: string
+  width?: number
 }
 
 export function RolesSelect<T extends FieldValues>({
   setValue,
   control,
+  width = 520,
   name = "allowedRole",
 }: RolesMultiSelectProps<T>) {
   const [open, setOpen] = useState(false)
@@ -56,7 +58,7 @@ export function RolesSelect<T extends FieldValues>({
                   variant="outline"
                   role="combobox"
                   className={cn(
-                    "w-full justify-between",
+                    "h-[40px] w-full justify-between px-3 ",
                     !field.value && "text-muted-foreground"
                   )}
                 >
@@ -69,7 +71,12 @@ export function RolesSelect<T extends FieldValues>({
             </div>
           </PopoverTrigger>
 
-          <PopoverContent className="max-h-[300px] w-[550px] overflow-y-auto p-0">
+          <PopoverContent
+            className={cn(
+              "max-h-[300px] overflow-y-auto p-0",
+              `w-[${width}px]`
+            )}
+          >
             <Command className="w-full">
               <CommandInput className="w-full" placeholder="Search roles..." />
 
@@ -85,7 +92,7 @@ export function RolesSelect<T extends FieldValues>({
                         Something went wrong
                       </h3>
 
-                      <p className="mb-4 mt-2 text-sm text-muted-foreground">
+                      <p className="text-muted-foreground mb-4 mt-2 text-sm">
                         We couldn&#39;t load roles from your server. Try again
                         later.
                       </p>
@@ -109,7 +116,7 @@ export function RolesSelect<T extends FieldValues>({
                       <Icons.check
                         className={cn(
                           "mr-2 h-4 w-4",
-                          field.value.id ===
+                          field?.value?.id ===
                             DEFAULT_OPTION_VALUES.allowedRole.id
                             ? "opacity-100"
                             : "opacity-0"
@@ -131,7 +138,7 @@ export function RolesSelect<T extends FieldValues>({
                         <Icons.check
                           className={cn(
                             "mr-2 h-4 w-4",
-                            field.value.id === role.id
+                            field?.value?.id === role.id
                               ? "opacity-100"
                               : "opacity-0"
                           )}

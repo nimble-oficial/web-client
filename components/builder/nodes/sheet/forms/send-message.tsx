@@ -1,13 +1,13 @@
 "use client"
 
 import {
+  Editor,
   EnableNodeSwitch,
   FormDescription,
   FormField,
   FormLabel,
   FormMessage,
   Input,
-  TextareaWithLimit,
 } from "@/components"
 import { SendMessageNodeSchema } from "@/schemas"
 import { Control } from "react-hook-form"
@@ -29,8 +29,6 @@ export const SendMessageNodeSheetForm = ({
             <div className="grid w-full gap-2">
               <FormLabel htmlFor="name">Name</FormLabel>
 
-              <FormDescription>The name of the node.</FormDescription>
-
               <Input
                 type="text"
                 id="name"
@@ -38,6 +36,8 @@ export const SendMessageNodeSheetForm = ({
                 value={field.value}
                 placeholder="Eg.: Send Hello World!"
               />
+
+              <FormDescription>The name of the node.</FormDescription>
 
               <FormMessage />
             </div>
@@ -57,7 +57,7 @@ export const SendMessageNodeSheetForm = ({
                 The message that will be sent to the user.
               </FormDescription>
 
-              <TextareaWithLimit
+              <Editor
                 {...field}
                 placeholder="Type your message here."
                 id="content"

@@ -1,6 +1,6 @@
+import { GuildSwitcher } from "@/components"
 import { dashboardConfig } from "@/config"
 
-import { GuildSwitcher } from "../guild-switcher"
 import { DashboardNav } from "./nav"
 
 export const DashboardSidebar = () => {

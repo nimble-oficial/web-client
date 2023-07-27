@@ -1,4 +1,5 @@
 export * from "./forms"
+export * from "./move-users-to-channel"
 export * from "./provider"
 export * from "./reply-message"
 export * from "./send-message"

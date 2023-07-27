@@ -1,13 +1,13 @@
 "use client"
 
 import {
+  Editor,
   EnableNodeSwitch,
   FormDescription,
   FormField,
   FormLabel,
   FormMessage,
   Input,
-  TextareaWithLimit,
 } from "@/components"
 import { ReplyMessageNodeSchema } from "@/schemas"
 import { Control, FieldValues } from "react-hook-form"
@@ -29,8 +29,6 @@ export const ReplyMessageNodeSheetForm = <T extends FieldValues>({
             <div className="grid w-full gap-2">
               <FormLabel htmlFor="name">Name</FormLabel>
 
-              <FormDescription>The name of the node.</FormDescription>
-
               <Input
                 type="text"
                 id="name"
@@ -38,6 +36,8 @@ export const ReplyMessageNodeSheetForm = <T extends FieldValues>({
                 value={field.value}
                 placeholder="Eg.: Replies with pong"
               />
+
+              <FormDescription>The name of the node.</FormDescription>
 
               <FormMessage />
             </div>
@@ -57,7 +57,7 @@ export const ReplyMessageNodeSheetForm = <T extends FieldValues>({
                 The message that will be replied to the user.
               </FormDescription>
 
-              <TextareaWithLimit
+              <Editor
                 placeholder="Type your message here."
                 id="content"
                 {...field}

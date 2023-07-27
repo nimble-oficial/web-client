@@ -1,7 +1,8 @@
 "use client"
 
 import { useEffect, useMemo } from "react"
-import { useBuilderStore, useGetBuilderQuery } from "@/hooks"
+import { useBuilderStore, useDashboardStore, useGetBuilderQuery } from "@/hooks"
+import useUndoable from "use-undoable"
 
 interface UseInitBuilderProps {
   builderId: string
@@ -33,9 +34,28 @@ export const useInitBuilder = ({ builderId }: UseInitBuilderProps) => {
     handleChangeViewport,
   } = useBuilderStore()
 
+  const { handleSelectGuild } = useDashboardStore()
+
+  const [nodes, setNodes, { undo: undoNodes, redo: redoNodes }] = useUndoable(
+    []
+  )
+  const [edges, setEdges, { undo: undoEdges, redo: redoEdges }] = useUndoable(
+    []
+  )
+
   const { data, isLoading } = useGetBuilderQuery({ builderId })
 
   const builderData = data?.data?.data
+
+  const undo = () => {
+    undoNodes()
+    undoEdges()
+  }
+
+  const redo = () => {
+    redoNodes()
+    redoEdges()
+  }
 
   useEffect(() => {
     handleChangeBuilderId(builderId)
@@ -46,8 +66,9 @@ export const useInitBuilder = ({ builderId }: UseInitBuilderProps) => {
       return
     }
 
-    handleChangeEdges(builderData?.edges)
-  }, [builderData?.edges, handleChangeEdges])
+    handleChangeEdges(edges)
+    setEdges(builderData?.edges)
+  }, [builderData?.edges, edges, handleChangeEdges, setEdges])
 
   useEffect(() => {
     if (!builderData?.viewport) {
@@ -68,8 +89,9 @@ export const useInitBuilder = ({ builderId }: UseInitBuilderProps) => {
   }, [builderData?.nodes])
 
   useEffect(() => {
-    handleChangeNodes(nodesWithIndexField)
-  }, [handleChangeNodes, nodesWithIndexField])
+    handleChangeNodes(nodes)
+    setNodes(nodesWithIndexField)
+  }, [handleChangeNodes, nodes, nodesWithIndexField, setNodes])
 
-  return { isLoading }
+  return { isLoading, undo, redo }
 }

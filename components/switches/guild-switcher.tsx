@@ -79,7 +79,6 @@ export function GuildSwitcher({ className }: TeamSwitcherProps) {
           {!!selectedGuild?.name && (
             <Button
               variant="outline"
-              size="sm"
               role="combobox"
               aria-expanded={open}
               aria-label="Select a server"

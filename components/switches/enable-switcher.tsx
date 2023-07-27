@@ -17,7 +17,7 @@ export const EnableSwitcher = <T extends {}>({
   description,
 }: EnableSwitcherProps<T>) => {
   return (
-    <div className="flex flex-row items-center justify-between space-y-2 rounded-lg border p-4">
+    <div className="flex w-full flex-row items-center justify-between space-y-2 rounded-lg border p-4">
       <div className="space-y-0.5">
         {!!title && (
           <Label className="font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70">

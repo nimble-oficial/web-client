@@ -8,6 +8,6 @@ interface BuilderPageProps {
   }
 }
 
-export default function BuilderPage({ params, ...props }: BuilderPageProps) {
+export default function BuilderPage({ params }: BuilderPageProps) {
   return <BuilderFlow builderId={params.builderId} />
 }
