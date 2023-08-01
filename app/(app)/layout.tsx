@@ -3,5 +3,5 @@ interface AppLayoutProps {
 }
 
 export default function AppLayout({ children }: AppLayoutProps) {
-  return <>{children}</>
+  return <div className="mb-12">{children}</div>
 }
